@@ -42,7 +42,7 @@ describe 'sum_rec' do
     expect(sum_rec([1, 2, 3])).to eq(6)
   end
 
-  it "[99, 66, 33]" do
+  it "[99, 66, 33] should return 198" do
     expect(sum_rec([99, 66, 33])).to eq(198)
   end
 
