@@ -1,4 +1,4 @@
 algorithm-practice
 ==================
 
-Algorithm practice for Ruby and Javascript.
+Practice algorithms in Javascript and Ruby.
