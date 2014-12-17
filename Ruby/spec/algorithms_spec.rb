@@ -23,3 +23,15 @@ describe 'caesar_cipher' do
   end
 
 end
+
+describe 'common_substrings' do
+
+  it "'Hello' and 'Hello World' should return 'Hello'" do
+    expect(common_substrings('Hello', 'Hello World')).to eq('Hello')
+  end
+
+  it "'ABABC' and 'BABCA' should return 'ABC'" do
+    expect(common_substrings('ABABC', 'BABCA')).to eq('BABC')
+  end
+
+end

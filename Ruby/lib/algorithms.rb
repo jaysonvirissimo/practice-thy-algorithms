@@ -13,5 +13,10 @@ end
 # Preserve spaces.
 
 def caesar_cipher(string, shift)
-  
+
+end
+
+# Write a function that takes two strings and returns the longest common substring.
+def common_substrings(string_one, string_two)
+
 end
