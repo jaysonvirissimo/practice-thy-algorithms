@@ -27,3 +27,13 @@ describe("commonSubstrings", function() {
     expect(Algorithms.commonSubstrings('ABABC', 'BABCA')).toBe('ABC');
   });
 });
+
+describe("sumRec", function() {
+  it("[1, 2, 3] should return 6", function() {
+    expect(Algorithms.sumRec([1, 2, 3])).toBe(6);
+  });
+
+  it("[99, 66, 33] should return 198", function() {
+    expect(Algorithms.sumRec([99, 66, 33])).toBe(198);
+  });
+});
