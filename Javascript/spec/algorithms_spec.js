@@ -7,3 +7,13 @@ describe("digitalRoot", function() {
     expect(Algorithms.digitalRoot(1853)).toBe(8);
   });
 });
+
+describe("caesarCipher", function() {
+  it("'Hello' should return 'Lipps'", function() {
+    expect(Algorithms.caesarCipher('Hello')).toBe('Lipps');
+  });
+
+  it("'abc' should return 'abc'", function() {
+    expect(Algorithms.caesarCipher('abc')).toBe('abc');
+  });
+});

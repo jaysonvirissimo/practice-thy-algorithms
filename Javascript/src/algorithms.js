@@ -12,5 +12,9 @@ Algorithms.digitalRoot = function (number) {
 
 };
 
+Algorithms.caesarCipher = function (string, shift) {
+
+};
+
 
 })();
