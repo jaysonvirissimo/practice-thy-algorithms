@@ -16,5 +16,8 @@ Algorithms.caesarCipher = function (string, shift) {
 
 };
 
+Algorithms.commonSubstrings = function (stringOne, stringTwo) {
+
+};
 
 })();

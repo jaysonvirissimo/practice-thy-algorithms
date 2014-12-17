@@ -17,3 +17,13 @@ describe("caesarCipher", function() {
     expect(Algorithms.caesarCipher('abc')).toBe('abc');
   });
 });
+
+describe("commonSubstrings", function() {
+  it("'Hello' and 'Hello World' should return 'Hello'", function() {
+    expect(Algorithms.commonSubstrings('Hello', 'Hello World')).toBe('Hello');
+  });
+
+  it("'ABABC' and 'BABCA' should return 'ABC'", function() {
+    expect(Algorithms.commonSubstrings('ABABC', 'BABCA')).toBe('ABC');
+  });
+});
