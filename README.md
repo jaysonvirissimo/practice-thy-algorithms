@@ -1,4 +1,6 @@
-algorithm-practice
+practice-thy-algorithms
 ==================
 
-Practice algorithms in Javascript and Ruby.
+Some specs for practicing algorithms in the Javascript and Ruby programming languages.
+
+1. Digital Root
