@@ -22,7 +22,7 @@ end
 # Write a function that takes an array of integers and returns their sum.
 # Use recursion.
 def sum_rec(numbers)
-
+  
 end
 
 # Write a function which returns the first n elements from the fibonnacci sequence, given n.
