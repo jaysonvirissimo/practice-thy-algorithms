@@ -37,3 +37,13 @@ describe("sumRec", function() {
     expect(Algorithms.sumRec([99, 66, 33])).toBe(198);
   });
 });
+
+describe("fibs", function() {
+  it("3 should return [0, 1, 1]", function() {
+    expect(Algorithms.fibs(3)).toBe([0, 1, 1]);
+  });
+
+  it("5 should return [0, 1, 1, 2, 3]", function() {
+    expect(Algorithms.fibs(5)).toBe([0, 1, 1, 2, 3]);
+  });
+});

@@ -10,3 +10,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 2. Caesar Cipher
 3. Common Substrings
 4. Recursive Sum
+5. Fibonacci Sequence

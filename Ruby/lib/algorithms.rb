@@ -19,7 +19,8 @@ def common_substrings(string_one, string_two)
 
 end
 
-# Write a function that takes an array of integers and returns their sum. Use recursion.
+# Write a function that takes an array of integers and returns their sum.
+# Use recursion.
 def sum_rec(numbers)
 
 end
