@@ -36,14 +36,14 @@ describe 'common_substrings' do
 
 end
 
-describe 'sum_rec' do
+describe 'fibs' do
 
-  it "[1, 2, 3] should return 6" do
-    expect(sum_rec([1, 2, 3])).to eq(6)
+  it "3 should return [0, 1, 1]" do
+    expect(fibs(3)).to eq([0, 1, 1])
   end
 
-  it "[99, 66, 33] should return 198" do
-    expect(sum_rec([99, 66, 33])).to eq(198)
+  it "5 should return [0, 1, 1, 2, 3]" do
+    expect(fibs(5)).to eq([0, 1, 1, 2, 3])
   end
 
 end
