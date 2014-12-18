@@ -1,4 +1,4 @@
-*practice-thy-algorithms* is a series of specs for practicing algorithms in the Javascript and Ruby programming languages.
+*practice-thy-algorithms* is a series of specs for practicing algorithms in the **Javascript** and **Ruby** programming languages.
 
 
 For Ruby, write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
