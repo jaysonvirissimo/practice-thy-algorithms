@@ -47,3 +47,13 @@ describe("fibs", function() {
     expect(Algorithms.fibs(5)).toBe([0, 1, 1, 2, 3]);
   });
 });
+
+describe("isPalindrome", function() {
+  it("'ricercar' should return false", function() {
+    expect(Algorithms.isPalindrome('ricercar')).toBe(false);
+  });
+
+  it("'racecar' should return true", function() {
+    expect(Algorithms.isPalindrome('racecar')).toBe(true);
+  });
+});
