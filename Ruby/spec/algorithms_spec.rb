@@ -59,3 +59,15 @@ describe 'fibs' do
   end
 
 end
+
+describe 'is_palindrome?' do
+
+  it "'ricercar' should return false" do
+    expect(is_palindrome?('ricercar')).to eq(false)
+  end
+
+  it "'racecar' should return true" do
+    expect(is_palindrome?('racecar')).to eq(true)
+  end
+
+end

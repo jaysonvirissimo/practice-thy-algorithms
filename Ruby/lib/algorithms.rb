@@ -22,10 +22,16 @@ end
 # Write a function that takes an array of integers and returns their sum.
 # Use recursion.
 def sum_rec(numbers)
-  
+
 end
 
 # Write a function which returns the first n elements from the fibonnacci sequence, given n.
 def fibs(number)
 
+end
+
+# Write a function that takes a string and returns true if it's a palindrome, false if it's not.
+# Your solution should take less time and memory than rebuilding the string backward and comparing the two.
+def is_palindrome?(string)
+  
 end
