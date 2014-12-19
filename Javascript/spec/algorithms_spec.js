@@ -9,8 +9,8 @@ describe("digitalRoot", function() {
 });
 
 describe("caesarCipher", function() {
-  it("'Hello' should return 'Lipps'", function() {
-    expect(Algorithms.caesarCipher('Hello')).toBe('Lipps');
+  it("'hello' should return 'lipps'", function() {
+    expect(Algorithms.caesarCipher('hello')).toBe('lipps');
   });
 
   it("'abc' should return 'abc'", function() {
