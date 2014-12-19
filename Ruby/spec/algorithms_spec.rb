@@ -14,8 +14,8 @@ end
 
 describe 'caesar_cipher' do
 
-  it "'Hello' should return 'Lipps'" do
-    expect(caesar_cipher('Hello', 4)).to eq('Lipps')
+  it "'hello' should return 'lipps'" do
+    expect(caesar_cipher('hello', 4)).to eq('lipps')
   end
 
   it "'abc' should return 'abc'" do
