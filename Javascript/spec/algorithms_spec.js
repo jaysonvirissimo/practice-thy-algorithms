@@ -57,3 +57,13 @@ describe("isPalindrome", function() {
     expect(Algorithms.isPalindrome('racecar')).toBe(true);
   });
 });
+
+describe("foldingCipher", function() {
+  it("'abcm' should return 'zyxn'", function() {
+    expect(Algorithms.foldingCipher('abcm')).toBe('zyxn');
+  });
+
+  it("'zyxn' should return 'abcm'", function() {
+    expect(Algorithms.foldingCipher('zyxn')).toBe('abcm');
+  });
+});

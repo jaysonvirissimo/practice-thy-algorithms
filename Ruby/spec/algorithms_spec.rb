@@ -71,3 +71,15 @@ describe 'is_palindrome?' do
   end
 
 end
+
+describe 'folding_cipher' do
+
+  it "'abcm' should return 'zyxn'" do
+    expect(folding_cipher('abcm')).to eq('zyxn')
+  end
+
+  it "'zyxn' should return 'abcm'" do
+    expect(folding_cipher('zyxn')).to eq('abcm')
+  end
+
+end
