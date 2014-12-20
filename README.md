@@ -12,3 +12,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 4. Recursive Sum
 5. Fibonacci Sequence
 6. Palindrome
+7. Folding Cipher
