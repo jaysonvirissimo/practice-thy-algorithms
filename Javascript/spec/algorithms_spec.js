@@ -67,3 +67,15 @@ describe("foldingCipher", function() {
     expect(Algorithms.foldingCipher('zyxn')).toBe('abcm');
   });
 });
+
+describe("uniqSubs", function() {
+  it("should return all the substrings", function() {
+    var array = ["a", "b", "c", "d", "ab", "bc", "cd", "abc", "bcd", "abcd"]
+    expect(Algorithms.uniqSubs('abcd').sort()).toEqual(array.sort());
+  });
+
+  it("should not return repeats", function() {
+    var array = ["d", "du", "dud", "dude", "u", "ud", "ude", "de", "e"]
+    expect(Algorithms.uniqSubs('dude').sort()).toEqual(array.sort());
+  });
+});
