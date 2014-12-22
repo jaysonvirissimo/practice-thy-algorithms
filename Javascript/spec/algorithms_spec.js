@@ -79,3 +79,15 @@ describe("uniqSubs", function() {
     expect(Algorithms.uniqSubs('dude').sort()).toEqual(array.sort());
   });
 });
+
+describe("lcs", function() {
+  it("should return all the substrings", function() {
+    var array = [4, -1, 5, 6, -13, 2]
+    expect(Algorithms.lcs(array)).toBe(14);
+  });
+
+  it("should not return repeats", function() {
+    var array = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+    expect(Algorithms.lcs(array)).toBe(6);
+  });
+});

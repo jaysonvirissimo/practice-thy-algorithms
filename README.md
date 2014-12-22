@@ -14,3 +14,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 6. Palindrome
 7. Folding Cipher
 8. Unique Substrings
+9. 
