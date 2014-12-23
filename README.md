@@ -15,3 +15,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 7. Folding Cipher
 8. Unique Substrings
 9. Largest Contiguous Subsum
+10. Silly Years
