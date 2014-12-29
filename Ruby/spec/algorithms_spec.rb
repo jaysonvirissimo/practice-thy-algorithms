@@ -1,4 +1,5 @@
 require 'algorithms'
+require 'set'
 
 describe 'digital_root' do
 
@@ -120,6 +121,22 @@ describe 'silly_years' do
   it "should return the ten subsequent silly years" do
     array = [2307, 2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516, 3626]
     expect(silly_years(2307)).to match_array(array)
+  end
+
+end
+
+describe 'pair_sum' do
+
+  it "should return all the pairs that sum to 0" do
+    set = Set.new
+    set.add([-1, 1])
+    expect(pair_sum([1, 2, -1], 0)).to eq(set)
+  end
+
+  it "should return all the pairs that sum to 1" do
+    set = Set.new
+    set.add([-1, 2])
+    expect(pair_sum([1, 2, -1, -1, -2], 1)).to eq(set)
   end
 
 end
