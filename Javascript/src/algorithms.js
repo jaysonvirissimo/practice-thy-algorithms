@@ -75,4 +75,11 @@ Algorithms.pairSum = function (array, k) {
 
 };
 
+// Given a matrix of integers and coordinates of a rectangular region within the matrix.
+// Find the sum of numbers falling inside the rectangle.
+// Time complexity: O(number of rows * number of columns).
+Algorithms.matrixRegionSum = function (matrix, topLeftCoords, bottomRightCoords) {
+
+};
+
 })();

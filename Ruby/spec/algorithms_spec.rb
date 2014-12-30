@@ -140,3 +140,21 @@ describe 'pair_sum' do
   end
 
 end
+
+describe 'matrix_region_sum' do
+
+  it "should return the sum of the elements within the coordinates" do
+    matrix = [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+    top_left_coords = [0, 0]
+    bottom_right_coords = [1, 1]
+    expect(matrix_region_sum(matrix, top_left_coords, bottom_right_coords)).to eq(8)
+  end
+
+  it "should return the sum of the elements within the coordinates" do
+    matrix = [[2, 3, 4], [3, 4, 5], [4, 5, 6]]
+    top_left_coords = [0, 0]
+    bottom_right_coords = [2, 2]
+    expect(matrix_region_sum(matrix, top_left_coords, bottom_right_coords)).to eq(36)
+  end
+
+end
