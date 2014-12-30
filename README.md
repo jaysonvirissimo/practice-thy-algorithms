@@ -17,3 +17,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 9. Largest Contiguous Subsum
 10. Silly Years
 11. Pair Sum
+12. Matrix Region Sum
