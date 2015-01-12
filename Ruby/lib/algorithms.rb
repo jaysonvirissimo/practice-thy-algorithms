@@ -1,5 +1,4 @@
-# Write a method, digital_root(num).
-# It should sum the digits of a positive integer.
+# Write a method that sums the digits of a positive integer.
 # If it is greater than or equal to 10, sum the digits of the resulting number.
 # Keep repeating until there is only one digit in the result, called the "digital root".
 # Do not use string conversion within your method.
@@ -73,5 +72,14 @@ end
 # Find the sum of numbers falling inside the rectangle.
 # Time complexity: O(number of rows * number of columns).
 def matrix_region_sum(matrix, top_left_coords, bottom_right_coords)
+
+end
+
+# Implement merge sort.
+def merge_sort(array)
+
+end
+
+def merge(left, right)
 
 end

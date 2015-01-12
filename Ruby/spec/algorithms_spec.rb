@@ -158,3 +158,17 @@ describe 'matrix_region_sum' do
   end
 
 end
+
+describe 'merge_sort' do
+
+  it "should sort the array" do
+    array = [5, 4, 3, 2, 1]
+    expect(merge_sort(array)).to match_array([1, 2, 3, 4, 5])
+  end
+
+  it "sort the array" do
+    array = [2345, 443, 2342, 234, 343, 24]
+    expect(merge_sort(array)).to match_array([24, 234, 343, 443, 2342, 2345])
+  end
+
+end
