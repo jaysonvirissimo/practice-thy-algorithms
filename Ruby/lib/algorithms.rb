@@ -83,3 +83,8 @@ end
 def merge(left, right)
 
 end
+
+# Implement binary search.
+def binary_search(array, target)
+  
+end
