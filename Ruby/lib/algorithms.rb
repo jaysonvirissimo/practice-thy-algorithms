@@ -1,3 +1,4 @@
+
 # Write a method, digital_root(num).
 # It should sum the digits of a positive integer.
 # If it is greater than or equal to 10, sum the digits of the resulting number.
@@ -73,5 +74,24 @@ end
 # Find the sum of numbers falling inside the rectangle.
 # Time complexity: O(number of rows * number of columns).
 def matrix_region_sum(matrix, top_left_coords, bottom_right_coords)
+
+end
+
+# Implement Merge Sort (Hint: this typically involves a helper function)
+def merge_sort(array)
+
+end
+
+#Implement Binary Search
+def binary_search(array, target)
+
+end
+
+# Given a list of numbers in an array, replace all the numbers
+# with the product of all other numbers. Do this in O(n) time without
+# using division.
+
+
+def productify(arr)
 
 end

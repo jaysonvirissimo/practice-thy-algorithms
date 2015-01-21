@@ -158,3 +158,33 @@ describe 'matrix_region_sum' do
   end
 
 end
+
+describe "merge_sort" do
+
+  it "[1452, 23, 1, 5] should return [1, 5, 23, 1452]" do
+    expect(merge_sort([1452, 23, 1, 5])).to eq([1, 5, 23, 1452])
+  end
+
+  it "[10, 4, 6, 2] should return [2, 4, 6, 10]" do
+    expect(merge_sort([10, 4, 6, 2])).to eq([2, 4, 6, 10])
+  end
+
+end
+
+describe "binary_search" do
+
+  it "([1, 5, 13, 23, 305, 333, 402, 454, 500], 13) should return 2" do
+    expect(binary_search([1, 5, 13, 23, 305, 333, 402, 454, 500], 13)).to eq(2)
+  end
+
+end
+
+describe "productify" do
+  it "([2, 3, 5]) should return [15, 10, 6]" do
+    expect(productify([4, 2, 5, 7])).to eq([70, 140, 56, 40])
+  end
+
+  it "([4, 2, 5, 7]) should return [70, 140, 56, 40]" do
+    expect(productify([4, 2, 5, 7])).to eq([70, 140, 56, 40])
+  end
+end
