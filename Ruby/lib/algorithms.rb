@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 # Write a method that sums the digits of a positive integer.
+=======
+
+# Write a method, digital_root(num).
+# It should sum the digits of a positive integer.
+>>>>>>> df610ed9a68cc93ea68aee3a2e7d1f28e89cc019
 # If it is greater than or equal to 10, sum the digits of the resulting number.
 # Keep repeating until there is only one digit in the result, called the "digital root".
 # Do not use string conversion within your method.
@@ -75,7 +81,7 @@ def matrix_region_sum(matrix, top_left_coords, bottom_right_coords)
 
 end
 
-# Implement merge sort.
+# Implement Merge Sort (Hint: this typically involves a helper function)
 def merge_sort(array)
 
 end
@@ -86,5 +92,12 @@ end
 
 # Implement binary search.
 def binary_search(array, target)
-  
+
+end
+
+# Given a list of numbers in an array, replace all the numbers
+# with the product of all other numbers. Do this in O(n) time without
+# using division.
+def productify(array)
+
 end
