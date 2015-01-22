@@ -20,3 +20,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 12. Matrix Region Sum (JavaScript, Ruby)
 13. Merge Sort (Ruby)
 14. Binary Search (Ruby)
+15. Productify (Ruby)
