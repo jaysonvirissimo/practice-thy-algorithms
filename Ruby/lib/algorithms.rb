@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-# Write a method that sums the digits of a positive integer.
-=======
-
 # Write a method, digital_root(num).
 # It should sum the digits of a positive integer.
->>>>>>> df610ed9a68cc93ea68aee3a2e7d1f28e89cc019
 # If it is greater than or equal to 10, sum the digits of the resulting number.
 # Keep repeating until there is only one digit in the result, called the "digital root".
 # Do not use string conversion within your method.
@@ -91,6 +86,7 @@ def merge(left, right)
 end
 
 # Implement binary search.
+# Return nil if the target isn't found.
 def binary_search(array, target)
 
 end
@@ -99,5 +95,10 @@ end
 # with the product of all other numbers. Do this in O(n) time without
 # using division.
 def productify(array)
+
+end
+
+# Write a function that takes an array and returns all of its subsets.
+def subsets(array)
 
 end
