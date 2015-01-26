@@ -22,3 +22,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 14. Binary Search (Ruby)
 15. Productify (Ruby)
 16. Subsets (Ruby)
+17. Longest Palindrome (Ruby)
