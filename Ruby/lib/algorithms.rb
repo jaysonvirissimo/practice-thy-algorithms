@@ -102,3 +102,10 @@ end
 def subsets(array)
 
 end
+
+# Take a string and return the indices of the start/end of the longest palindrome it contains.
+# Your palindrome checker could reverse the string and compare it to the original, but that takes extra memory.
+# Instead, you should be able to solve the problem with O(1) memory.
+def longest_palindrome(string)
+
+end

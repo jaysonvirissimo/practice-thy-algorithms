@@ -188,11 +188,11 @@ end
 describe "productify" do
 
   it "([2, 3, 5]) should return [15, 10, 6]" do
-    expect(productify([4, 2, 5, 7])).to eq([70, 140, 56, 40])
+    expect(productify([2, 3, 5])).to match_array([15, 10, 6])
   end
 
   it "([4, 2, 5, 7]) should return [70, 140, 56, 40]" do
-    expect(productify([4, 2, 5, 7])).to eq([70, 140, 56, 40])
+    expect(productify([4, 2, 5, 7])).to match_array([70, 140, 56, 40])
   end
 
 end
@@ -207,6 +207,18 @@ describe 'subsets' do
   it "should return a set containing an empty set if given and empty set" do
     array = [[]]
     expect(subsets([])).to match_array(array)
+  end
+
+end
+
+describe 'longest_palindrome' do
+
+  it "should return the longest palindrome of a given string" do
+    expect(longest_palindrome("asdfdsaqwerqwer")).to eq([0, 6])
+  end
+
+  it "should return the longest palindrome of a given string" do
+    expect(longest_palindrome("asdfghjklzxcxz")).to eq([9, 13])
   end
 
 end
