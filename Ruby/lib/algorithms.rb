@@ -1,5 +1,4 @@
-# Write a method, digital_root(num).
-# It should sum the digits of a positive integer.
+# Write a method that will sum the digits of a positive integer.
 # If it is greater than or equal to 10, sum the digits of the resulting number.
 # Keep repeating until there is only one digit in the result, called the "digital root".
 # Do not use string conversion within your method.
@@ -114,5 +113,12 @@ end
 # It should be trivial to write an O(n**2) solution. Use sorting to solve in O(nlog(n)).
 # Next, improve this to O(n) time (maybe use a non-array datastructure).
 def fast_intersection(array_one, array_two)
+
+end
+
+# Write a function that takes two arrays of integers and returns an array with all the subsets commmon to both.
+# Don't generate all subsets of both array, which would take time exponential time.
+# Instead, directly generate the subsets of both.
+def common_subsets(array_one, array_two)
 
 end
