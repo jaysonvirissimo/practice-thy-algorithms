@@ -122,3 +122,10 @@ end
 def common_subsets(array_one, array_two)
 
 end
+
+# Given an array and index,
+# find if it's possible to reach 0 by starting at the index
+# and repeatedly moving left/right by the distance found at array[index].
+def can_win?(array, index)
+
+end
