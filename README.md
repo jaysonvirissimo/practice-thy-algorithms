@@ -26,3 +26,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 18. Fast Intersection (Ruby)
 19. Common Subsets (Ruby)
 20. Can Win (Ruby)
+21. Non-Comparison Sorts (Ruby)
