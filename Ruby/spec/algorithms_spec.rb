@@ -328,3 +328,15 @@ describe 'move_zeros' do
   end
 
 end
+
+describe 'look_and_say' do
+
+  it 'describe the count of the elements in the array as they appear' do
+    expect(look_and_say([1])).to match_array([[1, 1]])
+  end
+
+  it 'describe the count of the elements in the array as they appear' do
+    expect(look_and_say([1, 2, 1, 1])).to match_array([[1, 1], [1, 2], [2, 1]])
+  end
+
+end
