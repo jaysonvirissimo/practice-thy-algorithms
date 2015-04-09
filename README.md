@@ -1,11 +1,16 @@
-***practice-thy-algorithms*** is a series of specs for practicing algorithms in the **Javascript** and **Ruby** programming languages.
+# practice-thy-algorithms
 
+## what is this?
+***practice-thy-algorithms*** is a series of specs for practicing algorithms in the **Javascript** and **Ruby** programming languages. To get started, just clone the repo.
 
-For Ruby, write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
-To run the Javascript specs, open the `run_this.html` file in a web browser.
+## ruby instructions
+Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
+
+## javascript instructions
+Open the `run_this.html` file in a web browser.
 Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 
-
+## problems
 1. Digital Root (JavaScript, Ruby)
 2. Caesar Cipher (JavaScript, Ruby)
 3. Common Substrings (JavaScript, Ruby)
