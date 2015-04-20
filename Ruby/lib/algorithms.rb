@@ -166,3 +166,19 @@ end
 def look_and_say(array)
 
 end
+
+# Implement a stack with a method max that returns the maximum value.
+# It should run in O(1) time.
+class MaxStack
+  def initialize
+  end
+
+  def push(value)
+  end
+
+  def pop
+  end
+
+  def max
+  end
+end

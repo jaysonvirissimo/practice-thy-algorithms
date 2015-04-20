@@ -340,3 +340,23 @@ describe 'look_and_say' do
   end
 
 end
+
+describe 'MaxStack#max' do
+
+  it 'should return the largest number added to the stack' do
+    stack = MaxStack.new
+    stack.push(10)
+    stack.push(21)
+    stack.push(32)
+    expect(stack.max).to eq(32)
+  end
+
+  it 'should return the largest number added to the stack' do
+    stack = MaxStack.new
+    stack.push(99)
+    stack.pop
+    stack.push(33)
+    expect(stack.max).to eq(33)
+  end
+
+end

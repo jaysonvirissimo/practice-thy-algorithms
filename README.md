@@ -34,3 +34,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 21. Non-Comparison Sorts (Ruby)
 22. Move Zeros (Ruby)
 23. Look and Say (Ruby)
+24. Bonus Stack (Ruby)
