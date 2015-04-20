@@ -149,7 +149,7 @@ end
 # Sort the strings in O(kn).
 # Hint: do not compare any two strings.
 # All strings contain only lowercase letters a..z without whitespace or punctuation.
-def sort3(array)
+def sort3(array, length)
 
 end
 
