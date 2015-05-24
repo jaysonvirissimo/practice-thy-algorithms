@@ -19,7 +19,7 @@ Algorithms.caesarCipher = function (string, shift) {
 
 };
 
-// Write a function that takes two strings and returns the longest common substring.
+// Write a function that takes two strings and returns the lenght of the longest common substring.
 Algorithms.commonSubstrings = function (stringOne, stringTwo) {
 
 };

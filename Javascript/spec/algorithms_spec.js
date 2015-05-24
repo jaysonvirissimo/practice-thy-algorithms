@@ -20,11 +20,11 @@ describe("caesarCipher", function() {
 
 describe("commonSubstrings", function() {
   it("'Hello' and 'Hello World' should return 'Hello'", function() {
-    expect(Algorithms.commonSubstrings('Hello', 'Hello World')).toBe('Hello');
+    expect(Algorithms.commonSubstrings('Hello', 'Hello World')).toBe(5);
   });
 
   it("'ABABC' and 'BABCA' should return 'ABC'", function() {
-    expect(Algorithms.commonSubstrings('ABABC', 'BABCA')).toBe('ABC');
+    expect(Algorithms.commonSubstrings('ABABC', 'BABCA')).toBe(3);
   });
 });
 
