@@ -100,7 +100,7 @@ describe("sillyYears", function() {
 
   it("should return the ten subsequent silly years", function() {
     var array = [2307, 2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516, 3626]
-    expect(Algorithms.sillyYears(2307).toEqual(array);
+    expect(Algorithms.sillyYears(2307)).toEqual(array);
   });
 });
 
@@ -113,7 +113,6 @@ describe("pairSum", function() {
   it("should return all the pairs that sum to 1", function() {
     var array = [[-1, 2]]
     expect(Algorithms.pairSum([1, 2, -1, -1, -2], 1)).toEqual(array);
-    });
   });
 });
 
