@@ -10,21 +10,21 @@ describe("digitalRoot", function() {
 
 describe("caesarCipher", function() {
   it("'hello' should return 'lipps'", function() {
-    expect(Algorithms.caesarCipher('hello')).toBe('lipps');
+    expect(Algorithms.caesarCipher('hello', 4)).toBe('lipps');
   });
 
   it("'abc' should return 'abc'", function() {
-    expect(Algorithms.caesarCipher('abc')).toBe('abc');
+    expect(Algorithms.caesarCipher('abc', 26)).toBe('abc');
   });
 });
 
 describe("commonSubstrings", function() {
   it("'Hello' and 'Hello World' should return 'Hello'", function() {
-    expect(Algorithms.commonSubstrings('Hello', 'Hello World')).toBe('Hello');
+    expect(Algorithms.commonSubstrings('Hello', 'Hello World')).toBe(5);
   });
 
   it("'ABABC' and 'BABCA' should return 'ABC'", function() {
-    expect(Algorithms.commonSubstrings('ABABC', 'BABCA')).toBe('ABC');
+    expect(Algorithms.commonSubstrings('ABABC', 'BABCA')).toBe(3);
   });
 });
 
@@ -40,11 +40,11 @@ describe("sumRec", function() {
 
 describe("fibs", function() {
   it("3 should return [0, 1, 1]", function() {
-    expect(Algorithms.fibs(3)).toBe([0, 1, 1]);
+    expect(Algorithms.fibs(3)).toEqual([0, 1, 1]);
   });
 
   it("5 should return [0, 1, 1, 2, 3]", function() {
-    expect(Algorithms.fibs(5)).toBe([0, 1, 1, 2, 3]);
+    expect(Algorithms.fibs(5)).toEqual([0, 1, 1, 2, 3]);
   });
 });
 
@@ -100,7 +100,7 @@ describe("sillyYears", function() {
 
   it("should return the ten subsequent silly years", function() {
     var array = [2307, 2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516, 3626]
-    expect(Algorithms.sillyYears(2307).toEqual(array);
+    expect(Algorithms.sillyYears(2307)).toEqual(array);
   });
 });
 
@@ -113,7 +113,6 @@ describe("pairSum", function() {
   it("should return all the pairs that sum to 1", function() {
     var array = [[-1, 2]]
     expect(Algorithms.pairSum([1, 2, -1, -1, -2], 1)).toEqual(array);
-    });
   });
 });
 
