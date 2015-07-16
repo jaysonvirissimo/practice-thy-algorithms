@@ -15,7 +15,8 @@ def caesar_cipher(string, shift)
 
 end
 
-# Write a function that takes two strings and returns the longest common substring.
+# Write a function that takes two strings.
+# Return the longest common substring.
 def common_substrings(string_one, string_two)
 
 end
@@ -26,20 +27,22 @@ def sum_rec(numbers)
 
 end
 
-# Write a function which returns the first n elements from the fibonnacci sequence, given n.
+# Write a function that takes n, the length of the sequence.
+# Return the first n elements from the fibonnacci sequence as an array.
 def fibs(n)
 
 end
 
-# Write a function that takes a string and returns true if it's a palindrome, false if it's not.
-# Your solution should take less time and memory than rebuilding the string backward and comparing the two.
+# Write a function that takes a string.
+# Return true if the string is a palindrome, otherwise return false.
+# It should take less time and memory than reversing the string.
 def is_palindrome?(string)
 
 end
 
 # Implement the Folding Cipher.
 # It folds the alphabet in half and uses the adjacent letter.
-# a <=> z, b <=> y, c <=> x, m <=> n.
+# a -> z, b -> y, c -> x, m -> n, etc...
 def folding_cipher(string)
 
 end
