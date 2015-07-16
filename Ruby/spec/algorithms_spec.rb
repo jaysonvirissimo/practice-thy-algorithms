@@ -22,6 +22,10 @@ describe 'caesar_cipher' do
   it "'abc' should return 'abc'" do
     expect(caesar_cipher('abc', 0)).to eq('abc')
   end
+  
+  it "should preserve spaces" do
+    expect(caesar_cipher('asdf asdf', 13)).to eq('nfqs nfqs')
+  end
 
 end
 
