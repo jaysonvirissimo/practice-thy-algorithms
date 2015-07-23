@@ -52,20 +52,22 @@ def uniq_subs(string)
 
 end
 
-# Given an array of integers (positive and negative) find the largest contiguous subsum (sum of a subarray).
+# Given an array of integers find the largest contiguous subsum.
 # You can solve this trivially in O(n**2) time by considering all subarrays.
 # Try to solve it in O(n) time with O(1) memory.
 def lcs(array)
 
 end
 
-# Write a function that takes a year (four digit integer) and returns an array with the 10 closest subsequent years that meet the following condition:
-# the first two digits summed with the last two digits are equal to the middle two digits.
+# Write a function that takes a year as a four digit integer. 
+# Returns an array of the 10 closest subsequent silly years.
+# A silly year's first two digits plus the last two digits equal the middle two.
 def silly_years(year)
 
 end
 
-# Given an array of integers, return all pairs that sum up to a specified value k.
+# Take an array of integers, and integer k.
+# Return all pairs that sum to k exactly.
 # List the pairs in [min, max] order.
 # Time complexity: O(n).
 # Return a set.
