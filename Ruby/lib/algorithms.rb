@@ -75,14 +75,16 @@ def pair_sum(array, k)
 
 end
 
-# Given a matrix of integers and coordinates of a rectangular region within the matrix.
+# Take a matrix of integers and coordinates.
+# The coordinates represent a rectangular region within the matrix
 # Find the sum of numbers falling inside the rectangle.
 # Time complexity: O(number of rows * number of columns).
 def matrix_region_sum(matrix, top_left_coords, bottom_right_coords)
 
 end
 
-# Implement Merge Sort (Hint: this typically involves a helper function)
+# Implement Merge Sort 
+# Hint: This typically involves a helper function.
 def merge_sort(array)
 
 end
@@ -97,9 +99,9 @@ def binary_search(array, target)
 
 end
 
-# Given a list of numbers in an array, replace all the numbers
-# with the product of all other numbers. Do this in O(n) time without
-# using division.
+# You are given a list of numbers in an array.
+# Replace all the numbers with the product of all other numbers. 
+# Do this in O(n) time without using division.
 def productify(array)
 
 end
@@ -109,37 +111,39 @@ def subsets(array)
 
 end
 
-# Take a string and return the indices of the start/end of the longest palindrome it contains.
-# Your palindrome checker could reverse the string and compare it to the original, but that takes extra memory.
+# Return the indices of the start/end of the longest palindrome in the string.
+# You could reverse the string and compare it to the original, but that is slow.
 # Instead, you should be able to solve the problem with O(1) memory.
 def longest_palindrome(string)
 
 end
 
 # Given two arrays, find the intersection of both sets.
-# It should be trivial to write an O(n**2) solution. Use sorting to solve in O(nlog(n)).
+# It should be trivial to write an O(n**2) solution. 
+# Use sorting to solve in O(nlog(n)).
 # Next, improve this to O(n) time (maybe use a non-array datastructure).
 def fast_intersection(array_one, array_two)
 
 end
 
-# Write a function that takes two arrays of integers and returns an array with all the subsets commmon to both.
-# Don't generate all subsets of both array, which would take time exponential time.
+# Write a function that takes two arrays of integers
+# Returns an array with all the subsets commmon to both arrays.
+# Don't generate all subsets of both arrays, which would be exponential time.
 # Instead, directly generate the subsets of both.
 def common_subsets(array_one, array_two)
 
 end
 
-# Given an array and index,
-# find if it's possible to reach 0 by starting at the index
-# and repeatedly moving left/right by the distance found at array[index].
+# You are given an array and index.
+# Find if it's possible to reach 0 by starting at the index.
+# You can only move left or right by the distance found at array[index].
 def can_win?(array, index)
 
 end
 
 # Assume an array of length n, containing the numbers 1..n in jumbled order.
 # "Sort" this array in O(n) time.
-# You should be able to do this without looking at the input.
+# Hint: You should be able to do this without looking at the input.
 def sort1(array)
 
 end
@@ -152,12 +156,19 @@ def sort2(array, max_value)
 end
 
 # Say I give you an array of n strings, each of length k.
-# Merge sort can sort this in O(knlog(n)), since comparing a pair of strings takes O(k) time.
+# Merge sort can sort this in O(knlog(n)).
 # Sort the strings in O(kn).
-# Hint: do not compare any two strings.
-# All strings contain only lowercase letters a..z without whitespace or punctuation.
+# Hint: Do not compare any two strings.
+# All strings contain only lowercase letters without whitespace or punctuation.
 def sort3(array, length)
 
+end
+
+# Given an array, write a function that will return a random index of the array.
+# The chance of returning a given index will vary with the value of the element.
+# Probability of i should be the ith element divided by the sum of all elements.
+def weighted_random_index(array)
+  
 end
 
 # Given an array, move all zeros to the end.
@@ -169,23 +180,31 @@ end
 
 # Implement the 'look and say' function.
 #'Look and say' takes an input array and outputs an array.
-# The output array describes the count of the elements in the input array as they appear in order.
+# The output describes the count of the elements in the input.
+
 def look_and_say(array)
 
 end
 
-# Implement a stack with a method max that returns the maximum value.
+# I give you a scrambled list of n unique integers between 0 and n. 
+# Tell me what number is missing?
+# How could you solve the problem in O(n), and also O(1) space?
+def sum_upon_sums(array)
+  
+end
+
+# Implement a stack with a max method that returns the maximum value.
 # It should run in O(1) time.
 class MaxStack
-  def initialize
-  end
 
-  def push(value)
-  end
+end
 
-  def pop
-  end
+# Implement a queue using stacks. 
+# That is, write enqueue and dequeue using only push and pop operations.
+# In terms of performance, enqueue should be O(1).
+# Dequeue may be worst-case O(n). 
+# In terms of ammortized time, dequeue should be O(1). 
+# Prove that your solution accomplishes this.
+class StackQueue
 
-  def max
-  end
 end

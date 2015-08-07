@@ -1,7 +1,8 @@
 # practice-thy-algorithms
 
 ## what is this?
-***practice-thy-algorithms*** is a series of specs for practicing algorithms in the **Javascript** and **Ruby** programming languages. To get started, just clone the repo.
+***practice-thy-algorithms*** is a series of specs for practicing algorithms in the **Javascript** and **Ruby** programming languages. 
+To get started, just clone the repo.
 
 ## ruby instructions
 Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
@@ -32,6 +33,9 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 19. Common Subsets (Ruby)
 20. Can Win (Ruby)
 21. Non-Comparison Sorts (Ruby)
-22. Move Zeros (Ruby)
-23. Look and Say (Ruby)
-24. Bonus Stack (Ruby)
+22. Weighted Random Index (Ruby)
+23. Move Zeros (Ruby)
+24. Look and Say (Ruby)
+25. Sum Upon Sums (Ruby)
+26. Max Stack (Ruby)
+27. Stack Queue (Ruby)
