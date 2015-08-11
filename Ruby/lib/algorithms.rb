@@ -40,6 +40,13 @@ def is_palindrome?(string)
 
 end
 
+# Write a method that takes a string as input. 
+# It should return true if the input is a valid IPv4 address.
+# Valid IPs are anything between '0.0.0.0' and '255.255.255.255'.
+def valid_ip?(string)
+
+end
+
 # Implement the Folding Cipher.
 # It folds the alphabet in half and uses the adjacent letter.
 # a -> z, b -> y, c -> x, m -> n, etc...

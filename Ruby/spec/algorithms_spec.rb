@@ -65,6 +65,16 @@ describe 'is_palindrome?' do
   end
 end
 
+describe 'valid_ip?' do
+  it '1.1.1.1 should return true' do
+    expect(valid_ip?('1.1.1.1')).to eq(true)
+  end
+
+  it '256.2.2.2 should return false' do
+    expect(valid_ip?('256.2.2.2')).to eq(false)
+  end
+end
+
 describe 'folding_cipher' do
   it "'abcm' should return 'zyxn'" do
     expect(folding_cipher('abcm')).to eq('zyxn')
@@ -353,4 +363,23 @@ describe StackQueue do
       expect(stack.dequeue).to eq(20)
     end
   end
+end
+
+private
+
+def test_file
+  file = <<-FILE
+    1
+    # 2
+    3
+    # 4
+    5
+    # 6
+    7
+    # 8
+    9
+    # 10
+    FILE
+
+  file
 end
