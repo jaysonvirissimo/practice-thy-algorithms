@@ -94,12 +94,12 @@ describe("lcs", function() {
 
 describe("sillyYears", function() {
   it("should return the ten subsequent silly years", function() {
-    var array = [1978, 2307, 2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516]
+    var array = [2307, 2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516, 3626]
     expect(Algorithms.sillyYears(1978)).toEqual(array);
   });
 
   it("should return the ten subsequent silly years", function() {
-    var array = [2307, 2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516, 3626]
+    var array = [2417, 2527, 2637, 2747, 2857, 2967, 3406, 3516, 3626, 3736]
     expect(Algorithms.sillyYears(2307)).toEqual(array);
   });
 });
