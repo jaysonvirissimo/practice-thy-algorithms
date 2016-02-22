@@ -40,7 +40,7 @@ def is_palindrome?(string)
 
 end
 
-# Write a method that takes a string as input. 
+# Write a method that takes a string as input.
 # It should return true if the input is a valid IPv4 address.
 # Valid IPs are anything between '0.0.0.0' and '255.255.255.255'.
 def valid_ip?(string)
@@ -66,7 +66,7 @@ def lcs(array)
 
 end
 
-# Write a function that takes a year as a four digit integer. 
+# Write a function that takes a year as a four digit integer.
 # Returns an array of the 10 closest subsequent silly years.
 # A silly year's first two digits plus the last two digits equal the middle two.
 def silly_years(year)
@@ -90,7 +90,7 @@ def matrix_region_sum(matrix, top_left_coords, bottom_right_coords)
 
 end
 
-# Implement Merge Sort 
+# Implement Merge Sort
 # Hint: This typically involves a helper function.
 def merge_sort(array)
 
@@ -107,7 +107,7 @@ def binary_search(array, target)
 end
 
 # You are given a list of numbers in an array.
-# Replace all the numbers with the product of all other numbers. 
+# Replace all the numbers with the product of all other numbers.
 # Do this in O(n) time without using division.
 def productify(array)
 
@@ -126,7 +126,7 @@ def longest_palindrome(string)
 end
 
 # Given two arrays, find the intersection of both sets.
-# It should be trivial to write an O(n**2) solution. 
+# It should be trivial to write an O(n**2) solution.
 # Use sorting to solve in O(nlog(n)).
 # Next, improve this to O(n) time (maybe use a non-array datastructure).
 def fast_intersection(array_one, array_two)
@@ -175,7 +175,7 @@ end
 # The chance of returning a given index will vary with the value of the element.
 # Probability of i should be the ith element divided by the sum of all elements.
 def weighted_random_index(array)
-  
+
 end
 
 # Given an array, move all zeros to the end.
@@ -193,11 +193,11 @@ def look_and_say(array)
 
 end
 
-# I give you a scrambled list of n unique integers between 0 and n. 
+# I give you a scrambled list of n unique integers between 0 and n.
 # Tell me what number is missing?
 # How could you solve the problem in O(n), and also O(1) space?
 def sum_upon_sums(array)
-  
+
 end
 
 # Implement a stack with a max method that returns the maximum value.
@@ -206,12 +206,31 @@ class MaxStack
 
 end
 
-# Implement a queue using stacks. 
+# Implement a queue using stacks.
 # That is, write enqueue and dequeue using only push and pop operations.
 # In terms of performance, enqueue should be O(1).
-# Dequeue may be worst-case O(n). 
-# In terms of ammortized time, dequeue should be O(1). 
+# Dequeue may be worst-case O(n).
+# In terms of ammortized time, dequeue should be O(1).
 # Prove that your solution accomplishes this.
 class StackQueue
+
+end
+
+# Take an array, and a window size w.
+# Find the maximum max - min within a range of w elements.
+# First solve MaxStack.
+# Write a MinMaxStack to track both the min and the max in a stack.
+# Next, solve StackQueue.
+# Write a MinMaxStackQueue which tracks both the min and max.
+# Last, use MinMaxStackQueue to solve the problem.
+class MinMaxStack
+  
+end
+
+class MinMaxStackQueue
+
+end
+
+def windowed_max_range(array, w)
 
 end

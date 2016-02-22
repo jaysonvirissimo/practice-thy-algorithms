@@ -366,6 +366,38 @@ describe StackQueue do
   end
 end
 
+describe MinMaxStack do
+  it { should respond_to(:length) }
+  it { should respond_to(:push) }
+  it { should respond_to(:pop) }
+  it { should respond_to(:max) }
+  it { should respond_to(:min) }
+end
+
+describe MinMaxStackQueue do
+  it { should respond_to(:enqueue) }
+  it { should respond_to(:dequeue) }
+  it { should respond_to(:length) }
+  it { should respond_to(:max) }
+  it { should respond_to(:min) }
+end
+
+describe 'windowed_max_range' do
+  let(:queue) { MinMaxStackQueue.new }
+
+  specify { expect(windowed_max_range([1, 0, 2, 5, 4, 8], 2)).to eq(4) }
+  specify { expect(windowed_max_range([1, 0, 2, 5, 4, 8], 3)).to eq(5) }
+  specify { expect(windowed_max_range([1, 0, 2, 5, 4, 8], 4)).to eq(6) }
+  specify { expect(windowed_max_range([1, 3, 2, 5, 4, 8], 5)).to eq(6) }
+
+  it 'makes use of MinMaxStackQueue in the solution' do
+    allow(MinMaxStackQueue).to receive(:new).and_return(queue)
+    windowed_max_range([1, 0, 2, 5, 4, 8], 2)
+    
+    expect(MinMaxStackQueue).to have_received(:new)
+  end
+end
+
 private
 
 def test_file

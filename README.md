@@ -1,7 +1,7 @@
 # practice-thy-algorithms
 
 ## what is this?
-***practice-thy-algorithms*** is a series of specs for practicing algorithms in the **Javascript** and **Ruby** programming languages. 
+***practice-thy-algorithms*** is a series of specs for practicing algorithms in the **Javascript** and **Ruby** programming languages.
 To get started, just clone the repo.
 
 ## ruby instructions
@@ -40,3 +40,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 26. Sum Upon Sums (Ruby)
 27. Max Stack (Ruby)
 28. Stack Queue (Ruby)
+29. Windowed Max Range (Ruby)
