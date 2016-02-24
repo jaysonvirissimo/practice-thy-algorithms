@@ -41,3 +41,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 27. Max Stack (Ruby)
 28. Stack Queue (Ruby)
 29. Windowed Max Range (Ruby)
+30. Hash Dictionary (Ruby)
