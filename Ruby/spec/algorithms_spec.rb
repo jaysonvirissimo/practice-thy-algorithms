@@ -2,87 +2,44 @@ require 'algorithms'
 require 'set'
 
 describe 'digital_root' do
-  it '65,536 should return 7' do
-    expect(digital_root(65_536)).to eq(7)
-  end
-
-  it '1,853 should return 8' do
-    expect(digital_root(1853)).to eq(8)
-  end
+  specify { expect(digital_root(65_536)).to eq(7) }
+  specify { expect(digital_root(1853)).to eq(8) }
 end
 
 describe 'caesar_cipher' do
-  it "'hello' should return 'lipps'" do
-    expect(caesar_cipher('hello', 4)).to eq('lipps')
-  end
-
-  it "'abc' should return 'abc'" do
-    expect(caesar_cipher('abc', 0)).to eq('abc')
-  end
-
-  it 'should preserve spaces' do
-    expect(caesar_cipher('asdf asdf', 13)).to eq('nfqs nfqs')
-  end
+  specify { expect(caesar_cipher('hello', 4)).to eq('lipps') }
+  specify { expect(caesar_cipher('abc', 0)).to eq('abc') }
+  specify { expect(caesar_cipher('asdf asdf', 13)).to eq('nfqs nfqs') }
 end
 
 describe 'common_substrings' do
-  it "'Hello' and 'Hello World' should return 'Hello'" do
-    expect(common_substrings('Hello', 'Hello World')).to eq('Hello')
-  end
-
-  it "'ABABC' and 'BABCA' should return 'ABC'" do
-    expect(common_substrings('ABABC', 'BABCA')).to eq('BABC')
-  end
+  specify { expect(common_substrings('Hello', 'Hello World')).to eq('Hello') }
+  specify { expect(common_substrings('ABABC', 'BABCA')).to eq('BABC') }
 end
 
 describe 'sum_rec' do
-  it '[1, 2, 3] should return 6' do
-    expect(sum_rec([1, 2, 3])).to eq(6)
-  end
-
-  it '[99, 66, 33] should return 198' do
-    expect(sum_rec([99, 66, 33])).to eq(198)
-  end
+  specify { expect(sum_rec([1, 2, 3])).to eq(6) }
+  specify { expect(sum_rec([99, 66, 33])).to eq(198) }
 end
 
 describe 'fibs' do
-  it '3 should return [0, 1, 1]' do
-    expect(fibs(3)).to eq([0, 1, 1])
-  end
-
-  it '5 should return [0, 1, 1, 2, 3]' do
-    expect(fibs(5)).to eq([0, 1, 1, 2, 3])
-  end
+  specify { expect(fibs(3)).to eq([0, 1, 1]) }
+  specify { expect(fibs(5)).to eq([0, 1, 1, 2, 3]) }
 end
 
 describe 'is_palindrome?' do
-  it "'ricercar' should return false" do
-    expect(is_palindrome?('ricercar')).to eq(false)
-  end
-
-  it "'racecar' should return true" do
-    expect(is_palindrome?('racecar')).to eq(true)
-  end
+  specify { expect(is_palindrome?('ricercar')).to eq(false) }
+  specify { expect(is_palindrome?('racecar')).to eq(true) }
 end
 
 describe 'valid_ip?' do
-  it '1.1.1.1 should return true' do
-    expect(valid_ip?('1.1.1.1')).to eq(true)
-  end
-
-  it '256.2.2.2 should return false' do
-    expect(valid_ip?('256.2.2.2')).to eq(false)
-  end
+  specify { expect(valid_ip?('1.1.1.1')).to eq(true) }
+  specify { expect(valid_ip?('256.2.2.2')).to eq(false) }
 end
 
 describe 'folding_cipher' do
-  it "'abcm' should return 'zyxn'" do
-    expect(folding_cipher('abcm')).to eq('zyxn')
-  end
-
-  it "'zyxn' should return 'abcm'" do
-    expect(folding_cipher('zyxn')).to eq('abcm')
-  end
+  specify { expect(folding_cipher('abcm')).to eq('zyxn') }
+  specify { expect(folding_cipher('zyxn')).to eq('abcm') }
 end
 
 describe 'uniq_subs' do
@@ -98,13 +55,8 @@ describe 'uniq_subs' do
 end
 
 describe 'lcs' do
-  it 'should return the largest sum' do
-    expect(lcs([4, -1, 5, 6, -13, 2])).to eq(14)
-  end
-
-  it 'should return the largest sum' do
-    expect(lcs([-2, 1, -3, 4, -1, 2, 1, -5, 4])).to eq(6)
-  end
+  specify { expect(lcs([4, -1, 5, 6, -13, 2])).to eq(14) }
+  specify { expect(lcs([-2, 1, -3, 4, -1, 2, 1, -5, 4])).to eq(6) }
 end
 
 describe 'silly_years' do
@@ -120,14 +72,14 @@ describe 'silly_years' do
 end
 
 describe 'pair_sum' do
+  let(:set) { Set.new }
+
   it 'should return all the pairs that sum to 0' do
-    set = Set.new
     set.add([-1, 1])
     expect(pair_sum([1, 2, -1], 0)).to eq(set)
   end
 
   it 'should return all the pairs that sum to 1' do
-    set = Set.new
     set.add([-1, 2])
     expect(pair_sum([1, 2, -1, -1, -2], 1)).to eq(set)
   end
@@ -138,25 +90,24 @@ describe 'matrix_region_sum' do
     matrix = [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
     top_left_coords = [0, 0]
     bottom_right_coords = [1, 1]
-    expect(matrix_region_sum(matrix, top_left_coords, bottom_right_coords)).to eq(8)
+    actual = matrix_region_sum(matrix, top_left_coords, bottom_right_coords)
+
+    expect(actual).to eq(8)
   end
 
   it 'should return the sum of the elements within the coordinates' do
     matrix = [[2, 3, 4], [3, 4, 5], [4, 5, 6]]
     top_left_coords = [0, 0]
     bottom_right_coords = [2, 2]
-    expect(matrix_region_sum(matrix, top_left_coords, bottom_right_coords)).to eq(36)
+    actual = matrix_region_sum(matrix, top_left_coords, bottom_right_coords)
+
+    expect(actual).to eq(36)
   end
 end
 
 describe 'merge_sort' do
-  it '[1452, 23, 1, 5] should return [1, 5, 23, 1452]' do
-    expect(merge_sort([1452, 23, 1, 5])).to eq([1, 5, 23, 1452])
-  end
-
-  it '[10, 4, 6, 2] should return [2, 4, 6, 10]' do
-    expect(merge_sort([10, 4, 6, 2])).to eq([2, 4, 6, 10])
-  end
+  specify { expect(merge_sort([1452, 23, 1, 5])).to eq([1, 5, 23, 1452]) }
+  specify { expect(merge_sort([10, 4, 6, 2])).to eq([2, 4, 6, 10]) }
 end
 
 describe 'binary_search' do
@@ -172,13 +123,8 @@ describe 'binary_search' do
 end
 
 describe 'productify' do
-  it '([2, 3, 5]) should return [15, 10, 6]' do
-    expect(productify([2, 3, 5])).to match_array([15, 10, 6])
-  end
-
-  it '([4, 2, 5, 7]) should return [70, 140, 56, 40]' do
-    expect(productify([4, 2, 5, 7])).to match_array([70, 140, 56, 40])
-  end
+  specify { expect(productify([2, 3, 5])).to match_array([15, 10, 6]) }
+  specify { expect(productify([4, 2, 5, 7])).to match_array([70, 140, 56, 40]) }
 end
 
 describe 'subsets' do
@@ -195,13 +141,8 @@ describe 'subsets' do
 end
 
 describe 'longest_palindrome' do
-  it 'should return the longest palindrome of a given string' do
-    expect(longest_palindrome('asdfdsaqwerqwer')).to eq([0, 6])
-  end
-
-  it 'should return the longest palindrome of a given string' do
-    expect(longest_palindrome('asdfghjklzxcxz')).to eq([9, 13])
-  end
+  specify { expect(longest_palindrome('asdfdsaqwerqwer')).to eq([0, 6]) }
+  specify { expect(longest_palindrome('asdfghjklzxcxz')).to eq([9, 13]) }
 end
 
 describe 'fast_intersection' do
@@ -326,13 +267,14 @@ describe 'sum_upon_sums' do
 end
 
 describe MaxStack do
+  let(:stack) { MaxStack.new }
+
   it { should respond_to(:push) }
   it { should respond_to(:pop) }
   it { should respond_to(:max) }
 
   describe '#max' do
     it 'should return the largest number added to the stack' do
-      stack = MaxStack.new
       stack.push(10)
       stack.push(21)
       stack.push(32)
@@ -340,7 +282,6 @@ describe MaxStack do
     end
 
     it 'should return the largest number added to the stack' do
-      stack = MaxStack.new
       stack.push(99)
       stack.pop
       stack.push(33)
@@ -350,12 +291,13 @@ describe MaxStack do
 end
 
 describe StackQueue do
+  let(:stack) { StackQueue.new }
+
   it { should respond_to(:enqueue) }
   it { should respond_to(:dequeue) }
 
   describe '#dequeue' do
     it 'should dequeue elements from the stack' do
-      stack = StackQueue.new
       stack.enqueue(10)
       stack.enqueue(15)
       stack.enqueue(20)
@@ -393,7 +335,7 @@ describe 'windowed_max_range' do
   it 'makes use of MinMaxStackQueue in the solution' do
     allow(MinMaxStackQueue).to receive(:new).and_return(queue)
     windowed_max_range([1, 0, 2, 5, 4, 8], 2)
-    
+
     expect(MinMaxStackQueue).to have_received(:new)
   end
 end
