@@ -1,16 +1,16 @@
 ***practice-thy-algorithms*** is a series of specifications for practicing algorithms in the **Javascript** and **Ruby** programming languages.
 To get started, just clone this repo.
 
-## Ruby instructions
+## Ruby Instructions
 Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
 
-## Javascript instructions
+## Javascript Instructions
 Open the `run_this.html` file in a web browser.
 Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 
-## problems
+## Problems
 | Problem Name              | JavaScript | Ruby |
-| ------------------------- |:----------:| ----:|
+| ------------------------- |:----------:| :---:|
 | Digital Root              | x          | x    |
 | Caesar Cipher             | x          | x    |
 | Common Substrings         | x          | x    |
