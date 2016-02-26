@@ -41,3 +41,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 | Stack Queue               |            | x    |
 | Windowed Max Range        |            | x    |
 | Hash Dictionary           |            | x    |
+| Find Missing Number       |            | x    |
