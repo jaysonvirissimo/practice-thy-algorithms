@@ -368,6 +368,14 @@ describe 'find_missing_number' do
   specify { expect(find_missing_number(integers, shuffled)).to eq(deleted) }
 end
 
+describe 'is_shuffle?' do
+  let(:first) { 'abc' }
+  let(:second) { 'def' }
+
+  specify { expect(is_shuffle?(first, second, 'abdecf')).to be_truthy }
+  specify { expect(is_shuffle?(first, second, 'fcedba')).to be_falsy }
+end
+
 private
 
 def test_file

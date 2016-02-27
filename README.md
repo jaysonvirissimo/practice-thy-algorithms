@@ -42,3 +42,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 | Windowed Max Range        |            | x    |
 | Hash Dictionary           |            | x    |
 | Find Missing Number       |            | x    |
+| Is Shuffle?               |            | x    |
