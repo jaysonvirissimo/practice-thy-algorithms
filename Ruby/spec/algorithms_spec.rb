@@ -28,13 +28,13 @@ describe 'fibs' do
 end
 
 describe 'is_palindrome?' do
-  specify { expect(is_palindrome?('ricercar')).to eq(false) }
-  specify { expect(is_palindrome?('racecar')).to eq(true) }
+  specify { expect(is_palindrome?('ricercar')).to be_falsy }
+  specify { expect(is_palindrome?('racecar')).to be_truthy }
 end
 
 describe 'valid_ip?' do
-  specify { expect(valid_ip?('1.1.1.1')).to eq(true) }
-  specify { expect(valid_ip?('256.2.2.2')).to eq(false) }
+  specify { expect(valid_ip?('1.1.1.1')).to be_truthy }
+  specify { expect(valid_ip?('256.2.2.2')).to be_falsy }
 end
 
 describe 'folding_cipher' do
@@ -180,12 +180,12 @@ end
 describe 'can_win?' do
   it "should return false if can't win" do
     array = [1, 2, 3, 4, 5, 0]
-    expect(can_win?(array, 1)).to eq(false)
+    expect(can_win?(array, 1)).to be_falsy
   end
 
   it 'should return true if can win' do
     array = [3, 1, 5, 7, 9, 2, 9, 0]
-    expect(can_win?(array, 1)).to eq(true)
+    expect(can_win?(array, 1)).to be_truthy
   end
 end
 
