@@ -381,22 +381,3 @@ describe 'binary' do
   specify { expect(binary(5)).to eq('101') }
   specify { expect(binary(15)).to eq('1111') }
 end
-
-private
-
-def test_file
-  file = <<-FILE
-    1
-    # 2
-    3
-    # 4
-    5
-    # 6
-    7
-    # 8
-    9
-    # 10
-    FILE
-
-  file
-end
