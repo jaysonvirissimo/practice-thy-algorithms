@@ -44,3 +44,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 | Find Missing Number       |            | x    |
 | Is Shuffle?               |            | x    |
 | Binary                    |            | x    |
+| Recursive Factorial       |            | x    |
