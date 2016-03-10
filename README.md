@@ -43,3 +43,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 | Hash Dictionary           |            | x    |
 | Find Missing Number       |            | x    |
 | Is Shuffle?               |            | x    |
+| Binary                    |            | x    |
