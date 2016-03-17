@@ -45,3 +45,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 | Is Shuffle?               |            | x    |
 | Binary                    |            | x    |
 | Recursive Factorial       |            | x    |
+| Iterative Factorial       |            | x    |
