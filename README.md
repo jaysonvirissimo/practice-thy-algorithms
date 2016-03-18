@@ -46,3 +46,4 @@ Your Javascript code goes in the `algorithms.js` file in the `src` directory.
 | Binary                    |            | x    |
 | Recursive Factorial       |            | x    |
 | Iterative Factorial       |            | x    |
+| Permutations              |            | x    |
