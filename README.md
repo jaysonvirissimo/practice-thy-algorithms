@@ -1,15 +1,18 @@
-***practice-thy-algorithms*** is a series of specifications for practicing algorithms in the **Javascript** and **Ruby** programming languages.
-To get started, just clone this repo.
+This repository includes a series of tests that can be used for practicing algorithms in the _Javascript_ and _Ruby_ programming languages.
+To get started, just clone this repo with `get clone https://github.com/jaysonvirissimo/practice-thy-algorithms.git`.
+
+## JavaScript Instructions
+Make sure you have the [Yarn](https://yarnpkg.com/lang/en/) package manager installed on your system.
+Navigate to the `JavaScript` directory and run `yarn install`.
+The problem statements are inside the appropriately named file in `lib`.
+This is also where you write your own code.
+Run `yarn test` when you are ready for some feedback on your attempt.
 
 ## Ruby Instructions
 Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
 
-## Javascript Instructions
-Open the `run_this.html` file in a web browser.
-Your Javascript code goes in the `algorithms.js` file in the `src` directory.
-
 ## Problems
-| Problem Name              | JavaScript | Ruby |
+| Name                      | JavaScript | Ruby |
 | ------------------------- |:----------:| :---:|
 | Digital Root              | x          | x    |
 | Caesar Cipher             | x          | x    |
