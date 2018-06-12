@@ -1,5 +1,5 @@
 This repository includes a series of tests that can be used for practicing algorithms in the _Javascript_ and _Ruby_ programming languages.
-To get started, just clone this repo with `get clone https://github.com/jaysonvirissimo/practice-thy-algorithms.git`.
+To get started, just clone this repo with `git clone https://github.com/jaysonvirissimo/practice-thy-algorithms.git`.
 
 ## JavaScript Instructions
 Make sure you have the [Yarn](https://yarnpkg.com/lang/en/) package manager installed on your system.

@@ -28,7 +28,7 @@ def sum_rec(numbers)
 end
 
 # Write a function that takes n, the length of the sequence.
-# Return the first n elements from the fibonnacci sequence as an array.
+# Return the first n elements from the Fibonacci sequence as an array.
 def fibs(n)
 
 end
@@ -277,5 +277,5 @@ end
 
 # Write a method that takes an array and returns all its permutations.
 def permutations(array)
-  
+
 end
