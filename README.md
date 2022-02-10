@@ -11,51 +11,44 @@ Run `yarn test` when you are ready for some feedback on your attempt.
 ## Ruby Instructions
 Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
 
-## Lua Instructions
-Grab the [LuaRocks](https://luarocks.org/#quick-start) package manager.
-Install the testing framework with `luarocks install busted`.
-Write you solutions within the appropriate file in the `src` directory.
-Run your specs with `busted run spec/` in your terminal.
-
-
 ## Problems
-| Name                      | JavaScript | Ruby | Lua |
-| ------------------------- |:----------:| :---:| :--:|
-| Digital Root              | x          | x    |     |
-| Caesar Cipher             | x          | x    |     |
-| Common Substrings         | x          | x    |     |
-| Recursive Sum             | x          | x    |     |
-| Fibonacci Sequence        | x          | x    |     |
-| Palindrome                | x          | x    |     |
-| Valid IP                  |            | x    |     |
-| Folding Cipher            | x          | x    |     |
-| Unique Substrings         | x          | x    |     |
-| Largest Contiguous Subsum | x          | x    |     |
-| Silly Years               | x          | x    |     |
-| Pair Sum                  | x          | x    |     |
-| Matrix Region Sum         | x          | x    |     |
-| Merge Sort                |            | x    |     |
-| Binary Search             |            | x    | x   |
-| Productify                |            | x    |     |
-| Subsets                   |            | x    |     |
-| Longest Palindrome        |            | x    |     |
-| Fast Intersection         |            | x    |     |
-| Common Subsets            |            | x    |     |
-| Can Win                   |            | x    |     |
-| Non-Comparison Sorts      |            | x    |     |
-| Weighted Random Index     |            | x    |     |
-| Move Zeros                |            | x    |     |
-| Look and Say              |            | x    |     |
-| Sum Upon Sums             |            | x    |     |
-| Max Stack                 |            | x    |     |
-| Stack Queue               |            | x    |     |
-| Windowed Max Range        |            | x    |     |
-| Hash Dictionary           |            | x    |     |
-| Find Missing Number       |            | x    |     |
-| Is Shuffle?               |            | x    |     |
-| Binary                    |            | x    |     |
-| Recursive Factorial       |            | x    |     |
-| Iterative Factorial       |            | x    |     |
-| Permutations              |            | x    |     |
-| Dictionary                | x          |      |     |
-| Hash Table                | x          |      |     |
+| Name                      | JavaScript | Ruby |
+| ------------------------- |:----------:| :---:|
+| Digital Root              | x          | x    |
+| Caesar Cipher             | x          | x    |
+| Common Substrings         | x          | x    |
+| Recursive Sum             | x          | x    |
+| Fibonacci Sequence        | x          | x    |
+| Palindrome                | x          | x    |
+| Valid IP                  |            | x    |
+| Folding Cipher            | x          | x    |
+| Unique Substrings         | x          | x    |
+| Largest Contiguous Subsum | x          | x    |
+| Silly Years               | x          | x    |
+| Pair Sum                  | x          | x    |
+| Matrix Region Sum         | x          | x    |
+| Merge Sort                |            | x    |
+| Binary Search             |            | x    |
+| Productify                |            | x    |
+| Subsets                   |            | x    |
+| Longest Palindrome        |            | x    |
+| Fast Intersection         |            | x    |
+| Common Subsets            |            | x    |
+| Can Win                   |            | x    |
+| Non-Comparison Sorts      |            | x    |
+| Weighted Random Index     |            | x    |
+| Move Zeros                |            | x    |
+| Look and Say              |            | x    |
+| Sum Upon Sums             |            | x    |
+| Max Stack                 |            | x    |
+| Stack Queue               |            | x    |
+| Windowed Max Range        |            | x    |
+| Hash Dictionary           |            | x    |
+| Find Missing Number       |            | x    |
+| Is Shuffle?               |            | x    |
+| Binary                    |            | x    |
+| Recursive Factorial       |            | x    |
+| Iterative Factorial       |            | x    |
+| Permutations              |            | x    |
+| Dictionary                | x          |      |
+| Hash Table                | x          |      |
