@@ -57,3 +57,5 @@ Run your specs with `busted run spec/` in your terminal.
 | Recursive Factorial       |            | x    |     |
 | Iterative Factorial       |            | x    |     |
 | Permutations              |            | x    |     |
+| Dictionary                | x          |      |     |
+| Hash Table                | x          |      |     |
