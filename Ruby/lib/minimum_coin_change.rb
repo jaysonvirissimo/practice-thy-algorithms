@@ -4,13 +4,15 @@
 # 2. Contains no more coins that are absolutely needed to sum to the amount 
 class MinimumCoinChange
   def initialize(coins: AMERICAN_COINS)
-    @coin = coins
+    @coins = coins
   end
 
   def make_change(amount)
   end
 
   private
+
+  attr_reader :coins
 
   AMERICAN_COINS = [1, 5, 10, 25].freeze
 end
