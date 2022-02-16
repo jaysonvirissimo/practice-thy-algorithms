@@ -52,3 +52,4 @@ Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby
 | Permutations              |            | x    |
 | Dictionary                | x          |      |
 | Hash Table                | x          |      |
+| Minimum Coin Change       |            | x    |
