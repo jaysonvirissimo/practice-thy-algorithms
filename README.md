@@ -46,10 +46,11 @@ Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby
 | Hash Dictionary           |            | x    |
 | Find Missing Number       |            | x    |
 | Is Shuffle?               |            | x    |
-| Binary                    |            | x    |
+| Decimal to Binary         | x          | x    |
 | Recursive Factorial       |            | x    |
 | Iterative Factorial       |            | x    |
 | Permutations              |            | x    |
 | Dictionary                | x          |      |
 | Hash Table                | x          |      |
 | Minimum Coin Change       |            | x    |
+| Stack                     |            |      | 
