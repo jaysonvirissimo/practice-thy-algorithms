@@ -43,7 +43,7 @@ Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby
 | Max Stack                 |            | x    |
 | Stack Queue               |            | x    |
 | Windowed Max Range        |            | x    |
-| Hash Dictionary           |            | x    |
+| File List                 |            | x    |
 | Find Missing Number       |            | x    |
 | Is Shuffle?               |            | x    |
 | Decimal to Binary         | x          | x    |
