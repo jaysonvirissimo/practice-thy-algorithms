@@ -2,11 +2,11 @@ This repository includes a series of tests that can be used for practicing algor
 To get started, just clone this repo with `git clone https://github.com/jaysonvirissimo/practice-thy-algorithms.git`.
 
 ## JavaScript Instructions
-Make sure you have the [Yarn](https://yarnpkg.com/lang/en/) package manager installed on your system.
-Navigate to the `JavaScript` directory and run `yarn install`.
+Make sure you have the [npm](https://www.npmjs.com/) package manager installed.
+Navigate to the `JavaScript` directory and run `npm install`.
 The problem statements are inside the appropriately named file in `lib`.
 This is also where you write your own code.
-Run `yarn test` when you are ready for some feedback on your attempt.
+Run `npm test` when you are ready for some feedback on your attempt.
 
 ## Ruby Instructions
 Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby` directory.
@@ -32,7 +32,7 @@ Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby
 | Productify                |            | x    |
 | Subsets                   |            | x    |
 | Longest Palindrome        |            | x    |
-| Fast Intersection         |            | x    |
+| Fast Intersection         | x          | x    |
 | Common Subsets            |            | x    |
 | Can Win                   |            | x    |
 | Non-Comparison Sorts      |            | x    |
