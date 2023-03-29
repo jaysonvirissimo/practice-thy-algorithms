@@ -7,4 +7,3 @@ function findMissingLetter(string) {
 
 }
 module.exports = findMissingLetter;
-
