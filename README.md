@@ -55,3 +55,4 @@ Write your solutions in `algorithms.rb` and run the `rspec` command in the `Ruby
 | Minimum Coin Change       |            | x    |
 | Stack                     |            |      | 
 | Find Duplicate            | x          |      |
+| Find Missing Letter       | x          |      |
