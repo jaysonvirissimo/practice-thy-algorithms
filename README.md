@@ -59,7 +59,7 @@ Use `rspec` to run your tests and see your progress.
 | Dictionary                   | x          |      |
 | Hash Table                   | x          |      |
 | Minimum Coin Change          |            | x    |
-| Stack                        |            |      |
+| Stack                        | x          | x    |
 | Find Duplicate               | x          |      |
 | Find Missing Letter          | x          |      |
 | Find Non-Duplicate Character | x          |      |
