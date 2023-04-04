@@ -63,3 +63,4 @@ Use `rspec` to run your tests and see your progress.
 | Find Duplicate               | x          |      |
 | Find Missing Letter          | x          |      |
 | Find Non-Duplicate Character | x          |      |
+| Queue                        |            | x    |
