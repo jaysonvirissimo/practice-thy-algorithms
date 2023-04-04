@@ -64,3 +64,4 @@ Use `rspec` to run your tests and see your progress.
 | Find Missing Letter          | x          |      |
 | Find Non-Duplicate Character | x          |      |
 | Queue                        |            | x    |
+| Reverse String               |            | x    |
