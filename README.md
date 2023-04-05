@@ -12,10 +12,11 @@ This is also where you write your own code.
 Run `npm test` when you are ready for some feedback on your attempt.
 
 ## Ruby Instructions
-Make sure that you have Bundler installed.
+Make sure you have `bundler` installed.
 Navigate to the `Ruby` directory and run `bundle install`.
-The problem statements are inside the appropriately named files in `lib`.
-Use `rspec` to run your tests and see your progress.
+The problem statements are inside the appropriately named file in `lib`.
+This is also where you write your own code.
+Run `rake spec` when you are ready for some feedback on your attempt.
 
 ## Problems
 | Name                         | JavaScript | Ruby |
