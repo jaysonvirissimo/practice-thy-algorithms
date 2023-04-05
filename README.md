@@ -66,3 +66,4 @@ Run `rake spec` when you are ready for some feedback on your attempt.
 | Find Non-Duplicate Character | x          |      |
 | Queue                        |            | x    |
 | Reverse String               |            | x    |
+| Recursive Print              |            | x    |
