@@ -16,7 +16,7 @@ Make sure you have `bundler` installed.
 Navigate to the `Ruby` directory and run `bundle install`.
 The problem statements are inside the appropriately named file in `lib`.
 This is also where you write your own code.
-Run `rake spec` when you are ready for some feedback on your attempt.
+Run `rspec` when you are ready for some feedback on your attempt.
 
 ## Problems
 | Name                         | JavaScript | Ruby |
@@ -67,3 +67,4 @@ Run `rake spec` when you are ready for some feedback on your attempt.
 | Queue                        |            | x    |
 | Reverse String               |            | x    |
 | Recursive Print              |            | x    |
+| Recursive Character Count    |            | x    |
