@@ -8,4 +8,10 @@ describe "#triangle_number" do
   specify { expect(triangle_number(5)).to eq(15) }
   specify { expect(triangle_number(6)).to eq(21) }
   specify { expect(triangle_number(7)).to eq(28) }
+
+  it "calls itself" do
+    expect(self).to receive(:triangle_number)
+      .at_least(:twice).and_call_original
+    triangle_number(7)
+  end
 end
