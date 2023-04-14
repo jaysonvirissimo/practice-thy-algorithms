@@ -42,7 +42,6 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Fast Intersection            | x          | x    |
 | Common Subsets               |            | x    |
 | Can Win                      |            | x    |
-| Non-Comparison Sorts         |            | x    |
 | Weighted Random Index        |            | x    |
 | Move Zeros                   |            | x    |
 | Look and Say                 |            | x    |
