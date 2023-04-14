@@ -70,3 +70,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Select Even                  |            | x    |
 | Triangle Number              |            | x    |
 | Index of X                   |            | x    |
+| Uniques Paths                |            | x    |
