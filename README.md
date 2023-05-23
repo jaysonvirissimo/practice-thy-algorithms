@@ -11,6 +11,12 @@ The problem statements are inside the appropriately named files in `lib`.
 This is also where you write your own code.
 Run `npm test` when you are ready for some feedback on your attempt.
 
+## Python Instructions
+Ensure Python is installed.
+Navigate to the `Python` directory.
+Add your solutions in the `lib` directory.
+Run the tests with `python -m unittest discover -s test`.
+
 ## Ruby Instructions
 Make sure you have `bundler` installed.
 Navigate to the `Ruby` directory and run `bundle install`.
@@ -19,55 +25,55 @@ This is also where you write your own code.
 Run `rspec` when you are ready for some feedback on your attempt.
 
 ## Problems
-| Name                         | JavaScript | Ruby |
-|:----------------------------:|:----------:| :---:|
-| Digital Root                 | x          | x    |
-| Caesar Cipher                | x          | x    |
-| Common Substrings            | x          | x    |
-| Recursive Sum                | x          | x    |
-| Fibonacci Sequence           | x          | x    |
-| Palindrome                   | x          | x    |
-| Valid IP                     |            | x    |
-| Folding Cipher               | x          | x    |
-| Unique Substrings            | x          | x    |
-| Largest Contiguous Subsum    | x          | x    |
-| Silly Years                  | x          | x    |
-| Pair Sum                     | x          | x    |
-| Matrix Region Sum            | x          | x    |
-| Merge Sort                   |            | x    |
-| Binary Search                |            | x    |
-| Productify                   |            | x    |
-| Subsets                      |            | x    |
-| Longest Palindrome           |            | x    |
-| Fast Intersection            | x          | x    |
-| Common Subsets               |            | x    |
-| Can Win                      |            | x    |
-| Weighted Random Index        |            | x    |
-| Move Zeros                   |            | x    |
-| Look and Say                 |            | x    |
-| Sum Upon Sums                |            | x    |
-| Max Stack                    |            | x    |
-| Stack Queue                  |            | x    |
-| Windowed Max Range           |            | x    |
-| File List                    |            | x    |
-| Find Missing Number          |            | x    |
-| Is Shuffle?                  |            | x    |
-| Decimal to Binary            | x          | x    |
-| Recursive Factorial          |            | x    |
-| Iterative Factorial          |            | x    |
-| Permutations                 |            | x    |
-| Dictionary                   | x          |      |
-| Hash Table                   | x          |      |
-| Minimum Coin Change          |            | x    |
-| Stack                        | x          | x    |
-| Find Duplicate               | x          |      |
-| Find Missing Letter          | x          |      |
-| Find Non-Duplicate Character | x          |      |
-| Queue                        |            | x    |
-| Reverse String               |            | x    |
-| Recursive Print              |            | x    |
-| Recursive Character Count    |            | x    |
-| Select Even                  |            | x    |
-| Triangle Number              |            | x    |
-| Index of X                   |            | x    |
-| Uniques Paths                |            | x    |
+| Name                         | JavaScript | Ruby | Python |
+|:----------------------------:|:----------:|:----:|:------:|
+| Digital Root                 | x          | x    |        |
+| Caesar Cipher                | x          | x    |        |
+| Common Substrings            | x          | x    |        |
+| Recursive Sum                | x          | x    | x      |
+| Fibonacci Sequence           | x          | x    |        |
+| Palindrome                   | x          | x    | x      |
+| Valid IP                     |            | x    |        |
+| Folding Cipher               | x          | x    |        |
+| Unique Substrings            | x          | x    |        |
+| Largest Contiguous Subsum    | x          | x    |        |
+| Silly Years                  | x          | x    |        |
+| Pair Sum                     | x          | x    |        |
+| Matrix Region Sum            | x          | x    |        |
+| Merge Sort                   |            | x    |        |
+| Binary Search                |            | x    |        |
+| Productify                   |            | x    |        |
+| Subsets                      |            | x    |        |
+| Longest Palindrome           |            | x    |        |
+| Fast Intersection            | x          | x    |        |
+| Common Subsets               |            | x    |        |
+| Can Win                      |            | x    |        |
+| Weighted Random Index        |            | x    |        |
+| Move Zeros                   |            | x    |        |
+| Look and Say                 |            | x    |        |
+| Sum Upon Sums                |            | x    |        |
+| Max Stack                    |            | x    |        |
+| Stack Queue                  |            | x    |        |
+| Windowed Max Range           |            | x    |        |
+| File List                    |            | x    |        |
+| Find Missing Number          |            | x    |        |
+| Is Shuffle?                  |            | x    |        |
+| Decimal to Binary            | x          | x    |        |
+| Recursive Factorial          |            | x    |        |
+| Iterative Factorial          |            | x    |        |
+| Permutations                 |            | x    |        |
+| Dictionary                   | x          |      |        |
+| Hash Table                   | x          |      |        |
+| Minimum Coin Change          |            | x    |        |
+| Stack                        | x          | x    |        |
+| Find Duplicate               | x          |      |        |
+| Find Missing Letter          | x          |      |        |
+| Find Non-Duplicate Character | x          |      |        |
+| Queue                        |            | x    |        |
+| Reverse String               |            | x    |        |
+| Recursive Print              |            | x    |        |
+| Recursive Character Count    |            | x    |        |
+| Select Even                  |            | x    |        |
+| Triangle Number              |            | x    |        |
+| Index of X                   |            | x    |        |
+| Uniques Paths                |            | x    |        |
