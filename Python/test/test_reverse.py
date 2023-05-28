@@ -1,8 +1,8 @@
 import unittest
 from lib.reverse import reverse
 
-class TestCharacterCount(unittest.TestCase):
-    def test_character_count(self):
+class TestReverse(unittest.TestCase):
+    def test_reverse(self):
         self.assertEqual(reverse("abcd"), "dcba")
 
 if __name__ == '__main__':

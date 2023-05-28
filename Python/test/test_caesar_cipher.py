@@ -1,7 +1,7 @@
 import unittest
 from lib.caesar_cipher import caesar_cipher
 
-class TestIsPalindrome(unittest.TestCase):
+class TestCaesarCipher(unittest.TestCase):
     def test_caesar_cipher(self):
       self.assertEqual(caesar_cipher("hello", 4), "lipps")
       self.assertEqual(caesar_cipher("abc", 0), "abc")
