@@ -1,4 +1,4 @@
-This repository includes a series of tests that can be used for practicing algorithms in the _Javascript_ and _Ruby_ programming languages.
+This repository includes a series of tests that can be used for practicing algorithms in the _Javascript_, _Python_, and _Ruby_ programming languages.
 To get started, clone this repo locally:
 ```
 git clone https://github.com/jaysonvirissimo/practice-thy-algorithms.git
@@ -70,9 +70,9 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Find Missing Letter          | x          |      |        |
 | Find Non-Duplicate Character | x          |      |        |
 | Queue                        |            | x    |        |
-| Reverse String               |            | x    |        |
+| Reverse String               |            | x    | x      |
 | Recursive Print              |            | x    |        |
-| Recursive Character Count    |            | x    |        |
+| Recursive Character Count    |            | x    | x      |
 | Select Even                  |            | x    |        |
 | Triangle Number              |            | x    |        |
 | Index of X                   |            | x    |        |
