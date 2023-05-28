@@ -3,6 +3,5 @@
 # Keep repeating until there is only one digit in the result.
 # The result is called a 'digital root'.
 # Do not use string conversion within your method.
-def digital_root(number)
-
-end
+def digital_root(number):
+    return 0

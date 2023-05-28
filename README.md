@@ -27,7 +27,7 @@ Run `rspec` when you are ready for some feedback on your attempt.
 ## Problems
 | Name                         | JavaScript | Ruby | Python |
 |:----------------------------:|:----------:|:----:|:------:|
-| Digital Root                 | x          | x    |        |
+| Digital Root                 | x          | x    | x      |
 | Caesar Cipher                | x          | x    | x      |
 | Common Substrings            | x          | x    |        |
 | Recursive Sum                | x          | x    | x      |
