@@ -1,5 +1,5 @@
 # Take an array of strings
 # Return the total number of characters
 # Use recursion
-def character_count(lst):
+def character_count(array):
     return 0

@@ -34,7 +34,7 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Fibonacci Sequence           | x          | x    | x      |
 | Palindrome                   | x          | x    | x      |
 | Valid IP                     | x          | x    | x      |
-| Folding Cipher               | x          | x    |        |
+| Folding Cipher               | x          | x    | x      |
 | Unique Substrings            | x          | x    |        |
 | Largest Contiguous Subsum    | x          | x    |        |
 | Silly Years                  | x          | x    |        |

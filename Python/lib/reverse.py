@@ -2,4 +2,4 @@
 # Return a new string with all the characters in reverse order
 # Consider using a stack
 def reverse(string):
-  return 0
+  return ""
