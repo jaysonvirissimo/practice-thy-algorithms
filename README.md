@@ -78,3 +78,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Index of X                   |            | x    |        |
 | Uniques Paths                |            | x    |        |
 | Add Until 100                |            | x    |        |
+| Golomb Sequence              |            | x    |        |
