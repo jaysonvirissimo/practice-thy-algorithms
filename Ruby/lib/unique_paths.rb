@@ -3,6 +3,6 @@
 # Calculate the number of shortest paths from the upper-left to bottom-right of the grid.
 # Each step of a shortest path will always move down or to the right.
 # Use recursion.
-def unique_paths(rows, columns)
-
+# Consider memoization.
+def unique_paths(rows, columns, memo = {})
 end
