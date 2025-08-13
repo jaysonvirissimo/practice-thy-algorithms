@@ -36,7 +36,7 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Valid IP                     | x          | x    | x      |
 | Folding Cipher               | x          | x    | x      |
 | Unique Substrings            | x          | x    | x      |
-| Largest Contiguous Subsum    | x          | x    |        |
+| Maximum Subarray             | x          | x    |        |
 | Silly Years                  | x          | x    |        |
 | Two Sum                      | x          | x    |        |
 | Matrix Region Sum            | x          | x    |        |

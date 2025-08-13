@@ -5,4 +5,4 @@
 function twoSum(numbers, k) {
 
 }
-module.exports = pairSum;
+module.exports = twoSum;
