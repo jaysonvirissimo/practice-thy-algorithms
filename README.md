@@ -27,6 +27,10 @@ Run `rspec` when you are ready for some feedback on your attempt.
 ## Problems
 | Name                         | JavaScript | Ruby | Python |
 |:----------------------------:|:----------:|:----:|:------:|
+| Two Sum                      | x          | x    |        |
+| Maximum Subarray             | x          | x    |        |
+| Unique Paths                 |            | x    |        |
+| Coin Change                  |            | x    |        |
 | Digital Root                 | x          | x    | x      |
 | Caesar Cipher                | x          | x    | x      |
 | Common Substrings            | x          | x    | x      |
@@ -36,9 +40,7 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Valid IP                     | x          | x    | x      |
 | Folding Cipher               | x          | x    | x      |
 | Unique Substrings            | x          | x    | x      |
-| Maximum Subarray             | x          | x    |        |
 | Silly Years                  | x          | x    |        |
-| Two Sum                      | x          | x    |        |
 | Matrix Region Sum            | x          | x    |        |
 | Merge Sort                   |            | x    |        |
 | Binary Search                |            | x    |        |
@@ -64,7 +66,6 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Permutations                 |            | x    |        |
 | Dictionary                   | x          |      |        |
 | Hash Table                   | x          |      |        |
-| Coin Change                  |            | x    |        |
 | Stack                        | x          | x    |        |
 | Find Duplicate               | x          |      |        |
 | Find Missing Letter          | x          |      |        |
@@ -76,6 +77,5 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Select Even                  |            | x    |        |
 | Triangle Number              |            | x    |        |
 | Index of X                   |            | x    |        |
-| Unique Paths                 |            | x    |        |
 | Add Until 100                |            | x    |        |
 | Golomb Sequence              |            | x    |        |
