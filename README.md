@@ -38,7 +38,7 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Unique Substrings            | x          | x    | x      |
 | Largest Contiguous Subsum    | x          | x    |        |
 | Silly Years                  | x          | x    |        |
-| Pair Sum                     | x          | x    |        |
+| Two Sum                      | x          | x    |        |
 | Matrix Region Sum            | x          | x    |        |
 | Merge Sort                   |            | x    |        |
 | Binary Search                |            | x    |        |

@@ -3,5 +3,5 @@
 # List the pairs in [min, max] order.
 # Time complexity: O(n).
 # Return a set.
-def pair_sum(array, k)
+def two_sum(array, k)
 end

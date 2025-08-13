@@ -2,7 +2,7 @@
 // List the pairs in [min, max] order.
 // Time complexity: O(n).
 // Return an array.
-function pairSum(numbers, k) {
+function twoSum(numbers, k) {
 
 }
 module.exports = pairSum;
