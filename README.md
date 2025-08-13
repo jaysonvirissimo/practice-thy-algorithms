@@ -64,7 +64,7 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Permutations                 |            | x    |        |
 | Dictionary                   | x          |      |        |
 | Hash Table                   | x          |      |        |
-| Minimum Coin Change          |            | x    |        |
+| Coin Change                  |            | x    |        |
 | Stack                        | x          | x    |        |
 | Find Duplicate               | x          |      |        |
 | Find Missing Letter          | x          |      |        |
