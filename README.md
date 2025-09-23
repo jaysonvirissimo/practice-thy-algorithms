@@ -74,4 +74,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Recursive Print              |            | x    |        |
 | Recursive Character Count    |            | x    | x      |
 | Select Even                  |            | x    |        |
-| Triangle Number              |            | x    |        |
