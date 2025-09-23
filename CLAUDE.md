@@ -69,6 +69,7 @@ To add test cases for existing problems:
 2. Run the generation script to create initial test files
 3. Create implementation files in each language's `lib/` directory
 4. **Test validation**: Write complete solutions to verify tests work properly, then remove the actual implementation code, leaving only the function signature and problem description comments
+   - **Python syntax requirement**: Python functions must include a `pass` statement in empty function bodies, as Python cannot have syntactically empty functions unlike JavaScript and Ruby
 
 ### Problem Description Guidelines
 
