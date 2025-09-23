@@ -1,5 +1,5 @@
-# Given an array of integers (positive and negative) find the largest contiguous subsum (sum of a subarray).
-# You can solve this trivially in O(n**2) time by considering all subarrays.
-# Try to solve it in O(n) time with O(1) memory.
+# Maximum Subarray
+# Design an algorithm to determine the maximum sum achievable from any contiguous subsequence within an array of integers. The array contains both positive and negative values. While a brute-force approach examining all possible subarrays runs in O(n²) time, strive for an optimal O(n) solution using constant space.
+# Time complexity: O(n).
 def maximum_subarray(array)
 end

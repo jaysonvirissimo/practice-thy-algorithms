@@ -1,7 +1,7 @@
 {
   "two_sum": {
     "title": "Two Sum",
-    "description": "Given an array of integers and a target sum, return the indices of the two numbers such that they add up to the target. You may assume that each input would have exactly one solution, and you may not use the same element twice.",
+    "description": "Implement a function that locates a pair of elements within an integer array whose sum equals a specified target value. The function should return the array indices of these two elements. Assume exactly one valid pair exists and that no element may be used twice in the solution.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -54,7 +54,7 @@
   },
   "maximum_subarray": {
     "title": "Maximum Subarray",
-    "description": "Given an array of integers (positive and negative) find the largest contiguous subsum (sum of a subarray). You can solve this trivially in O(n**2) time by considering all subarrays. Try to solve it in O(n) time with O(1) memory.",
+    "description": "Design an algorithm to determine the maximum sum achievable from any contiguous subsequence within an array of integers. The array contains both positive and negative values. While a brute-force approach examining all possible subarrays runs in O(n²) time, strive for an optimal O(n) solution using constant space.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -87,6 +87,59 @@
         },
         "expected": 6,
         "description": "should return the largest subsum"
+      }
+    ]
+  },
+  "unique_paths": {
+    "title": "Unique Paths",
+    "description": "Develop a recursive algorithm to count the total number of distinct shortest paths through a rectangular grid from the top-left corner to the bottom-right corner. Movement is restricted to rightward and downward steps only. Implement memoization to optimize the recursive solution and avoid redundant calculations.",
+    "complexity": "O(m*n)",
+    "parameters": [
+      {
+        "name": "rows",
+        "type": "integer",
+        "description": "Number of rows in the grid"
+      },
+      {
+        "name": "columns",
+        "type": "integer",
+        "description": "Number of columns in the grid"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function uniquePaths(rows, columns)",
+      "ruby": "def unique_paths(rows, columns)",
+      "python": "def unique_paths(rows, columns)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "rows": 3,
+          "columns": 7
+        },
+        "expected": 28,
+        "description": "should return 28 unique paths for 3x7 grid"
+      },
+      {
+        "input": {
+          "rows": 4,
+          "columns": 12
+        },
+        "expected": 364,
+        "description": "should return 364 unique paths for 4x12 grid"
+      },
+      {
+        "input": {
+          "rows": 5,
+          "columns": 15
+        },
+        "expected": 3060,
+        "description": "should return 3060 unique paths for 5x15 grid"
       }
     ]
   }
