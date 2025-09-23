@@ -56,6 +56,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Max Stack                    |            | x    |        |
 | Stack Queue                  |            | x    |        |
 | Windowed Max Range           |            | x    |        |
-| File List                    |            | x    |        |
-| Find Missing Number          |            | x    |        |
-| Is Shuffle?                  |            | x    |        |
