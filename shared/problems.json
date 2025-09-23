@@ -142,5 +142,58 @@
         "description": "should return 3060 unique paths for 5x15 grid"
       }
     ]
+  },
+  "coin_change": {
+    "title": "Coin Change",
+    "description": "Construct an algorithm that determines the minimum number of coins needed to make change for a given monetary amount. Given a set of coin denominations and a target amount, return an array containing the specific coins that sum to the target using the fewest possible coins. Implement this as a classic dynamic programming optimization problem.",
+    "complexity": "O(amount * coins)",
+    "parameters": [
+      {
+        "name": "amount",
+        "type": "integer",
+        "description": "Target monetary amount to make change for"
+      },
+      {
+        "name": "coins",
+        "type": "array<integer>",
+        "description": "Available coin denominations (optional, defaults to [1, 5, 10, 25])"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<integer>",
+      "ruby": "array<integer>",
+      "python": "list<integer>"
+    },
+    "functionSignatures": {
+      "javascript": "function coinChange(amount, coins = [1, 5, 10, 25])",
+      "ruby": "def coin_change(amount, coins = [1, 5, 10, 25])",
+      "python": "def coin_change(amount, coins = [1, 5, 10, 25])"
+    },
+    "testCases": [
+      {
+        "input": {
+          "amount": 36,
+          "coins": [1, 5, 10, 25]
+        },
+        "expected": [25, 10, 1],
+        "description": "should return [25, 10, 1] using minimum 3 coins for 36 cents"
+      },
+      {
+        "input": {
+          "amount": 43,
+          "coins": [1, 5, 10, 25]
+        },
+        "expected": [25, 10, 5, 1, 1, 1],
+        "description": "should return [25, 10, 5, 1, 1, 1] using minimum 6 coins for 43 cents"
+      },
+      {
+        "input": {
+          "amount": 67,
+          "coins": [1, 5, 10, 25]
+        },
+        "expected": [25, 25, 10, 5, 1, 1],
+        "description": "should return [25, 25, 10, 5, 1, 1] using minimum 6 coins for 67 cents"
+      }
+    ]
   }
 }
