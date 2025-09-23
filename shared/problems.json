@@ -285,5 +285,64 @@
         "description": "should return 4 by buying at price 1 and selling at price 5"
       }
     ]
+  },
+  "valid_parentheses": {
+    "title": "Valid Parentheses",
+    "description": "Construct an algorithm to validate the proper matching and ordering of bracket characters within a string. Given a string containing only parentheses, square brackets, and curly braces, determine whether the brackets are correctly paired and nested. Each opening bracket must have a corresponding closing bracket of the same type, and brackets must be closed in the proper order to maintain valid nesting structure.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "s",
+        "type": "string",
+        "description": "String containing only bracket characters: '(', ')', '[', ']', '{', '}'"
+      }
+    ],
+    "returnType": {
+      "javascript": "boolean",
+      "ruby": "boolean",
+      "python": "boolean"
+    },
+    "functionSignatures": {
+      "javascript": "function isValid(s)",
+      "ruby": "def is_valid(s)",
+      "python": "def is_valid(s)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "s": "()"
+        },
+        "expected": true,
+        "description": "should return true for simple parentheses pair"
+      },
+      {
+        "input": {
+          "s": "()[]{}"
+        },
+        "expected": true,
+        "description": "should return true for multiple bracket types in sequence"
+      },
+      {
+        "input": {
+          "s": "(]"
+        },
+        "expected": false,
+        "description": "should return false for mismatched bracket types"
+      },
+      {
+        "input": {
+          "s": "([])"
+        },
+        "expected": true,
+        "description": "should return true for properly nested brackets"
+      },
+      {
+        "input": {
+          "s": "([)]"
+        },
+        "expected": false,
+        "description": "should return false for improperly nested brackets"
+      }
+    ]
   }
 }

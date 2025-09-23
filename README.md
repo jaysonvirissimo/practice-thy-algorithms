@@ -33,3 +33,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Coin Change                     | x          | x    | x      |
 | Contains Duplicate              | x          | x    | x      |
 | Best Time to Buy and Sell Stock | x          | x    | x      |
+| Valid Parentheses               | x          | x    | x      |
