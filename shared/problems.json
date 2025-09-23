@@ -240,5 +240,50 @@
         "description": "should return true when multiple elements have duplicates"
       }
     ]
+  },
+  "best_time_to_buy_and_sell_stock": {
+    "title": "Best Time to Buy and Sell Stock",
+    "description": "Determine the optimal strategy for a single stock transaction to maximize profit. Given an array representing stock prices over consecutive days, identify the most profitable buy-sell pair where the purchase precedes the sale. The algorithm should find the maximum difference between a selling price and a buying price, with the constraint that the buying day must occur before the selling day. If no profitable transaction exists, return zero.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "prices",
+        "type": "array<integer>",
+        "description": "Array of stock prices where prices[i] represents the price on day i"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function maxProfit(prices)",
+      "ruby": "def max_profit(prices)",
+      "python": "def max_profit(prices)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "prices": [7, 1, 5, 3, 6, 4]
+        },
+        "expected": 5,
+        "description": "should return 5 by buying at price 1 and selling at price 6"
+      },
+      {
+        "input": {
+          "prices": [7, 6, 4, 3, 1]
+        },
+        "expected": 0,
+        "description": "should return 0 when prices only decrease"
+      },
+      {
+        "input": {
+          "prices": [1, 2, 3, 4, 5]
+        },
+        "expected": 4,
+        "description": "should return 4 by buying at price 1 and selling at price 5"
+      }
+    ]
   }
 }

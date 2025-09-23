@@ -32,3 +32,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Unique Paths                 |            | x    |        |
 | Coin Change                  |            | x    |        |
 | Contains Duplicate           | x          | x    | x      |
+| Best Time to Buy and Sell Stock | x          | x    | x      |
