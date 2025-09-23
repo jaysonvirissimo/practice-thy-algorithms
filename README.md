@@ -47,6 +47,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Subsets                      |            | x    | x      |
 | Longest Palindrome           |            | x    |        |
 | Fast Intersection            | x          | x    |        |
-| Common Subsets               |            | x    |        |
-| Can Win                      |            | x    |        |
-| Weighted Random Index        |            | x    |        |
