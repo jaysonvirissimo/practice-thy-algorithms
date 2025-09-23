@@ -33,6 +33,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Coin Change                  |            | x    |        |
 | Caesar Cipher                | x          | x    | x      |
 | Common Substrings            | x          | x    | x      |
-| Recursive Sum                | x          | x    | x      |
-| Fibonacci Sequence           | x          | x    | x      |
-| Palindrome                   | x          | x    | x      |
