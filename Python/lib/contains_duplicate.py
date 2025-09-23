@@ -16,3 +16,4 @@ Returns:
 """
 
 def contains_duplicate(nums):
+  pass

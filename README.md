@@ -25,11 +25,11 @@ This is also where you write your own code.
 Run `rspec` when you are ready for some feedback on your attempt.
 
 ## Problems
-| Name                         | JavaScript | Ruby | Python |
-|:----------------------------:|:----------:|:----:|:------:|
-| Two Sum                      | x          | x    | x      |
-| Maximum Subarray             | x          | x    |        |
-| Unique Paths                 |            | x    |        |
-| Coin Change                  |            | x    |        |
-| Contains Duplicate           | x          | x    | x      |
+| Name                            | JavaScript | Ruby | Python |
+|:-------------------------------:|:----------:|:----:|:------:|
+| Two Sum                         | x          | x    | x      |
+| Maximum Subarray                | x          | x    | x      |
+| Unique Paths                    | x          | x    | x      |
+| Coin Change                     | x          | x    | x      |
+| Contains Duplicate              | x          | x    | x      |
 | Best Time to Buy and Sell Stock | x          | x    | x      |
