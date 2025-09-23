@@ -65,6 +65,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Permutations                 |            | x    |        |
 | Dictionary                   | x          |      |        |
 | Hash Table                   | x          |      |        |
-| Stack                        | x          | x    |        |
-| Find Duplicate               | x          |      |        |
-| Find Missing Letter          | x          |      |        |
