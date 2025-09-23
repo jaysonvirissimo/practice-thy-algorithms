@@ -39,6 +39,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Valid IP                     | x          | x    | x      |
 | Folding Cipher               | x          | x    | x      |
 | Unique Substrings            | x          | x    | x      |
-| Silly Years                  | x          | x    |        |
-| Matrix Region Sum            | x          | x    |        |
-| Productify                   |            | x    |        |
