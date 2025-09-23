@@ -1,0 +1,10 @@
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+
+desc "Generate test files from shared JSON"
+task :generate_tests do
+  ruby "../shared/generators/ruby_test_generator.rb"
+end
+
+task default: :spec

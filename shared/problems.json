@@ -1,0 +1,47 @@
+{
+  "two_sum": {
+    "title": "Two Sum",
+    "description": "Given an array of integers, return all pairs that sum up to a specified value k. List the pairs in [min, max] order.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "array",
+        "type": "array<integer>",
+        "description": "Array of integers"
+      },
+      {
+        "name": "k",
+        "type": "integer",
+        "description": "Target sum"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<array<integer>>",
+      "ruby": "set<array<integer>>",
+      "python": "list<tuple<integer>>"
+    },
+    "functionSignatures": {
+      "javascript": "function twoSum(numbers, k)",
+      "ruby": "def two_sum(array, k)",
+      "python": "def two_sum(array, k)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "array": [1, 2, -1],
+          "k": 0
+        },
+        "expected": [[-1, 1]],
+        "description": "should return all the pairs that sum to 0"
+      },
+      {
+        "input": {
+          "array": [1, 2, -1, -1, -2],
+          "k": 1
+        },
+        "expected": [[-1, 2]],
+        "description": "should return all the pairs that sum to 1"
+      }
+    ]
+  }
+}

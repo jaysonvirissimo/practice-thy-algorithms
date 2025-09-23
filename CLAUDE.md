@@ -44,6 +44,29 @@ When implementing solutions:
 - All problems should pass their respective test suites
 - Code should be placed in the appropriate language directory's `lib/` folder
 
+## Shared Problem Definition System
+
+The repository uses a centralized JSON system for problem definitions and test cases:
+
+- **Problem definitions**: `shared/problems.json` - Single source of truth for problem statements, test cases, and function signatures
+- **Test generation**: Language-specific generators in `shared/generators/` convert JSON to test files
+- **Automation**: `shared/generate_all_tests.sh` regenerates all test files from the shared definitions
+
+### Adding New Test Cases
+
+To add test cases for existing problems:
+1. Edit `shared/problems.json` to add new entries to the `testCases` array
+2. Run `./shared/generate_all_tests.sh` to regenerate all test files
+3. Alternatively, use language-specific commands:
+   - JavaScript: `cd JavaScript && npm run generate-tests`
+   - Ruby: `cd Ruby && rake generate_tests`
+
+### Adding New Problems
+
+1. Add problem definition to `shared/problems.json` following the existing schema
+2. Run the generation script to create initial test files
+3. Create implementation files in each language's `lib/` directory
+
 ## Test Coverage
 
 Problems are implemented across languages with varying coverage - check the README.md table for which problems are available in each language.

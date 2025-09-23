@@ -3,7 +3,8 @@
     "jest": "^27"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "generate-tests": "node ../shared/generators/javascript_test_generator.js"
   },
   "dependencies": {
     "ansi-regex": "^5.0.1",
