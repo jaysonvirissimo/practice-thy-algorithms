@@ -41,6 +41,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Unique Substrings            | x          | x    | x      |
 | Silly Years                  | x          | x    |        |
 | Matrix Region Sum            | x          | x    |        |
-| Merge Sort                   |            | x    |        |
-| Binary Search                |            | x    |        |
 | Productify                   |            | x    |        |
