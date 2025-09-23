@@ -37,3 +37,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Product of Array Except Self    | x          | x    | x      |
 | Three Sum                       | x          | x    | x      |
 | Merge Intervals                 | x          | x    | x      |
+| Group Anagrams                  | x          | x    | x      |

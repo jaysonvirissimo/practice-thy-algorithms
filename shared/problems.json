@@ -479,5 +479,50 @@
         "description": "should merge overlapping intervals after sorting [4,7] and [1,4] into [1,7]"
       }
     ]
+  },
+  "group_anagrams": {
+    "title": "Group Anagrams",
+    "description": "Develop an algorithm to categorize strings into groups where each group contains anagrams of each other. Given an array of strings, identify and collect all strings that can be rearranged to form identical character sequences. Two strings are anagrams if they contain exactly the same characters with the same frequencies, but potentially in different orders. Return the grouped anagrams in any arrangement. Design an efficient solution that can process up to 10^4 strings, each containing up to 100 lowercase English letters.",
+    "complexity": "O(n * k log k)",
+    "parameters": [
+      {
+        "name": "strs",
+        "type": "array<string>",
+        "description": "Array of strings to group by anagrams"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<array<string>>",
+      "ruby": "array<array<string>>",
+      "python": "list<list<string>>"
+    },
+    "functionSignatures": {
+      "javascript": "function groupAnagrams(strs)",
+      "ruby": "def group_anagrams(strs)",
+      "python": "def group_anagrams(strs)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "strs": ["eat", "tea", "tan", "ate", "nat", "bat"]
+        },
+        "expected": [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
+        "description": "should group anagrams correctly with mixed groups"
+      },
+      {
+        "input": {
+          "strs": [""]
+        },
+        "expected": [[""]],
+        "description": "should handle single empty string"
+      },
+      {
+        "input": {
+          "strs": ["a"]
+        },
+        "expected": [["a"]],
+        "description": "should handle single character string"
+      }
+    ]
   }
 }
