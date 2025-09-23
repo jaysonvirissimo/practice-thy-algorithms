@@ -73,4 +73,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Reverse String               |            | x    | x      |
 | Recursive Print              |            | x    |        |
 | Recursive Character Count    |            | x    | x      |
-| Select Even                  |            | x    |        |
