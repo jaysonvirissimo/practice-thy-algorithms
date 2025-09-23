@@ -59,9 +59,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | File List                    |            | x    |        |
 | Find Missing Number          |            | x    |        |
 | Is Shuffle?                  |            | x    |        |
-| Decimal to Binary            | x          | x    |        |
-| Recursive Factorial          |            | x    |        |
-| Iterative Factorial          |            | x    |        |
-| Permutations                 |            | x    |        |
-| Dictionary                   | x          |      |        |
-| Hash Table                   | x          |      |        |
