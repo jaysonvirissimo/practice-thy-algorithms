@@ -105,6 +105,28 @@ When writing problem descriptions for `shared/problems.json`, use academic and o
 - Example: "arrays with up to 100,000 elements" is clearer than "arrays with up to 105 elements"
 - **Use common sense**: Consider the context - for algorithm problems, "105" is almost certainly 10^5 (100,000) rather than the literal number 105, as most practical algorithms deal with larger datasets
 
+### Test Generator Function Naming Issues
+
+**Known Issue**: The test generators sometimes use inconsistent function naming between the JSON signatures and actual test expectations:
+
+- **JavaScript**: Generally follows camelCase from JSON (e.g., `productExceptSelf`) but test files sometimes expect different names (e.g., `mergeIntervals` vs `merge`)
+- **Ruby/Python**: Test generators often use snake_case problem key names instead of respecting the JSON function signatures
+  - Example: JSON specifies `max_profit` but tests expect `best_time_to_buy_and_sell_stock`
+  - **Workaround**: Match implementation function names to test expectations rather than JSON signatures
+
+**Best Practice**: Always check the generated test files to confirm the expected function name before implementing solutions.
+
+### Test Output Ordering Considerations
+
+**Important**: When implementing problems that return collections (arrays, lists), be aware that:
+
+- Problem statements often specify "return the answer in any order" (e.g., Group Anagrams, Three Sum)
+- Test cases should specify one consistent expected ordering rather than trying to test all valid orderings
+- When implementing algorithms, use the natural ordering your algorithm produces
+- If tests fail due to ordering differences, update the expected results in `shared/problems.json` to match the algorithm's natural output, then regenerate test files
+
+**Example**: Group Anagrams naturally groups by the order elements are first encountered, which may differ from problem examples that show arbitrary orderings.
+
 ## Test Coverage
 
 Problems are implemented across languages with varying coverage - check the README.md table for which problems are available in each language.
