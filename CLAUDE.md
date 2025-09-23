@@ -69,6 +69,33 @@ To add test cases for existing problems:
 2. Run the generation script to create initial test files
 3. Create implementation files in each language's `lib/` directory
 
+### Problem Description Guidelines
+
+When writing problem descriptions for `shared/problems.json`, use academic and original language to avoid copyright concerns while maintaining clarity:
+
+**Academic Style Elements:**
+- Use formal vocabulary: "implement", "design", "develop", "construct", "determine"
+- Technical precision: "contiguous subsequence", "distinct shortest paths", "optimal solution"
+- Algorithm focus: "classic dynamic programming problem", "recursive algorithm", "optimization problem"
+- Performance guidance: "strive for an optimal O(n) solution using constant space"
+
+**Examples of Academic Rephrasing:**
+- Instead of: "Given an array of integers and a target sum, return the indices..."
+- Use: "Implement a function that locates a pair of elements within an integer array whose sum equals a specified target value..."
+
+- Instead of: "Find the largest contiguous subarray sum..."
+- Use: "Design an algorithm to determine the maximum sum achievable from any contiguous subsequence..."
+
+- Instead of: "Count paths in a grid from top-left to bottom-right..."
+- Use: "Develop a recursive algorithm to count the total number of distinct shortest paths through a rectangular grid..."
+
+**Key Principles:**
+- Maintain complete problem requirements and constraints
+- Use textbook-style formal language
+- Emphasize algorithmic thinking and optimization
+- Be distinctly different from common online problem statements
+- Ensure clarity despite formal tone
+
 ## Test Coverage
 
 Problems are implemented across languages with varying coverage - check the README.md table for which problems are available in each language.
