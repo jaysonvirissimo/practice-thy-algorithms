@@ -31,3 +31,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Maximum Subarray             | x          | x    |        |
 | Unique Paths                 |            | x    |        |
 | Coin Change                  |            | x    |        |
+| Contains Duplicate           | x          | x    | x      |

@@ -195,5 +195,50 @@
         "description": "should return [25, 25, 10, 5, 1, 1] using minimum 6 coins for 67 cents"
       }
     ]
+  },
+  "contains_duplicate": {
+    "title": "Contains Duplicate",
+    "description": "Analyze an integer array to determine whether any value appears more than once. Return true if at least one duplicate exists, false if all elements are distinct. Design an efficient solution that can handle arrays with up to 100,000 elements containing values in the range of negative one billion to positive one billion.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "nums",
+        "type": "array<integer>",
+        "description": "Array of integers to check for duplicates"
+      }
+    ],
+    "returnType": {
+      "javascript": "boolean",
+      "ruby": "boolean",
+      "python": "boolean"
+    },
+    "functionSignatures": {
+      "javascript": "function containsDuplicate(nums)",
+      "ruby": "def contains_duplicate(nums)",
+      "python": "def contains_duplicate(nums)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "nums": [1, 2, 3, 1]
+        },
+        "expected": true,
+        "description": "should return true when element 1 appears at indices 0 and 3"
+      },
+      {
+        "input": {
+          "nums": [1, 2, 3, 4]
+        },
+        "expected": false,
+        "description": "should return false when all elements are distinct"
+      },
+      {
+        "input": {
+          "nums": [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+        },
+        "expected": true,
+        "description": "should return true when multiple elements have duplicates"
+      }
+    ]
   }
 }
