@@ -50,6 +50,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Common Subsets               |            | x    |        |
 | Can Win                      |            | x    |        |
 | Weighted Random Index        |            | x    |        |
-| Move Zeros                   |            | x    |        |
-| Look and Say                 |            | x    |        |
-| Sum Upon Sums                |            | x    |        |
