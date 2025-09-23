@@ -44,6 +44,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Merge Sort                   |            | x    |        |
 | Binary Search                |            | x    |        |
 | Productify                   |            | x    |        |
-| Subsets                      |            | x    | x      |
-| Longest Palindrome           |            | x    |        |
-| Fast Intersection            | x          | x    |        |
