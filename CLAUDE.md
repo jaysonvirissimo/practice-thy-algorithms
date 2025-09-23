@@ -98,6 +98,13 @@ When writing problem descriptions for `shared/problems.json`, use academic and o
 - Be distinctly different from common online problem statements
 - Ensure clarity despite formal tone
 
+**Constraint Formatting:**
+- When copying constraints from external sources, be careful with scientific notation formatting
+- Common issue: "1 <= x <= 105" should be written as "1 <= x <= 10^5"
+- Always use proper exponential notation (10^5) rather than concatenated numbers (105) to avoid ambiguity
+- Example: "arrays with up to 100,000 elements" is clearer than "arrays with up to 105 elements"
+- **Use common sense**: Consider the context - for algorithm problems, "105" is almost certainly 10^5 (100,000) rather than the literal number 105, as most practical algorithms deal with larger datasets
+
 ## Test Coverage
 
 Problems are implemented across languages with varying coverage - check the README.md table for which problems are available in each language.
