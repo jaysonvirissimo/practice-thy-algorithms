@@ -71,4 +71,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Find Non-Duplicate Character | x          |      |        |
 | Queue                        |            | x    |        |
 | Reverse String               |            | x    | x      |
-| Recursive Print              |            | x    |        |
