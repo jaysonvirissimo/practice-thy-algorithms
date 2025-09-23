@@ -27,7 +27,7 @@ Run `rspec` when you are ready for some feedback on your attempt.
 ## Problems
 | Name                         | JavaScript | Ruby | Python |
 |:----------------------------:|:----------:|:----:|:------:|
-| Two Sum                      | x          | x    |        |
+| Two Sum                      | x          | x    | x      |
 | Maximum Subarray             | x          | x    |        |
 | Unique Paths                 |            | x    |        |
 | Coin Change                  |            | x    |        |

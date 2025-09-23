@@ -19,7 +19,8 @@ This is a multi-language algorithm practice repository with implementations in J
 ### Python
 - **Setup**: No additional setup required (standard library only)
 - **Run tests**: `python -m unittest discover -s test`
-- **Single test**: `python -m unittest test.test_<problem_name>`
+- **Single test**: `python -m unittest discover -s test -p "test_<problem_name>.py"`
+- **Generate tests**: `python ../shared/generators/python_test_generator.py`
 
 ### Ruby
 - **Setup**: `cd Ruby && bundle install`
@@ -60,6 +61,7 @@ To add test cases for existing problems:
 3. Alternatively, use language-specific commands:
    - JavaScript: `cd JavaScript && npm run generate-tests`
    - Ruby: `cd Ruby && rake generate_tests`
+   - Python: `cd Python && python ../shared/generators/python_test_generator.py`
 
 ### Adding New Problems
 

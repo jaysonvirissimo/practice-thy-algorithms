@@ -12,4 +12,9 @@ echo "Generating Ruby tests..."
 cd Ruby && rake generate_tests
 cd ..
 
+# Generate Python tests
+echo "Generating Python tests..."
+cd Python && python ../shared/generators/python_test_generator.py
+cd ..
+
 echo "All test files generated successfully!"
