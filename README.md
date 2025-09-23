@@ -72,4 +72,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Queue                        |            | x    |        |
 | Reverse String               |            | x    | x      |
 | Recursive Print              |            | x    |        |
-| Recursive Character Count    |            | x    | x      |
