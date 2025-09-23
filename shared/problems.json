@@ -389,5 +389,50 @@
         "description": "should return [60, 40, 30, 24] for consecutive integer sequence"
       }
     ]
+  },
+  "three_sum": {
+    "title": "Three Sum",
+    "description": "Design an algorithm to identify all unique triplets within an integer array that sum to zero. Given an array of integers, return all distinct combinations of three elements where the sum equals zero and no indices are repeated. The solution must eliminate duplicate triplets from the result set. Implement an efficient approach that can handle arrays with up to 3000 elements containing values ranging from -10^5 to 10^5.",
+    "complexity": "O(n²)",
+    "parameters": [
+      {
+        "name": "nums",
+        "type": "array<integer>",
+        "description": "Array of integers to find triplets within"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<array<integer>>",
+      "ruby": "array<array<integer>>",
+      "python": "list<list<integer>>"
+    },
+    "functionSignatures": {
+      "javascript": "function threeSum(nums)",
+      "ruby": "def three_sum(nums)",
+      "python": "def three_sum(nums)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "nums": [-1, 0, 1, 2, -1, -4]
+        },
+        "expected": [[-1, -1, 2], [-1, 0, 1]],
+        "description": "should return [[-1, -1, 2], [-1, 0, 1]] for mixed positive and negative values"
+      },
+      {
+        "input": {
+          "nums": [0, 1, 1]
+        },
+        "expected": [],
+        "description": "should return empty array when no valid triplets exist"
+      },
+      {
+        "input": {
+          "nums": [0, 0, 0]
+        },
+        "expected": [[0, 0, 0]],
+        "description": "should return [[0, 0, 0]] for array of all zeros"
+      }
+    ]
   }
 }
