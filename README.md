@@ -31,5 +31,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Maximum Subarray             | x          | x    |        |
 | Unique Paths                 |            | x    |        |
 | Coin Change                  |            | x    |        |
-| Caesar Cipher                | x          | x    | x      |
-| Common Substrings            | x          | x    | x      |
