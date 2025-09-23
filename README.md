@@ -68,4 +68,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Stack                        | x          | x    |        |
 | Find Duplicate               | x          |      |        |
 | Find Missing Letter          | x          |      |        |
-| Find Non-Duplicate Character | x          |      |        |
