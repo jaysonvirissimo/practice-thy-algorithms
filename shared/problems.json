@@ -434,5 +434,50 @@
         "description": "should return [[0, 0, 0]] for array of all zeros"
       }
     ]
+  },
+  "merge_intervals": {
+    "title": "Merge Intervals",
+    "description": "Construct an algorithm to consolidate overlapping intervals within a collection. Given an array of intervals where each interval is represented as [start, end], merge all overlapping intervals and return an array of non-overlapping intervals that cover the entire input range. Two intervals are considered overlapping if they share any common points, including when one interval's end equals another's start. Design an efficient solution that can handle up to 10^4 intervals with coordinates ranging from 0 to 10^4.",
+    "complexity": "O(n log n)",
+    "parameters": [
+      {
+        "name": "intervals",
+        "type": "array<array<integer>>",
+        "description": "Array of intervals where each interval is [start, end]"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<array<integer>>",
+      "ruby": "array<array<integer>>",
+      "python": "list<list<integer>>"
+    },
+    "functionSignatures": {
+      "javascript": "function merge(intervals)",
+      "ruby": "def merge(intervals)",
+      "python": "def merge(intervals)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "intervals": [[1, 3], [2, 6], [8, 10], [15, 18]]
+        },
+        "expected": [[1, 6], [8, 10], [15, 18]],
+        "description": "should merge overlapping intervals [1,3] and [2,6] into [1,6]"
+      },
+      {
+        "input": {
+          "intervals": [[1, 4], [4, 5]]
+        },
+        "expected": [[1, 5]],
+        "description": "should merge touching intervals [1,4] and [4,5] into [1,5]"
+      },
+      {
+        "input": {
+          "intervals": [[4, 7], [1, 4]]
+        },
+        "expected": [[1, 7]],
+        "description": "should merge overlapping intervals after sorting [4,7] and [1,4] into [1,7]"
+      }
+    ]
   }
 }

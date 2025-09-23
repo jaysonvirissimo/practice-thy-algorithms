@@ -36,3 +36,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Maximum Subarray                | x          | x    | x      |
 | Product of Array Except Self    | x          | x    | x      |
 | Three Sum                       | x          | x    | x      |
+| Merge Intervals                 | x          | x    | x      |
