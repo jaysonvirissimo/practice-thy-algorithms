@@ -53,6 +53,3 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Move Zeros                   |            | x    |        |
 | Look and Say                 |            | x    |        |
 | Sum Upon Sums                |            | x    |        |
-| Max Stack                    |            | x    |        |
-| Stack Queue                  |            | x    |        |
-| Windowed Max Range           |            | x    |        |
