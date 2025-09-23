@@ -8,7 +8,15 @@ def generate_python_tests(problem_name, problem_data):
         input_args = ', '.join(repr(val) for val in test_case['input'].values())
         expected = repr(test_case['expected'])
 
-        test_case_code = f'''    def test_{test_case['description'].replace(' ', '_').replace('?', '').lower()}(self):
+        # Clean the description for a valid Python method name
+        method_name = test_case['description'].lower()
+        # Replace invalid characters with underscores and remove duplicates
+        import re
+        method_name = re.sub(r'[^a-zA-Z0-9_]', '_', method_name)
+        method_name = re.sub(r'_+', '_', method_name)  # Replace multiple underscores with single
+        method_name = method_name.strip('_')  # Remove leading/trailing underscores
+
+        test_case_code = f'''    def test_{method_name}(self):
         """Test case: {test_case['description']}"""
         expected = {expected}
         result = {problem_name}({input_args})

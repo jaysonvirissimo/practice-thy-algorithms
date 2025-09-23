@@ -1,4 +1,4 @@
-require "maximum_subarray"
+require_relative "../lib/maximum_subarray"
 
 describe "maximum_subarray" do
   it "should return the largest subsum" do
