@@ -28,9 +28,10 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Name                            | JavaScript | Ruby | Python |
 |:-------------------------------:|:----------:|:----:|:------:|
 | Two Sum                         | x          | x    | x      |
-| Maximum Subarray                | x          | x    | x      |
 | Unique Paths                    | x          | x    | x      |
 | Coin Change                     | x          | x    | x      |
 | Contains Duplicate              | x          | x    | x      |
 | Best Time to Buy and Sell Stock | x          | x    | x      |
 | Valid Parentheses               | x          | x    | x      |
+| Maximum Subarray                | x          | x    | x      |
+| Product of Array Except Self    | x          | x    | x      |

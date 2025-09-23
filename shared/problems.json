@@ -344,5 +344,50 @@
         "description": "should return false for improperly nested brackets"
       }
     ]
+  },
+  "product_of_array_except_self": {
+    "title": "Product of Array Except Self",
+    "description": "Construct an algorithm that generates an output array where each element represents the product of all input array elements excluding the element at the current index position. The solution must operate in O(n) time complexity without utilizing division operations. Design the algorithm to handle arrays containing up to 10^5 elements with values ranging from -30 to 30, ensuring all intermediate and final products remain within 32-bit integer bounds.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "nums",
+        "type": "array<integer>",
+        "description": "Array of integers where each element contributes to products at other indices"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<integer>",
+      "ruby": "array<integer>",
+      "python": "list<integer>"
+    },
+    "functionSignatures": {
+      "javascript": "function productExceptSelf(nums)",
+      "ruby": "def product_except_self(nums)",
+      "python": "def product_except_self(nums)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "nums": [1, 2, 3, 4]
+        },
+        "expected": [24, 12, 8, 6],
+        "description": "should return [24, 12, 8, 6] where each element is the product of all others"
+      },
+      {
+        "input": {
+          "nums": [-1, 1, 0, -3, 3]
+        },
+        "expected": [0, 0, 9, 0, 0],
+        "description": "should return [0, 0, 9, 0, 0] handling negative numbers and zero"
+      },
+      {
+        "input": {
+          "nums": [2, 3, 4, 5]
+        },
+        "expected": [60, 40, 30, 24],
+        "description": "should return [60, 40, 30, 24] for consecutive integer sequence"
+      }
+    ]
   }
 }
