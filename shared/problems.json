@@ -43,5 +43,43 @@
         "description": "should return all the pairs that sum to 1"
       }
     ]
+  },
+  "maximum_subarray": {
+    "title": "Maximum Subarray",
+    "description": "Given an array of integers (positive and negative) find the largest contiguous subsum (sum of a subarray). You can solve this trivially in O(n**2) time by considering all subarrays. Try to solve it in O(n) time with O(1) memory.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "array",
+        "type": "array<integer>",
+        "description": "Array of integers (positive and negative)"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function maximumSubarray(numbers)",
+      "ruby": "def maximum_subarray(array)",
+      "python": "def maximum_subarray(array)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "array": [4, -1, 5, 6, -13, 2]
+        },
+        "expected": 14,
+        "description": "should return the largest subsum"
+      },
+      {
+        "input": {
+          "array": [-2, 1, -3, 4, -1, 2, 1, -5, 4]
+        },
+        "expected": 6,
+        "description": "should return the largest subsum"
+      }
+    ]
   }
 }

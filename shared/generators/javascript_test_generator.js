@@ -2,14 +2,23 @@ const fs = require('fs');
 const path = require('path');
 
 function generateJavaScriptTests(problemName, problemData) {
+  const returnType = problemData.returnType.javascript;
+  const isArray = returnType.includes('array');
+
   const testCases = problemData.testCases.map(testCase => {
     const inputArgs = Object.values(testCase.input).map(val => JSON.stringify(val)).join(', ');
     const expected = JSON.stringify(testCase.expected);
 
-    return `test("${testCase.description}", () => {
+    if (isArray) {
+      return `test("${testCase.description}", () => {
   let array = ${expected};
   expect(${problemName}(${inputArgs})).toEqual(array);
 });`;
+    } else {
+      return `test("${testCase.description}", () => {
+  expect(${problemName}(${inputArgs})).toBe(${expected});
+});`;
+    }
   }).join('\n\n');
 
   // Use camelCase for function name but keep snake_case for require
