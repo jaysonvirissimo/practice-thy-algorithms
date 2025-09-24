@@ -685,5 +685,64 @@
         "description": "should return 2 using the first and last lines"
       }
     ]
+  },
+  "find_minimum_in_rotated_sorted_array": {
+    "title": "Find Minimum in Rotated Sorted Array",
+    "description": "Implement a binary search algorithm to locate the minimum element in a rotated sorted array of unique integers. Consider an initially sorted array that has been rotated between 1 and n times, where rotation involves moving elements from the end to the beginning. The challenge is to identify the pivot point where the rotation occurred, which corresponds to the minimum element. Design an efficient logarithmic time solution using modified binary search that can handle arrays with up to 5000 elements containing values from -5000 to 5000. The algorithm must achieve O(log n) time complexity by leveraging the partial ordering properties of the rotated array.",
+    "complexity": "O(log n)",
+    "parameters": [
+      {
+        "name": "nums",
+        "type": "array<integer>",
+        "description": "Rotated sorted array of unique integers"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function findMin(nums)",
+      "ruby": "def find_min(nums)",
+      "python": "def find_min(nums)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "nums": [3, 4, 5, 1, 2]
+        },
+        "expected": 1,
+        "description": "should return 1 from rotated array [3,4,5,1,2]"
+      },
+      {
+        "input": {
+          "nums": [4, 5, 6, 7, 0, 1, 2]
+        },
+        "expected": 0,
+        "description": "should return 0 from rotated array [4,5,6,7,0,1,2]"
+      },
+      {
+        "input": {
+          "nums": [11, 13, 15, 17]
+        },
+        "expected": 11,
+        "description": "should return 11 from non-rotated array [11,13,15,17]"
+      },
+      {
+        "input": {
+          "nums": [2, 1]
+        },
+        "expected": 1,
+        "description": "should return 1 from small rotated array [2,1]"
+      },
+      {
+        "input": {
+          "nums": [1]
+        },
+        "expected": 1,
+        "description": "should return 1 from single element array [1]"
+      }
+    ]
   }
 }

@@ -39,3 +39,6 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Merge Intervals                 | x          | x    | x      |
 | Group Anagrams                  | x          | x    | x      |
 | Reverse Linked List             | x          | x    | x      |
+| Detect Cycle in Linked List     | x          | x    | x      |
+| Container With Most Water       | x          | x    | x      |
+| Find Minimum in Rotated Sorted Array | x          | x    | x      |

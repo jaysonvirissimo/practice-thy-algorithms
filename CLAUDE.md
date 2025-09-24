@@ -68,7 +68,8 @@ To add test cases for existing problems:
 1. Add problem definition to `shared/problems.json` following the existing schema
 2. Run the generation script to create initial test files
 3. Create implementation files in each language's `lib/` directory
-4. **Test validation**: Write complete solutions to verify tests work properly, then remove the actual implementation code, leaving only the function signature and problem description comments
+4. **IMPORTANT: Update README.md** - Add the new problem to the main README.md table showing which languages have implementations
+5. **Test validation**: Write complete solutions to verify tests work properly, then remove the actual implementation code, leaving only the function signature and problem description comments
    - **Python syntax requirement**: Python functions must include a `pass` statement in empty function bodies, as Python cannot have syntactically empty functions unlike JavaScript and Ruby
 
 ### Problem Description Guidelines
