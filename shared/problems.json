@@ -879,5 +879,84 @@
         "description": "should return 2 for two distinct characters"
       }
     ]
+  },
+  "number_of_islands": {
+    "title": "Number of Islands",
+    "description": "Implement a graph traversal algorithm to count the number of distinct islands in a 2D binary grid. Given an m x n matrix where '1' represents land and '0' represents water, determine how many separate landmasses exist. An island is defined as a group of adjacent land cells connected horizontally or vertically, surrounded by water. Design an efficient solution using depth-first search (DFS) or breadth-first search (BFS) to explore and mark visited land cells. The algorithm should handle grids with up to 300x300 dimensions and assume all grid edges are surrounded by water.",
+    "complexity": "O(m*n)",
+    "parameters": [
+      {
+        "name": "grid",
+        "type": "array<array<string>>",
+        "description": "2D binary grid where '1' represents land and '0' represents water"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function numIslands(grid)",
+      "ruby": "def num_islands(grid)",
+      "python": "def num_islands(grid)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "grid": [
+            ["1", "1", "1", "1", "0"],
+            ["1", "1", "0", "1", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "0", "0", "0"]
+          ]
+        },
+        "expected": 1,
+        "description": "should return 1 for a single connected island"
+      },
+      {
+        "input": {
+          "grid": [
+            ["1", "1", "0", "0", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "1", "0", "0"],
+            ["0", "0", "0", "1", "1"]
+          ]
+        },
+        "expected": 3,
+        "description": "should return 3 for three separate islands"
+      },
+      {
+        "input": {
+          "grid": [
+            ["1", "0", "1", "1", "1"],
+            ["1", "0", "1", "0", "1"],
+            ["1", "1", "1", "0", "1"]
+          ]
+        },
+        "expected": 1,
+        "description": "should return 1 for one large connected island"
+      },
+      {
+        "input": {
+          "grid": [
+            ["0", "0", "0", "0"],
+            ["0", "0", "0", "0"],
+            ["0", "0", "0", "0"]
+          ]
+        },
+        "expected": 0,
+        "description": "should return 0 for grid with no land"
+      },
+      {
+        "input": {
+          "grid": [
+            ["1"]
+          ]
+        },
+        "expected": 1,
+        "description": "should return 1 for single land cell"
+      }
+    ]
   }
 }

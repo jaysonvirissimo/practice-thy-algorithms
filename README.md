@@ -44,3 +44,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Find Minimum in Rotated Sorted Array | x          | x    | x      |
 | Longest Repeating Character Replacement | x          | x    | x      |
 | Longest Substring Without Repeating Characters | x          | x    | x      |
+| Number of Islands               | x          | x    | x      |
