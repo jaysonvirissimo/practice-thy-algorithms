@@ -1157,5 +1157,82 @@
         }
       }
     ]
+  },
+  "minimum_window_substring": {
+    "title": "Minimum Window Substring",
+    "description": "Implement an advanced sliding window algorithm to find the minimum window substring that contains all characters from a target string. Given two strings s and t, where s has length m and t has length n, identify the shortest contiguous substring of s that includes every character from t with the correct frequency counts. The algorithm must handle duplicate characters appropriately and return an empty string if no valid window exists. Design an optimal solution using the two-pointer sliding window technique with hash maps for character frequency tracking. The solution should achieve O(m + n) time complexity and handle strings with up to 10^5 characters consisting of uppercase and lowercase English letters.",
+    "complexity": "O(m + n)",
+    "parameters": [
+      {
+        "name": "s",
+        "type": "string",
+        "description": "Source string of length m consisting of English letters"
+      },
+      {
+        "name": "t",
+        "type": "string",
+        "description": "Target string of length n consisting of English letters"
+      }
+    ],
+    "returnType": {
+      "javascript": "string",
+      "ruby": "string",
+      "python": "string"
+    },
+    "functionSignatures": {
+      "javascript": "function minWindow(s, t)",
+      "ruby": "def min_window(s, t)",
+      "python": "def min_window(s, t)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "s": "ADOBECODEBANC",
+          "t": "ABC"
+        },
+        "expected": "BANC",
+        "description": "should return 'BANC' as the minimum window containing all characters"
+      },
+      {
+        "input": {
+          "s": "a",
+          "t": "a"
+        },
+        "expected": "a",
+        "description": "should return entire string when it matches target"
+      },
+      {
+        "input": {
+          "s": "a",
+          "t": "aa"
+        },
+        "expected": "",
+        "description": "should return empty string when target has more characters than source"
+      },
+      {
+        "input": {
+          "s": "ab",
+          "t": "b"
+        },
+        "expected": "b",
+        "description": "should return single character when it's the only requirement"
+      },
+      {
+        "input": {
+          "s": "abc",
+          "t": "cba"
+        },
+        "expected": "abc",
+        "description": "should return entire string when all characters are needed"
+      },
+      {
+        "input": {
+          "s": "ADOBECODEBANC",
+          "t": "AABC"
+        },
+        "expected": "ADOBECODEBA",
+        "description": "should handle duplicate characters correctly"
+      }
+    ]
   }
 }
