@@ -958,5 +958,74 @@
         "description": "should return 1 for single land cell"
       }
     ]
+  },
+  "remove_nth_from_end": {
+    "title": "Remove Nth Node From End of List",
+    "description": "Implement an algorithm to remove the nth node from the end of a singly linked list and return the modified list's head. Design an efficient one-pass solution using the two-pointer technique, where one pointer advances n steps ahead of the other to maintain the correct distance. This approach eliminates the need to first calculate the list length. Handle edge cases including removing the head node and working with lists containing only one element. The solution should process linked lists with up to 30 nodes containing values from 0 to 100.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "head",
+        "type": "ListNode",
+        "description": "Head node of the singly linked list"
+      },
+      {
+        "name": "n",
+        "type": "integer",
+        "description": "Position from the end of the list (1-indexed)"
+      }
+    ],
+    "returnType": {
+      "javascript": "ListNode",
+      "ruby": "ListNode",
+      "python": "ListNode"
+    },
+    "functionSignatures": {
+      "javascript": "function removeNthFromEnd(head, n)",
+      "ruby": "def remove_nth_from_end(head, n)",
+      "python": "def remove_nth_from_end(head, n)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "head": [1, 2, 3, 4, 5],
+          "n": 2
+        },
+        "expected": [1, 2, 3, 5],
+        "description": "should remove 2nd node from end [1,2,3,4,5] -> [1,2,3,5]"
+      },
+      {
+        "input": {
+          "head": [1],
+          "n": 1
+        },
+        "expected": [],
+        "description": "should remove only node [1] -> []"
+      },
+      {
+        "input": {
+          "head": [1, 2],
+          "n": 1
+        },
+        "expected": [1],
+        "description": "should remove last node [1,2] -> [1]"
+      },
+      {
+        "input": {
+          "head": [1, 2],
+          "n": 2
+        },
+        "expected": [2],
+        "description": "should remove first node [1,2] -> [2]"
+      },
+      {
+        "input": {
+          "head": [1, 2, 3, 4, 5],
+          "n": 5
+        },
+        "expected": [2, 3, 4, 5],
+        "description": "should remove first node [1,2,3,4,5] -> [2,3,4,5]"
+      }
+    ]
   }
 }

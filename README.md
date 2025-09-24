@@ -45,3 +45,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Longest Repeating Character Replacement | x          | x    | x      |
 | Longest Substring Without Repeating Characters | x          | x    | x      |
 | Number of Islands               | x          | x    | x      |
+| Remove Nth Node From End of List | x          | x    | x      |
