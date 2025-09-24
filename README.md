@@ -42,3 +42,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Detect Cycle in Linked List     | x          | x    | x      |
 | Container With Most Water       | x          | x    | x      |
 | Find Minimum in Rotated Sorted Array | x          | x    | x      |
+| Longest Repeating Character Replacement | x          | x    | x      |

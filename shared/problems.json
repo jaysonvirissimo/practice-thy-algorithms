@@ -744,5 +744,74 @@
         "description": "should return 1 from single element array [1]"
       }
     ]
+  },
+  "longest_repeating_character_replacement": {
+    "title": "Longest Repeating Character Replacement",
+    "description": "Develop a sliding window algorithm to determine the maximum length of a substring containing identical characters that can be achieved through strategic character replacements. Given a string of uppercase English letters and a limit k on the number of character modifications allowed, implement an efficient solution that finds the optimal substring where all characters can be made identical using at most k replacements. The algorithm should employ a two-pointer technique with frequency tracking to maintain a valid window and maximize the resulting substring length. Design the solution to handle strings with up to 10^5 characters efficiently.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "s",
+        "type": "string",
+        "description": "String consisting of only uppercase English letters"
+      },
+      {
+        "name": "k",
+        "type": "integer",
+        "description": "Maximum number of character replacements allowed"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function characterReplacement(s, k)",
+      "ruby": "def character_replacement(s, k)",
+      "python": "def character_replacement(s, k)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "s": "ABAB",
+          "k": 2
+        },
+        "expected": 4,
+        "description": "should return 4 by replacing two 'A's with 'B's or vice versa"
+      },
+      {
+        "input": {
+          "s": "AABABBA",
+          "k": 1
+        },
+        "expected": 4,
+        "description": "should return 4 by replacing one 'A' to form substring 'BBBB'"
+      },
+      {
+        "input": {
+          "s": "ABCDE",
+          "k": 1
+        },
+        "expected": 2,
+        "description": "should return 2 since we can make any 2 consecutive chars the same"
+      },
+      {
+        "input": {
+          "s": "AAAA",
+          "k": 0
+        },
+        "expected": 4,
+        "description": "should return 4 since all characters are already the same"
+      },
+      {
+        "input": {
+          "s": "ABAB",
+          "k": 0
+        },
+        "expected": 1,
+        "description": "should return 1 since no replacements allowed"
+      }
+    ]
   }
 }
