@@ -43,3 +43,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Container With Most Water       | x          | x    | x      |
 | Find Minimum in Rotated Sorted Array | x          | x    | x      |
 | Longest Repeating Character Replacement | x          | x    | x      |
+| Longest Substring Without Repeating Characters | x          | x    | x      |

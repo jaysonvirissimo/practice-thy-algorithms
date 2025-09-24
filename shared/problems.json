@@ -813,5 +813,71 @@
         "description": "should return 1 since no replacements allowed"
       }
     ]
+  },
+  "longest_substring_without_repeating_characters": {
+    "title": "Longest Substring Without Repeating Characters",
+    "description": "Implement a sliding window algorithm to determine the maximum length of a substring that contains no duplicate characters. Given a string consisting of English letters, digits, symbols, and spaces, design an efficient solution that identifies the longest contiguous sequence where each character appears at most once. The algorithm should employ a two-pointer technique with a hash set or hash map to track character occurrences within the current window. Optimize the solution to handle strings with up to 50,000 characters efficiently by dynamically adjusting the window boundaries when duplicates are encountered.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "s",
+        "type": "string",
+        "description": "String consisting of English letters, digits, symbols and spaces"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function lengthOfLongestSubstring(s)",
+      "ruby": "def length_of_longest_substring(s)",
+      "python": "def length_of_longest_substring(s)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "s": "abcabcbb"
+        },
+        "expected": 3,
+        "description": "should return 3 for substring 'abc'"
+      },
+      {
+        "input": {
+          "s": "bbbbb"
+        },
+        "expected": 1,
+        "description": "should return 1 for substring 'b'"
+      },
+      {
+        "input": {
+          "s": "pwwkew"
+        },
+        "expected": 3,
+        "description": "should return 3 for substring 'wke'"
+      },
+      {
+        "input": {
+          "s": ""
+        },
+        "expected": 0,
+        "description": "should return 0 for empty string"
+      },
+      {
+        "input": {
+          "s": " "
+        },
+        "expected": 1,
+        "description": "should return 1 for single space character"
+      },
+      {
+        "input": {
+          "s": "au"
+        },
+        "expected": 2,
+        "description": "should return 2 for two distinct characters"
+      }
+    ]
   }
 }
