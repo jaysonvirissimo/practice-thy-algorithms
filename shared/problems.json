@@ -577,5 +577,113 @@
         "description": "should handle empty list and return empty list"
       }
     ]
+  },
+  "has_cycle": {
+    "title": "Detect Cycle in Linked List",
+    "description": "Implement an algorithm to determine whether a singly linked list contains a cycle. Given the head node of a linked list, detect if there exists a cycle where some node in the list can be reached again by continuously following the next pointer. The challenge is to solve this using optimal O(1) constant memory space complexity. Consider implementing Floyd's Cycle-Finding Algorithm (tortoise and hare approach) for an elegant solution. Handle edge cases including empty lists and single-node lists. The solution should efficiently process lists with up to 10^4 nodes containing values from -10^5 to 10^5.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "head",
+        "type": "ListNode",
+        "description": "Head node of the singly linked list to check for cycles"
+      }
+    ],
+    "returnType": {
+      "javascript": "boolean",
+      "ruby": "boolean",
+      "python": "boolean"
+    },
+    "functionSignatures": {
+      "javascript": "function hasCycle(head)",
+      "ruby": "def has_cycle(head)",
+      "python": "def has_cycle(head)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "head": [3, 2, 0, -4],
+          "pos": 1
+        },
+        "expected": true,
+        "description": "should return true when tail connects to 1st node (0-indexed)"
+      },
+      {
+        "input": {
+          "head": [1, 2],
+          "pos": 0
+        },
+        "expected": true,
+        "description": "should return true when tail connects to 0th node"
+      },
+      {
+        "input": {
+          "head": [1],
+          "pos": -1
+        },
+        "expected": false,
+        "description": "should return false for single node with no cycle"
+      },
+      {
+        "input": {
+          "head": [],
+          "pos": -1
+        },
+        "expected": false,
+        "description": "should return false for empty list"
+      }
+    ]
+  },
+  "container_with_most_water": {
+    "title": "Container With Most Water",
+    "description": "Design an algorithm to find two vertical lines that together with the x-axis form a container capable of holding the maximum amount of water. Given an integer array representing the height of n vertical lines drawn at positions (i, 0) to (i, height[i]), determine the optimal pair of lines that maximizes the water volume. The container's capacity is determined by the shorter of the two selected lines multiplied by the distance between them. Note that the container cannot be tilted. Implement an efficient solution that can handle arrays with up to 10^5 elements containing heights from 0 to 10^4.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "height",
+        "type": "array<integer>",
+        "description": "Array of integers representing the height of vertical lines"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function maxArea(height)",
+      "ruby": "def max_area(height)",
+      "python": "def max_area(height)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "height": [1, 8, 6, 2, 5, 4, 8, 3, 7]
+        },
+        "expected": 49,
+        "description": "should return 49 as the maximum water area"
+      },
+      {
+        "input": {
+          "height": [1, 1]
+        },
+        "expected": 1,
+        "description": "should return 1 for two lines of equal height"
+      },
+      {
+        "input": {
+          "height": [4, 3, 2, 1, 4]
+        },
+        "expected": 16,
+        "description": "should return 16 using the first and last lines"
+      },
+      {
+        "input": {
+          "height": [1, 2, 1]
+        },
+        "expected": 2,
+        "description": "should return 2 using the first and last lines"
+      }
+    ]
   }
 }
