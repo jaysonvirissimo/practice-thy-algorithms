@@ -127,6 +127,151 @@ When writing problem descriptions for `shared/problems.json`, use academic and o
 
 **Example**: Group Anagrams naturally groups by the order elements are first encountered, which may differ from problem examples that show arbitrary orderings.
 
+### Test Generator Comparison Logic Issues
+
+**Critical Discovery**: The test generators use overly simplistic logic to determine comparison methods:
+
+**JavaScript Generator Logic**:
+```javascript
+const isArray = returnType.includes('array');
+if (isArray) {
+  // Uses toEqual() for deep equality
+} else {
+  // Uses toBe() for reference/primitive equality
+}
+```
+
+**Problems with Current Approach**:
+1. **String-based detection**: Only checks if return type contains literal string "array"
+2. **No actual test data analysis**: Doesn't examine what the test cases actually contain
+3. **Complex data structure issues**: Problems like Reverse Linked List return `ListNode` but tests compare arrays
+4. **No ordering consideration**: All arrays use `toEqual()` which requires exact ordering
+
+**Abstraction Layer Pattern**:
+For complex data structures (linked lists, trees), implement:
+- **Core algorithm function**: Works with actual data structures (e.g., `reverseList(head)` returns `ListNode`)
+- **Test wrapper function**: Converts between arrays and data structures for testability
+- **Helper functions**: `arrayToList()`, `listToArray()`, etc.
+
+**Common Failure**: Tests fail with "received serializes to the same string" when using `toBe()` instead of `toEqual()` for array comparisons.
+
+### Proposed Test Generator Enhancements
+
+**Enhanced JSON Schema**:
+Add optional comparison metadata to test cases:
+```json
+{
+  "testCases": [
+    {
+      "input": {"nums": [1, 2, 3]},
+      "expected": [[1, 2], [2, 3]],
+      "description": "should return pairs",
+      "comparison": {
+        "mode": "unordered_array",  // Options: "exact", "unordered_array", "set_equality"
+        "type": "deep_equality"     // Options: "reference", "deep_equality", "custom"
+      }
+    }
+  ]
+}
+```
+
+**Comparison Modes**:
+1. **"exact"**: Arrays must match exactly (current `toEqual()` behavior)
+2. **"unordered_array"**: Array contents must match but order doesn't matter
+3. **"set_equality"**: Treats arrays as sets (no duplicates, no order)
+
+**Enhanced Generator Logic**:
+```javascript
+function generateComparison(testCase, problemData) {
+  const comparison = testCase.comparison || getDefaultComparison(problemData.returnType);
+
+  switch (comparison.mode) {
+    case "exact":
+      return "toEqual";
+    case "unordered_array":
+      return "toEqualUnordered";  // Custom matcher
+    case "set_equality":
+      return "toEqualAsSet";      // Custom matcher
+    default:
+      return inferComparisonFromType(testCase.expected);
+  }
+}
+```
+
+**Custom Jest Matchers** (for JavaScript):
+```javascript
+expect.extend({
+  toEqualUnordered(received, expected) {
+    if (!Array.isArray(received) || !Array.isArray(expected)) {
+      return { pass: false, message: () => "Both values must be arrays" };
+    }
+    const sortedReceived = [...received].sort();
+    const sortedExpected = [...expected].sort();
+    return {
+      pass: JSON.stringify(sortedReceived) === JSON.stringify(sortedExpected),
+      message: () => `Expected arrays to have same elements regardless of order`
+    };
+  }
+});
+```
+
+**Backward Compatibility**: Default behavior remains unchanged; enhancements are opt-in through metadata.
+
+## Enhanced Test Comparison System (IMPLEMENTED)
+
+The test generator system now supports advanced array comparison modes through optional metadata in `shared/problems.json`.
+
+### Usage
+
+Add comparison metadata to test cases in `problems.json`:
+
+```json
+{
+  "input": {"strs": ["eat", "tea", "tan"]},
+  "expected": [["eat", "tea"], ["tan"]],
+  "description": "should group anagrams correctly",
+  "comparison": {
+    "mode": "unordered_array",
+    "type": "deep_equality"
+  }
+}
+```
+
+### Available Comparison Modes
+
+1. **"exact"** (default): Arrays must match exactly (standard behavior)
+2. **"unordered_array"**: Array contents must match but order doesn't matter
+3. **"set_equality"**: Treats arrays as sets (no duplicates, no order consideration)
+
+### Language-Specific Implementation
+
+**JavaScript**:
+- Uses custom Jest matchers: `toEqualUnordered()`, `toEqualAsSet()`
+- Automatically injected into test files when needed
+- Handles nested arrays (like Group Anagrams) correctly
+
+**Python**:
+- Uses custom assertion methods: `assertEqualUnordered()`, `assertEqualAsSet()`
+- Added as class methods to test classes when needed
+- Properly sorts nested structures before comparison
+
+**Ruby**:
+- Uses custom RSpec matchers: `match_unordered()`, `match_as_set()`
+- Automatically defined in test files when needed
+- Leverages Ruby's functional programming features
+
+### Problems Using Enhanced Comparison
+
+- **Group Anagrams**: Uses `"unordered_array"` mode since result groups can be in any order
+- **Three Sum**: Uses `"unordered_array"` mode since triplet order doesn't matter
+
+### Benefits
+
+- **No more manual result adjustment**: Problems with "any order" requirements work automatically
+- **Robust comparison logic**: Handles nested arrays, different data types, and edge cases
+- **Backward compatible**: Existing tests continue working without changes
+- **Maintainable**: Centralized comparison logic in generators, not scattered across tests
+
 ## Test Coverage
 
 Problems are implemented across languages with varying coverage - check the README.md table for which problems are available in each language.

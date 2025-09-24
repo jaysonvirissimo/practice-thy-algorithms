@@ -417,7 +417,11 @@
           "nums": [-1, 0, 1, 2, -1, -4]
         },
         "expected": [[-1, -1, 2], [-1, 0, 1]],
-        "description": "should return [[-1, -1, 2], [-1, 0, 1]] for mixed positive and negative values"
+        "description": "should return [[-1, -1, 2], [-1, 0, 1]] for mixed positive and negative values",
+        "comparison": {
+          "mode": "unordered_array",
+          "type": "deep_equality"
+        }
       },
       {
         "input": {
@@ -507,7 +511,11 @@
           "strs": ["eat", "tea", "tan", "ate", "nat", "bat"]
         },
         "expected": [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
-        "description": "should group anagrams correctly with mixed groups"
+        "description": "should group anagrams correctly with mixed groups",
+        "comparison": {
+          "mode": "unordered_array",
+          "type": "deep_equality"
+        }
       },
       {
         "input": {
@@ -522,6 +530,51 @@
         },
         "expected": [["a"]],
         "description": "should handle single character string"
+      }
+    ]
+  },
+  "reverse_linked_list": {
+    "title": "Reverse Linked List",
+    "description": "Implement an algorithm to reverse a singly linked list by modifying the direction of node connections. Given the head node of a linked list, rearrange the pointers so that the list traversal order is completely inverted. The original head becomes the tail, and the original tail becomes the new head. Design both iterative and recursive approaches to solve this fundamental linked list manipulation problem. Handle edge cases including empty lists and single-node lists. The solution should operate within the constraints of 0 to 5000 nodes with values ranging from -5000 to 5000.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "head",
+        "type": "ListNode",
+        "description": "Head node of the singly linked list to reverse"
+      }
+    ],
+    "returnType": {
+      "javascript": "ListNode",
+      "ruby": "ListNode",
+      "python": "ListNode"
+    },
+    "functionSignatures": {
+      "javascript": "function reverseList(head)",
+      "ruby": "def reverse_list(head)",
+      "python": "def reverse_list(head)"
+    },
+    "testCases": [
+      {
+        "input": {
+          "head": [1, 2, 3, 4, 5]
+        },
+        "expected": [5, 4, 3, 2, 1],
+        "description": "should reverse a 5-node list from [1,2,3,4,5] to [5,4,3,2,1]"
+      },
+      {
+        "input": {
+          "head": [1, 2]
+        },
+        "expected": [2, 1],
+        "description": "should reverse a 2-node list from [1,2] to [2,1]"
+      },
+      {
+        "input": {
+          "head": []
+        },
+        "expected": [],
+        "description": "should handle empty list and return empty list"
       }
     ]
   }

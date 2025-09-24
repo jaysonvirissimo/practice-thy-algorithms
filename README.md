@@ -38,3 +38,4 @@ Run `rspec` when you are ready for some feedback on your attempt.
 | Three Sum                       | x          | x    | x      |
 | Merge Intervals                 | x          | x    | x      |
 | Group Anagrams                  | x          | x    | x      |
+| Reverse Linked List             | x          | x    | x      |
