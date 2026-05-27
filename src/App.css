@@ -209,6 +209,18 @@
   cursor: not-allowed;
 }
 
+.ruby-loading {
+  margin: 0;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.ruby-error {
+  margin: 0;
+  color: var(--rubric);
+  font-weight: 600;
+}
+
 .toolbar-actions {
   display: flex;
   align-items: center;

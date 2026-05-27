@@ -1,4 +1,4 @@
-import type { Problem, TestRunResult, CaseResult } from '../data/types';
+import type { LangSpec, Problem, TestRunResult, CaseResult } from '../data/types';
 import { compare } from './comparison';
 import { arrayToList, listToArray, serializeForDisplay } from './marshal';
 
@@ -29,6 +29,7 @@ function errToString(err: unknown): string {
  * which terminates the worker.
  */
 export function runHarness(userCode: string, problem: Problem): TestRunResult {
+  const spec = problem.languages.javascript;
   const start =
     typeof performance !== 'undefined' ? performance.now() : Date.now();
 
@@ -57,7 +58,7 @@ export function runHarness(userCode: string, problem: Problem): TestRunResult {
     let fn: unknown;
     try {
       const factory = new Function(
-        `${userCode}\n;return typeof ${problem.functionName} !== 'undefined' ? ${problem.functionName} : undefined;`,
+        `${userCode}\n;return typeof ${spec.functionName} !== 'undefined' ? ${spec.functionName} : undefined;`,
       );
       fn = factory();
     } catch (err) {
@@ -65,7 +66,7 @@ export function runHarness(userCode: string, problem: Problem): TestRunResult {
       return finalize();
     }
     if (typeof fn !== 'function') {
-      result.runtimeError = `Function "${problem.functionName}" is not defined. Define it using the given signature.`;
+      result.runtimeError = `Function "${spec.functionName}" is not defined. Define it using the given signature.`;
       return finalize();
     }
     const userFn = fn as (...args: unknown[]) => unknown;
@@ -82,9 +83,9 @@ export function runHarness(userCode: string, problem: Problem): TestRunResult {
       };
 
       try {
-        const args = marshalArgs(problem, input);
+        const args = marshalArgs(spec, input);
         const raw = userFn(...args);
-        const actual = problem.isListNodeReturn
+        const actual = spec.isListNodeReturn
           ? listToArray(raw as never)
           : raw;
         caseResult.actual = serializeForDisplay(actual);
@@ -125,17 +126,17 @@ export function runHarness(userCode: string, problem: Problem): TestRunResult {
  * key is a construction hint, never passed as an argument.
  */
 function marshalArgs(
-  problem: Problem,
+  spec: LangSpec,
   input: Record<string, unknown>,
 ): unknown[] {
   const values = Object.values(input);
   const pos = typeof input.pos === 'number' ? input.pos : undefined;
 
-  return problem.argNames.map((name, i) => {
+  return spec.argNames.map((name, i) => {
     const hasNamed = Object.prototype.hasOwnProperty.call(input, name);
     const raw = hasNamed ? input[name] : values[i];
 
-    if (problem.paramTypes[i] === 'ListNode') {
+    if (spec.paramTypes[i] === 'ListNode') {
       // arrayToList builds fresh nodes, so the source array is never mutated.
       return arrayToList(raw as number[], pos);
     }

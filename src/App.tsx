@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import type { Language, LanguageRunner } from './data/types';
 import { PROBLEMS, getProblem } from './data/problems';
-import { JsRunner } from './runner';
+import { getRunner as createRunner } from './runner';
 import Catalog from './components/Catalog';
 import Workspace from './components/Workspace';
 import './App.css';
@@ -8,12 +9,23 @@ import './App.css';
 export default function App() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
 
-  // One runner for the app's lifetime; it spawns a fresh worker per run.
-  const runnerRef = useRef<JsRunner | null>(null);
-  if (!runnerRef.current) runnerRef.current = new JsRunner();
+  // Persistent per-language runners (the Ruby VM must survive across runs).
+  const runnersRef = useRef<Map<Language, LanguageRunner>>(new Map());
+  const getRunner = useCallback((language: Language): LanguageRunner => {
+    let runner = runnersRef.current.get(language);
+    if (!runner) {
+      runner = createRunner(language)!;
+      runnersRef.current.set(language, runner);
+    }
+    return runner;
+  }, []);
+
   useEffect(() => {
-    const runner = runnerRef.current;
-    return () => runner?.dispose();
+    const runners = runnersRef.current;
+    return () => {
+      for (const runner of runners.values()) runner.dispose();
+      runners.clear();
+    };
   }, []);
 
   const problem = selectedKey ? getProblem(selectedKey) : undefined;
@@ -34,7 +46,7 @@ export default function App() {
         <Workspace
           key={problem.key}
           problem={problem}
-          runner={runnerRef.current}
+          getRunner={getRunner}
           onBack={() => setSelectedKey(null)}
         />
       ) : (

@@ -16,6 +16,11 @@ export default defineConfig({
       '@shared': fileURLToPath(new URL('./shared', import.meta.url)),
     },
   },
+  optimizeDeps: {
+    // ruby.wasm ships large prebuilt assets; let Vite serve them as-is rather
+    // than trying to pre-bundle them.
+    exclude: ['@ruby/wasm-wasi', '@ruby/3.4-wasm-wasi'],
+  },
   test: {
     environment: 'jsdom',
     globals: true,
