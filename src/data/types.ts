@@ -1,7 +1,7 @@
 // Type contracts shared across the data, runner, and UI layers.
 
-/** Languages the app knows about. Only `javascript` is runnable in M1. */
-export type Language = 'javascript' | 'ruby';
+/** Languages the app can run in-browser (JS native, Ruby/Python via WASM). */
+export type Language = 'javascript' | 'ruby' | 'python';
 
 export type ComparisonMode = 'exact' | 'unordered_array' | 'set_equality';
 

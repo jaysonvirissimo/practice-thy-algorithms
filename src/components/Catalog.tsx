@@ -2,7 +2,11 @@ import { useState } from 'react';
 import type { Problem } from '../data/types';
 import { solvedLanguages } from '../data/storage';
 
-const LANG_ABBR: Record<string, string> = { javascript: 'JS', ruby: 'Rb' };
+const LANG_ABBR: Record<string, string> = {
+  javascript: 'JS',
+  ruby: 'Rb',
+  python: 'Py',
+};
 
 interface CatalogProps {
   problems: Problem[];

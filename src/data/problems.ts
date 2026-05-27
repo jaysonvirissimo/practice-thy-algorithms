@@ -54,8 +54,14 @@ function deriveLangSpec(
   language: Language,
 ): LangSpec {
   const { functionName, argNames } = parseSignature(signature);
-  // Ruby methods need an `end`; JS needs a brace body (M1 seed preserved exactly).
-  const body = language === 'ruby' ? `\n  \nend\n` : ` {\n  \n}\n`;
+  // Ruby needs an `end`; Python needs a colon + indented body (`pass` so the
+  // bare template parses and runs); JS needs a brace body (M1 seed preserved).
+  const body =
+    language === 'ruby'
+      ? `\n  \nend\n`
+      : language === 'python'
+        ? `:\n    pass\n`
+        : ` {\n  \n}\n`;
   return {
     functionName,
     argNames,
@@ -86,6 +92,12 @@ function deriveProblem(key: string, raw: RawProblem): Problem {
         paramTypes,
         raw.returnType.ruby === 'ListNode',
         'ruby',
+      ),
+      python: deriveLangSpec(
+        raw.functionSignatures.python,
+        paramTypes,
+        raw.returnType.python === 'ListNode',
+        'python',
       ),
     },
   };

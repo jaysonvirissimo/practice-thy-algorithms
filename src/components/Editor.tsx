@@ -9,6 +9,7 @@ import { EditorView, keymap } from '@codemirror/view';
 import { StreamLanguage } from '@codemirror/language';
 import { basicSetup } from 'codemirror';
 import { javascript } from '@codemirror/lang-javascript';
+import { python } from '@codemirror/lang-python';
 import { ruby } from '@codemirror/legacy-modes/mode/ruby';
 import { vim } from '@replit/codemirror-vim';
 import type { Extension } from '@codemirror/state';
@@ -28,8 +29,16 @@ interface EditorProps {
   language: Language;
 }
 
-const languageExtension = (language: Language): Extension =>
-  language === 'ruby' ? StreamLanguage.define(ruby) : javascript();
+const languageExtension = (language: Language): Extension => {
+  switch (language) {
+    case 'ruby':
+      return StreamLanguage.define(ruby);
+    case 'python':
+      return python();
+    default:
+      return javascript();
+  }
+};
 
 const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
   { initialValue, onChange, onRun, vimEnabled, language },

@@ -42,7 +42,7 @@ describe('completion', () => {
   });
 
   it('drops garbage values defensively', () => {
-    localStorage.setItem('pta:solved:two_sum', '["javascript","python","x"]');
+    localStorage.setItem('pta:solved:two_sum', '["javascript","cobol","x"]');
     expect(solvedLanguages('two_sum')).toEqual(['javascript']);
     localStorage.setItem('pta:solved:two_sum', 'not json');
     expect(solvedLanguages('two_sum')).toEqual([]);
@@ -77,7 +77,9 @@ describe('last language', () => {
     expect(lastLanguage('two_sum')).toBeNull();
     saveLastLanguage('two_sum', 'ruby');
     expect(lastLanguage('two_sum')).toBe('ruby');
-    localStorage.setItem('pta:lang:two_sum', 'python');
+    saveLastLanguage('two_sum', 'python');
+    expect(lastLanguage('two_sum')).toBe('python');
+    localStorage.setItem('pta:lang:two_sum', 'cobol');
     expect(lastLanguage('two_sum')).toBeNull();
   });
 });

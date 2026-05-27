@@ -23,6 +23,12 @@ import ResultsPanel from './ResultsPanel';
 
 const SAVE_DEBOUNCE_MS = 400;
 
+const LANG_LABEL: Record<Language, string> = {
+  javascript: 'JavaScript',
+  ruby: 'Ruby',
+  python: 'Python',
+};
+
 interface WorkspaceProps {
   problem: Problem;
   getRunner: (language: Language) => LanguageRunner;
@@ -51,8 +57,12 @@ export default function Workspace({
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<TestRunResult | null>(null);
   const [solved, setSolved] = useState(() => isSolved(problem.key));
-  const [rubyLoading, setRubyLoading] = useState(false);
-  const [rubyError, setRubyError] = useState<string | null>(null);
+  const [runtimeLoading, setRuntimeLoading] = useState<
+    Partial<Record<Language, boolean>>
+  >({});
+  const [runtimeError, setRuntimeError] = useState<
+    Partial<Record<Language, string>>
+  >({});
   const editorRef = useRef<EditorHandle>(null);
 
   // Stable refs so the editor's Mod-Enter keymap / debounce always see latest.
@@ -63,17 +73,25 @@ export default function Workspace({
   const runningRef = useRef(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const ensureRuby = useCallback(() => {
-    setRubyError(null);
-    setRubyLoading(true);
-    getRunner('ruby')
-      .init()
-      .then(() => setRubyLoading(false))
-      .catch((err: unknown) => {
-        setRubyLoading(false);
-        setRubyError(err instanceof Error ? err.message : String(err));
-      });
-  }, [getRunner]);
+  // Boot a WASM runtime (Ruby/Python). JS is native — no-op.
+  const ensureRuntime = useCallback(
+    (lang: Language) => {
+      if (lang === 'javascript') return;
+      setRuntimeError((e) => ({ ...e, [lang]: undefined }));
+      setRuntimeLoading((l) => ({ ...l, [lang]: true }));
+      getRunner(lang)
+        .init()
+        .then(() => setRuntimeLoading((l) => ({ ...l, [lang]: false })))
+        .catch((err: unknown) => {
+          setRuntimeLoading((l) => ({ ...l, [lang]: false }));
+          setRuntimeError((e) => ({
+            ...e,
+            [lang]: err instanceof Error ? err.message : String(err),
+          }));
+        });
+    },
+    [getRunner],
+  );
 
   const flushSave = useCallback(() => {
     if (saveTimer.current) {
@@ -95,9 +113,9 @@ export default function Workspace({
     [problem.key],
   );
 
-  // Load the Ruby runtime eagerly if we resumed into Ruby; flush code on unmount.
+  // Boot the runtime eagerly if we resumed into Ruby/Python; flush on unmount.
   useEffect(() => {
-    if (initialLang === 'ruby') ensureRuby();
+    ensureRuntime(initialLang);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => () => flushSave(), [flushSave]);
@@ -132,7 +150,7 @@ export default function Workspace({
     editorRef.current?.reset(seed);
     setResult(null);
     saveLastLanguage(problem.key, next);
-    if (next === 'ruby') ensureRuby();
+    ensureRuntime(next);
   };
 
   const reset = () => {
@@ -147,7 +165,7 @@ export default function Workspace({
     saveCode(problem.key, language, seed);
   };
 
-  const runDisabled = running || (language === 'ruby' && rubyLoading);
+  const runDisabled = running || !!runtimeLoading[language];
 
   return (
     <section className="workspace">
@@ -169,7 +187,7 @@ export default function Workspace({
           <LanguageSelector
             language={language}
             onChange={changeLanguage}
-            rubyLoading={rubyLoading}
+            loading={runtimeLoading}
           />
           <div className="toolbar-actions">
             <label className="vim-toggle">
@@ -197,13 +215,16 @@ export default function Workspace({
           </div>
         </div>
 
-        {rubyLoading && (
-          <p className="ruby-loading" data-testid="ruby-loading">
-            Summoning the Ruby runtime… (one-time download)
+        {runtimeLoading[language] && (
+          <p className="ruby-loading" data-testid="runtime-loading">
+            Summoning the {LANG_LABEL[language]} runtime… (one-time download)
           </p>
         )}
-        {rubyError && (
-          <p className="ruby-error">Ruby runtime failed to load: {rubyError}</p>
+        {runtimeError[language] && (
+          <p className="ruby-error">
+            {LANG_LABEL[language]} runtime failed to load:{' '}
+            {runtimeError[language]}
+          </p>
         )}
 
         <Editor

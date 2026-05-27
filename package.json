@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/lang-python": "^6.2.1",
     "@codemirror/language": "^6.12.3",
     "@codemirror/legacy-modes": "^6.5.3",
     "@codemirror/state": "^6.5.2",
@@ -22,6 +23,7 @@
     "@ruby/3.4-wasm-wasi": "2.9.3-2.9.4",
     "@ruby/wasm-wasi": "2.9.3-2.9.4",
     "codemirror": "^6.0.1",
+    "pyodide": "0.29.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -36,6 +38,7 @@
     "jsdom": "^25.0.1",
     "typescript": "^5.7.2",
     "vite": "^6.3.2",
+    "vite-plugin-static-copy": "^4.1.0",
     "vitest": "^3.1.2"
   }
 }
