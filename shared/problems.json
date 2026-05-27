@@ -50,6 +50,11 @@
         "expected": [0, 1],
         "description": "should return indices [0, 1] because nums[0] + nums[1] = 3 + 3 = 6"
       }
+    ],
+    "hints": [
+      "Consider what information you would need to retain about each element you have already examined.",
+      "A hash map permits constant-time lookup of complements: for each value, determine whether its complement (the target minus that value) has been encountered.",
+      "A single linear pass suffices — record each value's index as you proceed and query for the complement before inserting."
     ]
   },
   "maximum_subarray": {
@@ -239,6 +244,11 @@
         "expected": true,
         "description": "should return true when multiple elements have duplicates"
       }
+    ],
+    "hints": [
+      "The core operation is deciding whether a value has appeared before; which structure answers membership queries efficiently?",
+      "A hash set tests membership in constant time: insert each element and report a duplicate the instant an insertion would collide with an existing member.",
+      "This yields an O(n) time solution at the cost of O(n) auxiliary space; a sort-first approach trades space for O(n log n) time."
     ]
   },
   "best_time_to_buy_and_sell_stock": {
@@ -343,6 +353,11 @@
         "expected": false,
         "description": "should return false for improperly nested brackets"
       }
+    ],
+    "hints": [
+      "The most recently opened bracket must be the first one closed — this last-in, first-out discipline suggests a particular data structure.",
+      "Use a stack: push each opening bracket, and upon each closing bracket verify it matches the bracket on top of the stack.",
+      "The sequence is valid only if every closing bracket matches its counterpart and the stack is empty once the string is exhausted."
     ]
   },
   "product_of_array_except_self": {
