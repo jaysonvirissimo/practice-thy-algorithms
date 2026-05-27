@@ -59,7 +59,7 @@
   },
   "maximum_subarray": {
     "title": "Maximum Subarray",
-    "description": "Design an algorithm to determine the maximum sum achievable from any contiguous subsequence within an array of integers. The array contains both positive and negative values. While a brute-force approach examining all possible subarrays runs in O(n²) time, strive for an optimal O(n) solution using constant space.",
+    "description": "Design an algorithm to determine the maximum sum achievable from any contiguous subsequence within an array of integers. The array contains both positive and negative values, and the chosen subsequence must contain at least one element.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -93,11 +93,16 @@
         "expected": 6,
         "description": "should return the largest subsum"
       }
+    ],
+    "hints": [
+      "Consider scanning the array a single time while keeping track of the best sum that ends at the position you are currently examining.",
+      "At each element, decide whether to extend the run that precedes it or to begin a fresh run at that element — keep whichever yields the larger sum ending there.",
+      "This is Kadane's approach: maintain a running best-ending-here value alongside a separate overall maximum, which needs only constant additional space."
     ]
   },
   "unique_paths": {
     "title": "Unique Paths",
-    "description": "Develop a recursive algorithm to count the total number of distinct shortest paths through a rectangular grid from the top-left corner to the bottom-right corner. Movement is restricted to rightward and downward steps only. Implement memoization to optimize the recursive solution and avoid redundant calculations.",
+    "description": "Determine the total number of distinct shortest paths through a rectangular grid from the top-left corner to the bottom-right corner. Movement is restricted to rightward and downward steps only.",
     "complexity": "O(m*n)",
     "parameters": [
       {
@@ -146,11 +151,16 @@
         "expected": 3060,
         "description": "should return 3060 unique paths for 5x15 grid"
       }
+    ],
+    "hints": [
+      "Think about how the number of ways to reach a given cell relates to the cells immediately above it and to its left.",
+      "Each interior cell can be reached only from the cell above or the cell to its left, so the count for a cell is the sum of those two neighbors' counts; cells in the first row or first column have exactly one path.",
+      "Define this recurrence over the grid and cache the result for each (row, column) pair — memoizing the recursion (or filling a table bottom-up) avoids recomputing overlapping subproblems."
     ]
   },
   "coin_change": {
     "title": "Coin Change",
-    "description": "Construct an algorithm that determines the minimum number of coins needed to make change for a given monetary amount. Given a set of coin denominations and a target amount, return an array containing the specific coins that sum to the target using the fewest possible coins. Implement this as a classic dynamic programming optimization problem.",
+    "description": "Construct an algorithm that determines the minimum number of coins needed to make change for a given monetary amount. Given a set of coin denominations and a target amount, return an array containing the specific coins that sum to the target using the fewest possible coins.",
     "complexity": "O(amount * coins)",
     "parameters": [
       {
@@ -199,6 +209,11 @@
         "expected": [25, 25, 10, 5, 1, 1],
         "description": "should return [25, 25, 10, 5, 1, 1] using minimum 6 coins for 67 cents"
       }
+    ],
+    "hints": [
+      "Consider building up the answer for the target amount from the answers to smaller amounts.",
+      "For each amount, the best solution uses one coin of some denomination plus the best solution for the remaining amount; compare across all denominations to find the fewest coins.",
+      "This is a classic dynamic-programming optimization: compute the minimum coin count for every amount from 0 up to the target, recording which coin was chosen at each step so you can reconstruct the actual list."
     ]
   },
   "contains_duplicate": {
@@ -362,7 +377,7 @@
   },
   "product_of_array_except_self": {
     "title": "Product of Array Except Self",
-    "description": "Construct an algorithm that generates an output array where each element represents the product of all input array elements excluding the element at the current index position. The solution must operate in O(n) time complexity without utilizing division operations. Design the algorithm to handle arrays containing up to 10^5 elements with values ranging from -30 to 30, ensuring all intermediate and final products remain within 32-bit integer bounds.",
+    "description": "Construct an algorithm that generates an output array where each element represents the product of all input array elements excluding the element at the current index position. The solution must not use division. Handle arrays containing up to 100,000 elements with values ranging from -30 to 30, ensuring all intermediate and final products remain within 32-bit integer bounds.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -550,7 +565,7 @@
   },
   "reverse_linked_list": {
     "title": "Reverse Linked List",
-    "description": "Implement an algorithm to reverse a singly linked list by modifying the direction of node connections. Given the head node of a linked list, rearrange the pointers so that the list traversal order is completely inverted. The original head becomes the tail, and the original tail becomes the new head. Design both iterative and recursive approaches to solve this fundamental linked list manipulation problem. Handle edge cases including empty lists and single-node lists. The solution should operate within the constraints of 0 to 5000 nodes with values ranging from -5000 to 5000.",
+    "description": "Implement an algorithm to reverse a singly linked list by modifying the direction of node connections. Given the head node of a linked list, rearrange the pointers so that the list traversal order is completely inverted: the original head becomes the tail, and the original tail becomes the new head. Handle edge cases including empty lists and single-node lists. The list contains 0 to 5000 nodes with values ranging from -5000 to 5000.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -591,11 +606,16 @@
         "expected": [],
         "description": "should handle empty list and return empty list"
       }
+    ],
+    "hints": [
+      "As you walk the list, each node's next pointer needs to point to the node that preceded it rather than the one that followed.",
+      "Keep track of the previous node while you advance: before moving on from the current node, redirect its pointer back to that previous node.",
+      "Iterate with three references (previous, current, and a saved next) to reverse the links one at a time; the same relationship can be expressed recursively by reversing the remainder of the list first and then fixing the current link."
     ]
   },
   "has_cycle": {
     "title": "Detect Cycle in Linked List",
-    "description": "Implement an algorithm to determine whether a singly linked list contains a cycle. Given the head node of a linked list, detect if there exists a cycle where some node in the list can be reached again by continuously following the next pointer. The challenge is to solve this using optimal O(1) constant memory space complexity. Consider implementing Floyd's Cycle-Finding Algorithm (tortoise and hare approach) for an elegant solution. Handle edge cases including empty lists and single-node lists. The solution should efficiently process lists with up to 10^4 nodes containing values from -10^5 to 10^5.",
+    "description": "Implement an algorithm to determine whether a singly linked list contains a cycle. Given the head node of a linked list, detect whether some node can be reached again by continuously following the next pointer. Handle edge cases including empty lists and single-node lists. The solution should efficiently process lists with up to 10^4 nodes containing values from -10^5 to 10^5.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -647,6 +667,11 @@
         "expected": false,
         "description": "should return false for empty list"
       }
+    ],
+    "hints": [
+      "If you may not record which nodes you have already visited, think about advancing through the list at two different rates.",
+      "Move one traverser one step at a time and another two steps at a time; in a cyclic list the faster one eventually laps the slower.",
+      "This is Floyd's tortoise-and-hare technique: the two pointers meet if and only if a cycle exists, and it uses only constant additional memory."
     ]
   },
   "container_with_most_water": {
@@ -703,7 +728,7 @@
   },
   "find_minimum_in_rotated_sorted_array": {
     "title": "Find Minimum in Rotated Sorted Array",
-    "description": "Implement a binary search algorithm to locate the minimum element in a rotated sorted array of unique integers. Consider an initially sorted array that has been rotated between 1 and n times, where rotation involves moving elements from the end to the beginning. The challenge is to identify the pivot point where the rotation occurred, which corresponds to the minimum element. Design an efficient logarithmic time solution using modified binary search that can handle arrays with up to 5000 elements containing values from -5000 to 5000. The algorithm must achieve O(log n) time complexity by leveraging the partial ordering properties of the rotated array.",
+    "description": "Locate the minimum element in a rotated sorted array of unique integers. Consider an initially ascending array that has been rotated between 1 and n times, where each rotation moves the final element to the front; the minimum element marks the pivot point where the rotation occurred. The input contains up to 5000 elements with values from -5000 to 5000.",
     "complexity": "O(log n)",
     "parameters": [
       {
@@ -758,11 +783,16 @@
         "expected": 1,
         "description": "should return 1 from single element array [1]"
       }
+    ],
+    "hints": [
+      "Because the array was sorted before rotation, you can discard half of it at each step rather than scanning every element.",
+      "Compare the middle element to a boundary element to decide which half remains in sorted order, then continue searching in the half that must contain the minimum.",
+      "This is a modified binary search: repeatedly narrow the range toward the unsorted side until the bounds converge on the pivot, achieving logarithmic time."
     ]
   },
   "longest_repeating_character_replacement": {
     "title": "Longest Repeating Character Replacement",
-    "description": "Develop a sliding window algorithm to determine the maximum length of a substring containing identical characters that can be achieved through strategic character replacements. Given a string of uppercase English letters and a limit k on the number of character modifications allowed, implement an efficient solution that finds the optimal substring where all characters can be made identical using at most k replacements. The algorithm should employ a two-pointer technique with frequency tracking to maintain a valid window and maximize the resulting substring length. Design the solution to handle strings with up to 10^5 characters efficiently.",
+    "description": "Determine the maximum length of a substring containing identical characters that can be achieved through strategic character replacements. Given a string of uppercase English letters and a limit k on the number of character modifications allowed, find the longest substring whose characters can all be made identical using at most k replacements. The string may contain up to 100,000 characters.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -827,11 +857,16 @@
         "expected": 1,
         "description": "should return 1 since no replacements allowed"
       }
+    ],
+    "hints": [
+      "Examine a growing-and-shrinking range of the string rather than testing every substring independently.",
+      "Within a range, the number of replacements needed equals the range length minus the count of its most frequent character; the range stays valid while that figure does not exceed k.",
+      "Use two boundaries to bound the window and a frequency table of the letters inside it: expand the right boundary, and when the window becomes invalid advance the left boundary, tracking the largest valid width seen."
     ]
   },
   "longest_substring_without_repeating_characters": {
     "title": "Longest Substring Without Repeating Characters",
-    "description": "Implement a sliding window algorithm to determine the maximum length of a substring that contains no duplicate characters. Given a string consisting of English letters, digits, symbols, and spaces, design an efficient solution that identifies the longest contiguous sequence where each character appears at most once. The algorithm should employ a two-pointer technique with a hash set or hash map to track character occurrences within the current window. Optimize the solution to handle strings with up to 50,000 characters efficiently by dynamically adjusting the window boundaries when duplicates are encountered.",
+    "description": "Determine the maximum length of a substring that contains no duplicate characters. Given a string consisting of English letters, digits, symbols, and spaces, identify the longest contiguous sequence in which each character appears at most once. The string may contain up to 50,000 characters.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -893,11 +928,16 @@
         "expected": 2,
         "description": "should return 2 for two distinct characters"
       }
+    ],
+    "hints": [
+      "Track a contiguous range that currently holds no repeated character, adjusting its boundaries as you scan.",
+      "When you encounter a character already inside the current range, move the left boundary forward past that character's previous occurrence so the range stays duplicate-free.",
+      "Use two boundaries together with a hash set, or a map from character to its latest index, to advance the window in a single pass while recording the greatest width reached."
     ]
   },
   "number_of_islands": {
     "title": "Number of Islands",
-    "description": "Implement a graph traversal algorithm to count the number of distinct islands in a 2D binary grid. Given an m x n matrix where '1' represents land and '0' represents water, determine how many separate landmasses exist. An island is defined as a group of adjacent land cells connected horizontally or vertically, surrounded by water. Design an efficient solution using depth-first search (DFS) or breadth-first search (BFS) to explore and mark visited land cells. The algorithm should handle grids with up to 300x300 dimensions and assume all grid edges are surrounded by water.",
+    "description": "Count the number of distinct islands in a 2D binary grid. Given an m x n matrix where '1' represents land and '0' represents water, determine how many separate landmasses exist. An island is defined as a group of adjacent land cells connected horizontally or vertically, surrounded by water. The grid may be up to 300x300 in size, and all of its edges are surrounded by water.",
     "complexity": "O(m*n)",
     "parameters": [
       {
@@ -972,11 +1012,16 @@
         "expected": 1,
         "description": "should return 1 for single land cell"
       }
+    ],
+    "hints": [
+      "Whenever you find a land cell that has not yet been accounted for, it begins a new island; the task is to avoid counting any single island more than once.",
+      "From an unvisited land cell, reach every connected land cell and mark each as visited so the whole landmass is consumed before you resume scanning.",
+      "Flood each landmass with a depth-first or breadth-first traversal over the four cardinal neighbors, incrementing the count once per traversal you initiate."
     ]
   },
   "remove_nth_from_end": {
     "title": "Remove Nth Node From End of List",
-    "description": "Implement an algorithm to remove the nth node from the end of a singly linked list and return the modified list's head. Design an efficient one-pass solution using the two-pointer technique, where one pointer advances n steps ahead of the other to maintain the correct distance. This approach eliminates the need to first calculate the list length. Handle edge cases including removing the head node and working with lists containing only one element. The solution should process linked lists with up to 30 nodes containing values from 0 to 100.",
+    "description": "Implement an algorithm to remove the nth node from the end of a singly linked list and return the modified list's head. Handle edge cases including removing the head node and working with lists containing only one element. The list contains up to 30 nodes with values from 0 to 100.",
     "complexity": "O(n)",
     "parameters": [
       {
@@ -1041,11 +1086,16 @@
         "expected": [2, 3, 4, 5],
         "description": "should remove first node [1,2,3,4,5] -> [2,3,4,5]"
       }
+    ],
+    "hints": [
+      "Removing the nth node from the end is easier if you can also reach the node just before it.",
+      "Two pointers separated by a fixed gap let you locate the target without measuring the list first: keep one exactly n nodes ahead of the other.",
+      "Advance the leading pointer n steps, then move both together until it reaches the end — the trailing pointer now sits just before the node to remove, all in a single pass. A dummy node placed before the head simplifies removing the first element."
     ]
   },
   "palindromic_substrings": {
     "title": "Palindromic Substrings",
-    "description": "Develop an algorithm to count the total number of palindromic substrings within a given string. A palindrome is defined as a sequence that reads identically in both forward and reverse directions. A substring represents any contiguous sequence of characters from the original string. Implement an efficient solution using the expand-around-centers technique, which examines each possible center point (including positions between characters for even-length palindromes) and expands outward while characters match. Design the algorithm to handle strings with up to 1000 lowercase English letters optimally.",
+    "description": "Develop an algorithm to count the total number of palindromic substrings within a given string. A palindrome is defined as a sequence that reads identically in both forward and reverse directions. A substring represents any contiguous sequence of characters from the original string. The input consists of up to 1000 lowercase English letters.",
     "complexity": "O(n^2)",
     "parameters": [
       {
@@ -1107,11 +1157,16 @@
         "expected": 7,
         "description": "should return 7 for palindromes including 'bcb' and 'abcba'"
       }
+    ],
+    "hints": [
+      "Every palindrome is symmetric about a center, so consider enumerating possible centers instead of all substrings.",
+      "A center can be a single character (for odd-length palindromes) or the gap between two adjacent characters (for even-length palindromes); count both kinds.",
+      "For each of the 2n-1 centers, expand outward while the mirrored characters match, tallying one palindrome for every successful expansion."
     ]
   },
   "pacific_atlantic_water_flow": {
     "title": "Pacific Atlantic Water Flow",
-    "description": "Design an algorithm to identify grid coordinates where rainwater can reach both Pacific and Atlantic oceans through elevation-based flow. Given an m x n matrix representing island heights, where the Pacific Ocean borders the left and top edges while the Atlantic Ocean borders the right and bottom edges, determine all cells from which water can flow to both oceans. Water flows from higher to lower or equal elevation cells in four cardinal directions. Implement an efficient solution using depth-first search (DFS) from ocean boundaries, working backwards to identify reachable cells. The algorithm should handle grids up to 200x200 with elevations from 0 to 10^5.",
+    "description": "Design an algorithm to identify grid coordinates where rainwater can reach both Pacific and Atlantic oceans through elevation-based flow. Given an m x n matrix representing island heights, where the Pacific Ocean borders the left and top edges while the Atlantic Ocean borders the right and bottom edges, determine all cells from which water can flow to both oceans. Water flows from a cell to a neighboring cell in the four cardinal directions only when the neighbor's elevation is equal or lower. The grid may be up to 200x200 with elevations from 0 to 10^5.",
     "complexity": "O(m*n)",
     "parameters": [
       {
@@ -1171,11 +1226,16 @@
           "type": "deep_equality"
         }
       }
+    ],
+    "hints": [
+      "Rather than testing whether each cell can reach an ocean, consider which cells an ocean can reach when the direction of flow is reversed.",
+      "Starting from each ocean's border cells and moving only to neighbors of equal or greater height, mark every cell that ocean can ultimately drain; do this independently for both oceans.",
+      "Run a traversal (depth-first or breadth-first) inward from each ocean's edges to build two reachability sets, then return the coordinates present in both."
     ]
   },
   "minimum_window_substring": {
     "title": "Minimum Window Substring",
-    "description": "Implement an advanced sliding window algorithm to find the minimum window substring that contains all characters from a target string. Given two strings s and t, where s has length m and t has length n, identify the shortest contiguous substring of s that includes every character from t with the correct frequency counts. The algorithm must handle duplicate characters appropriately and return an empty string if no valid window exists. Design an optimal solution using the two-pointer sliding window technique with hash maps for character frequency tracking. The solution should achieve O(m + n) time complexity and handle strings with up to 10^5 characters consisting of uppercase and lowercase English letters.",
+    "description": "Find the minimum window substring of s that contains all characters from a target string t. Given two strings s and t of lengths m and n, identify the shortest contiguous substring of s that includes every character of t with at least the required frequency, accounting for duplicate characters. Return an empty string if no valid window exists. The strings may contain up to 100,000 characters consisting of uppercase and lowercase English letters.",
     "complexity": "O(m + n)",
     "parameters": [
       {
@@ -1248,6 +1308,11 @@
         "expected": "ADOBECODEBA",
         "description": "should handle duplicate characters correctly"
       }
+    ],
+    "hints": [
+      "Maintain a contiguous window over s and track how well its contents cover the required characters and counts from t.",
+      "Expand the window to gain coverage, and once every required character is present with sufficient frequency, contract it from the left to find the smallest window ending at that point.",
+      "Two boundaries plus a frequency map of the needed characters (and a count of how many are currently satisfied) let you scan s in a single pass, remembering the shortest valid window seen."
     ]
   }
 }

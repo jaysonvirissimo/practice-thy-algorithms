@@ -83,8 +83,10 @@ solution in each language) and `npm test`.
 
 **Adding a problem:**
 1. Add the entry to `shared/problems.json` with per-language `functionSignatures`/`returnType`,
-   `parameters`, and `testCases` (plus optional `hints`). Python's seeded body is `pass`; Ruby's is an
-   empty `end`; JS is an empty brace body — all produced automatically from the signature.
+   `parameters`, and `testCases`. Keep the `description` prescription-free (problem definition +
+   constraints only) and put any technique/performance guidance in a graduated `hints` array — see
+   the Problem Description Guidelines below. Python's seeded body is `pass`; Ruby's is an empty `end`;
+   JS is an empty brace body — all produced automatically from the signature.
 2. Verify a correct solution passes in **all three** languages via `npm run dev`.
 3. Add the problem to the README's problem list.
 4. If a return is a `ListNode`, set `returnType.<lang>` to `"ListNode"` so the harness serializes it.
@@ -95,8 +97,21 @@ Use academic, original phrasing (avoid copying problem statements verbatim):
 
 - Formal vocabulary: "implement", "design", "develop", "construct", "determine".
 - Technical precision: "contiguous subsequence", "distinct shortest paths", "optimal solution".
-- Algorithm/perf framing: "classic dynamic programming problem", "strive for an optimal O(n) solution
-  using constant space".
+
+**Keep the problem definition free of implementation prescriptions.** A description states *what* to
+compute plus the input/output shape and constraints — never *how* to solve it. Do **not** name the
+intended algorithm or technique (e.g. "binary search", "sliding window", "two-pointer", "DFS/BFS",
+"dynamic programming", "memoization", "Floyd's tortoise-and-hare", "expand around centers"), and do
+**not** restate the solution-time complexity in prose (e.g. "strive for an optimal O(n) solution
+using constant space") — the target complexity already lives in the `complexity` field. That guidance
+belongs in `hints` (see below). Genuine *constraints* that define the challenge (e.g. "must not use
+division", "at most one valid pair") stay in the description.
+
+**Hints carry the technique.** Put algorithmic/technique guidance and performance directives in the
+optional top-level `hints` array, authored as a graduated 3-hint progression: conceptual nudge → name
+the technique → implementation detail. Follow the `two_sum` entry as the model. Hints render one at a
+time through the "Reveal a hint" UI, so the user opts into spoilers rather than reading them in the
+statement.
 
 Examples of rephrasing:
 - Instead of "Given an array of integers and a target sum, return the indices…" → "Implement a function
