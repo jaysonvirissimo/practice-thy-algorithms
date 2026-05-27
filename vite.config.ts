@@ -39,6 +39,41 @@ export default defineConfig({
     // as-is rather than trying to pre-bundle pyodide.asm.js etc.
     exclude: ['@ruby/wasm-wasi', '@ruby/3.4-wasm-wasi', 'pyodide'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Split stable vendors into their own long-cached chunks (see #50).
+        // The per-language modes (@codemirror/lang-*, legacy-modes) and the Vim
+        // layer are deliberately NOT grouped here so the dynamic imports in
+        // Editor.tsx keep them as separate, load-on-demand chunks.
+        manualChunks(id) {
+          if (!id.includes('/node_modules/')) return undefined;
+          const inPkg = (pkg: string) => id.includes(`/node_modules/${pkg}/`);
+          if (['react', 'react-dom', 'scheduler'].some(inPkg)) {
+            return 'react-vendor';
+          }
+          const codemirrorCore = [
+            'codemirror',
+            '@codemirror/state',
+            '@codemirror/view',
+            '@codemirror/language',
+            '@codemirror/commands',
+            '@codemirror/autocomplete',
+            '@codemirror/search',
+            '@codemirror/lint',
+            '@lezer/common',
+            '@lezer/highlight',
+            '@lezer/lr',
+            'style-mod',
+            'crelt',
+            'w3c-keyname',
+          ];
+          if (codemirrorCore.some(inPkg)) return 'codemirror-core';
+          return undefined;
+        },
+      },
+    },
+  },
   worker: {
     // The Pyodide worker pulls in a code-split chunk, which the default IIFE
     // worker format cannot emit; ES module workers can.

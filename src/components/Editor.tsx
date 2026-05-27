@@ -8,10 +8,6 @@ import { Compartment, EditorState, Prec } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
 import { StreamLanguage } from '@codemirror/language';
 import { basicSetup } from 'codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import { python } from '@codemirror/lang-python';
-import { ruby } from '@codemirror/legacy-modes/mode/ruby';
-import { vim } from '@replit/codemirror-vim';
 import type { Extension } from '@codemirror/state';
 import type { Language } from '../data/types';
 
@@ -29,16 +25,28 @@ interface EditorProps {
   language: Language;
 }
 
-const languageExtension = (language: Language): Extension => {
+// Each syntax mode (and the Vim layer) is a separate dynamic chunk so they load
+// only when their language is active / Vim is enabled, keeping every CodeMirror
+// chunk under the bundle-size budget (see #50).
+const loadLanguageExtension = async (language: Language): Promise<Extension> => {
   switch (language) {
-    case 'ruby':
+    case 'ruby': {
+      const { ruby } = await import('@codemirror/legacy-modes/mode/ruby');
       return StreamLanguage.define(ruby);
-    case 'python':
+    }
+    case 'python': {
+      const { python } = await import('@codemirror/lang-python');
       return python();
-    default:
+    }
+    default: {
+      const { javascript } = await import('@codemirror/lang-javascript');
       return javascript();
+    }
   }
 };
+
+// Cache the Vim module across editor instances; loaded on first enable.
+let vimModule: typeof import('@replit/codemirror-vim') | null = null;
 
 const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
   { initialValue, onChange, onRun, vimEnabled, language },
@@ -74,9 +82,11 @@ const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
               },
             ]),
           ),
-          vimCompartment.current.of(vimEnabled ? vim() : []),
+          // Both compartments start empty; the effects below load the Vim layer
+          // and the active language mode asynchronously after mount.
+          vimCompartment.current.of([]),
           basicSetup,
-          languageCompartment.current.of(languageExtension(language)),
+          languageCompartment.current.of([]),
           EditorView.updateListener.of((u) => {
             if (u.docChanged) onChangeRef.current(u.state.doc.toString());
           }),
@@ -93,20 +103,39 @@ const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Toggle Vim keybindings without rebuilding state.
+  // Toggle Vim keybindings without rebuilding state (Vim loads on first enable).
   useEffect(() => {
-    viewRef.current?.dispatch({
-      effects: vimCompartment.current.reconfigure(vimEnabled ? vim() : []),
-    });
+    let cancelled = false;
+    (async () => {
+      let extension: Extension = [];
+      if (vimEnabled) {
+        vimModule ??= await import('@replit/codemirror-vim');
+        extension = vimModule.vim();
+      }
+      if (cancelled) return;
+      viewRef.current?.dispatch({
+        effects: vimCompartment.current.reconfigure(extension),
+      });
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [vimEnabled]);
 
-  // Switch syntax highlighting when the language changes.
+  // Switch syntax highlighting when the language changes (mode loads on demand).
+  // Also runs on mount, applying the initial language.
   useEffect(() => {
-    viewRef.current?.dispatch({
-      effects: languageCompartment.current.reconfigure(
-        languageExtension(language),
-      ),
-    });
+    let cancelled = false;
+    (async () => {
+      const extension = await loadLanguageExtension(language);
+      if (cancelled) return;
+      viewRef.current?.dispatch({
+        effects: languageCompartment.current.reconfigure(extension),
+      });
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [language]);
 
   useImperativeHandle(

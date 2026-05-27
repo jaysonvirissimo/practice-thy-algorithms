@@ -120,6 +120,13 @@
 }
 
 /* ---- Workspace ------------------------------------------------------- */
+.workspace-loading {
+  flex: 1;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--ink-muted, inherit);
+}
+
 .workspace {
   flex: 1;
   display: grid;

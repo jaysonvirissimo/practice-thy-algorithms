@@ -1,10 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react';
 import type { Language, LanguageRunner } from './data/types';
 import { PROBLEMS, getProblem } from './data/problems';
 import { getRunner as createRunner } from './runner';
 import Catalog from './components/Catalog';
-import Workspace from './components/Workspace';
 import './App.css';
+
+// The editor workspace pulls in CodeMirror; defer it so the catalog landing is
+// interactive without downloading the editor bundle (see #50).
+const Workspace = lazy(() => import('./components/Workspace'));
 
 export default function App() {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
@@ -43,12 +46,16 @@ export default function App() {
       </header>
 
       {problem ? (
-        <Workspace
-          key={problem.key}
-          problem={problem}
-          getRunner={getRunner}
-          onBack={() => setSelectedKey(null)}
-        />
+        <Suspense
+          fallback={<p className="workspace-loading">Loading editor…</p>}
+        >
+          <Workspace
+            key={problem.key}
+            problem={problem}
+            getRunner={getRunner}
+            onBack={() => setSelectedKey(null)}
+          />
+        </Suspense>
       ) : (
         <Catalog problems={PROBLEMS} onSelect={setSelectedKey} />
       )}
