@@ -1,0 +1,43 @@
+.scriptorium {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.codex {
+  max-width: 42rem;
+  text-align: center;
+  padding: 3rem;
+  border: 2px solid var(--gold);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.rubric {
+  font-variant: small-caps;
+  letter-spacing: 0.12em;
+  color: var(--rubric);
+  margin: 0 0 0.5rem;
+}
+
+.display-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  line-height: 1.05;
+  margin: 0 0 1rem;
+  color: var(--ink);
+}
+
+.tagline {
+  font-size: 1.35rem;
+  margin: 0 0 1.5rem;
+}
+
+.colophon {
+  font-style: italic;
+  color: var(--rubric);
+  margin: 0;
+}

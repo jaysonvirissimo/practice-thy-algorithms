@@ -1,3 +1,14 @@
 node_modules
 .DS_Store
 __pycache__
+
+# Vite / build output
+dist
+.vite
+node_modules/.vite
+*.tsbuildinfo
+
+# Test artifacts
+coverage
+playwright-report
+test-results

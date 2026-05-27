@@ -1,0 +1,45 @@
+/*
+ * Scriptorium design tokens (SDD §7.3).
+ * Reusable foundation for M1–M3 components.
+ */
+:root {
+  /* Palette */
+  --parchment: #f4ecd8;
+  --ink: #2b2117;
+  --gold: #b8860b;
+  --rubric: #8b2e2e;
+
+  /* Typefaces */
+  --font-display: 'UnifrakturMaguntia', 'EB Garamond', serif;
+  --font-body: 'EB Garamond', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+  color-scheme: light;
+  color: var(--ink);
+  background-color: var(--parchment);
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--parchment);
+  color: var(--ink);
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
