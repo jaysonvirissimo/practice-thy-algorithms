@@ -73,14 +73,15 @@ describe('vim preference', () => {
 });
 
 describe('last language', () => {
-  it('round-trips and validates against the Language union', () => {
-    expect(lastLanguage('two_sum')).toBeNull();
-    saveLastLanguage('two_sum', 'ruby');
-    expect(lastLanguage('two_sum')).toBe('ruby');
-    saveLastLanguage('two_sum', 'python');
-    expect(lastLanguage('two_sum')).toBe('python');
-    localStorage.setItem('pta:lang:two_sum', 'cobol');
-    expect(lastLanguage('two_sum')).toBeNull();
+  it('round-trips globally and validates against the Language union', () => {
+    expect(lastLanguage()).toBeNull();
+    saveLastLanguage('ruby');
+    expect(lastLanguage()).toBe('ruby');
+    expect(localStorage.getItem('pta:lang')).toBe('ruby');
+    saveLastLanguage('python');
+    expect(lastLanguage()).toBe('python');
+    localStorage.setItem('pta:lang', 'cobol');
+    expect(lastLanguage()).toBeNull();
   });
 });
 
@@ -99,6 +100,6 @@ describe('resilience when localStorage throws', () => {
     expect(solvedLanguages('two_sum')).toEqual([]);
     expect(loadHintCount('two_sum')).toBe(0);
     expect(loadVimPref()).toBe(false);
-    expect(lastLanguage('two_sum')).toBeNull();
+    expect(lastLanguage()).toBeNull();
   });
 });

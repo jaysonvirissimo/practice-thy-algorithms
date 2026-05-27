@@ -88,14 +88,14 @@ export function saveVimPref(enabled: boolean): void {
   safeSet(VIM_KEY, enabled ? '1' : '0');
 }
 
-// --- Last selected language (resume UX) ----------------------------------
-const langKey = (problemKey: string) => `${PREFIX}lang:${problemKey}`;
+// --- Last selected language (global; sticky across problems) -------------
+const LANG_KEY = `${PREFIX}lang`;
 
-export function lastLanguage(problemKey: string): Language | null {
-  const raw = safeGet(langKey(problemKey));
+export function lastLanguage(): Language | null {
+  const raw = safeGet(LANG_KEY);
   return isLanguage(raw) ? raw : null;
 }
 
-export function saveLastLanguage(problemKey: string, lang: Language): void {
-  safeSet(langKey(problemKey), lang);
+export function saveLastLanguage(lang: Language): void {
+  safeSet(LANG_KEY, lang);
 }
