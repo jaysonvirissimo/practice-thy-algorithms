@@ -48,8 +48,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/setupTests.ts',
-    // Only the new browser-app tests. The legacy JavaScript/ Jest suite
-    // (CLI workflow, retired at M5) is intentionally excluded.
+    // Unit/component tests live alongside the source; e2e is Playwright.
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     exclude: ['node_modules', 'dist', 'tests/e2e/**'],
   },

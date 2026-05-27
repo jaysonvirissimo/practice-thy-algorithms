@@ -40,10 +40,9 @@ export function deepEqual(a: unknown, b: unknown): boolean {
 }
 
 /**
- * Order-insensitive array equality. Ported from the existing Jest matcher in
- * shared/generators/javascript_test_generator.js (`toEqualUnordered`): sort each
- * nested array, then sort the outer array by JSON string. Handles nested arrays
- * such as three_sum triplets and group_anagrams groups.
+ * Order-insensitive array equality (the original `toEqualUnordered` matcher):
+ * sort each nested array, then sort the outer array by JSON string. Handles
+ * nested arrays such as three_sum triplets and group_anagrams groups.
  */
 export function equalUnordered(a: unknown, b: unknown): boolean {
   if (!Array.isArray(a) || !Array.isArray(b)) return false;
