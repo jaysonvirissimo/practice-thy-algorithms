@@ -2,277 +2,119 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Overview
+
+*Practice Thy Algorithms* is a **static, in-browser** algorithm-practice app (Vite + React +
+TypeScript), deployed to GitHub Pages. Users solve the bundled problems in **JavaScript, Ruby, or
+Python** and verify them entirely client-side — no backend, no local language toolchains. JavaScript
+runs natively in a Web Worker; Ruby runs via ruby.wasm; Python runs via Pyodide.
+
+> History: this was formerly a multi-language local-CLI repo (Jest / RSpec / unittest per language).
+> That workflow was retired in the browser cutover (M5); its final state is preserved under the
+> `cli-final` git tag. Do not reintroduce per-language CLI dirs or test generators.
+
 ## Repository Structure
 
-This is a multi-language algorithm practice repository with implementations in JavaScript, Python, and Ruby. Each language has its own directory with a consistent structure:
-
-- `lib/` - Problem implementations and solution code
-- `test/` or `spec/` - Test files for each problem
+- `index.html`, `src/` — the browser app:
+  - `src/data/` — `problems.ts` (loads `shared/problems.json` via the `@shared` alias and derives a
+    typed `Problem` per language), `types.ts`, `storage.ts` (localStorage persistence).
+  - `src/runner/` — the execution layer: `index.ts` (`getRunner(language)`), `JsRunner.ts`,
+    `comparison.ts`, `marshal.ts`, `harness.ts` (the JS in-runtime harness), `protocol.ts`, and the
+    WASM runners `ruby/` and `python/` (each with a `*Runner.ts`, `*.worker.ts`, `prelude.*`,
+    `driver.*`, and a `comparison.parity.test.ts`).
+  - `src/components/` — React UI (`Catalog`, `Workspace`, `Editor`, `ResultsPanel`, `Hints`, …).
+- `shared/problems.json` — the single source of truth for all problems (consumed directly by the app).
+- `tests/e2e/` — Playwright end-to-end specs.
+- `.github/workflows/deploy.yml` — build + test + deploy to GitHub Pages on push to `master`.
 
 ## Development Commands
 
-### JavaScript
-- **Setup**: `cd JavaScript && npm install`
-- **Run tests**: `npm test` (uses Jest)
-- **Single test**: `npx jest test/<test_file>.test.js`
+```bash
+npm install
+npm run dev        # Vite dev server
+npm run build      # tsc -b && vite build  → dist/
+npm run preview    # serve the production build
+npm test           # Vitest run (unit/component + Ruby & Python comparator parity)
+npm run test:watch # Vitest watch
+npm run test:e2e:install   # one-time Playwright browser install
+npm run test:e2e           # Playwright (boots the real ruby.wasm / Pyodide runtimes)
+```
 
-### Python
-- **Setup**: No additional setup required (standard library only)
-- **Run tests**: `python -m unittest discover -s test`
-- **Single test**: `python -m unittest discover -s test -p "test_<problem_name>.py"`
-- **Generate tests**: `python ../shared/generators/python_test_generator.py`
-
-### Ruby
-- **Setup**: `cd Ruby && bundle install`
-- **Run tests**: `rspec`
-- **Single test**: `rspec spec/<problem_name>_spec.rb`
-- **Ruby version**: 3.1.3 (specified in Gemfile)
+Node 20 only (see `.tool-versions`); Ruby/Python execute in-browser, not locally.
 
 ## Architecture
 
-The repository follows a test-driven development approach where:
+- **Single source of truth.** `shared/problems.json` defines every problem: `title`, `description`,
+  `complexity`, `parameters`, per-language `functionSignatures` and `returnType`, `testCases`, and an
+  optional top-level language-agnostic `hints` array. `src/data/problems.ts` derives a `Problem`
+  whose `languages: Record<Language, LangSpec>` holds, per language, the function name + arg names
+  (from `parseSignature`), the editor seed template, and an `isListNodeReturn` flag.
+- **Signature is authoritative.** `parseSignature` extracts the function name and argument names/order
+  from `functionSignatures[language]`. The JSON `parameters[]` names and the `testCase.input` keys can
+  diverge from the signature (e.g. `two_sum`'s param is `array` but the input key is `nums`;
+  `maximum_subarray`'s JS arg is `numbers` but the input key is `array`). The harness binds arguments
+  **by name, falling back to positional order**, so these mismatches are handled.
+- **Assert in runtime.** Each language verifies natively in its own VM, then returns a structured
+  `TestRunResult` (`protocolVersion: 1`, per-case `{description, passed, expected, actual, error?}`,
+  `durationMs`, `runtimeError?`, `stdout`). JavaScript: a pure `runHarness` evaluated in a
+  **fresh-per-run** Web Worker (so infinite loops are hard-killed by terminating it; 3 s timeout).
+  Ruby/Python: a `prelude.*` (ListNode + helpers + comparators) loaded once in a **persistent** worker,
+  plus a `driver.*` (`__ptap_run`) evaluated per run; on timeout the worker is terminated and the VM
+  re-booted next run. Metadata reaches Ruby as base64-in-eval (the bridge can't pass a raw JS string)
+  and Python via `pyodide.globals.set`; user `stdout` is captured separately from the result.
+- **Comparison modes.** `comparison.mode` may be `exact`, `unordered_array`, or `set_equality`,
+  implemented in `src/runner/comparison.ts` (JS) and mirrored in each language's prelude comparator.
+  Cross-language agreement is guarded by `src/runner/__fixtures__/comparison-vectors.json`, asserted in
+  Vitest for JS and by booting the real Ruby/Python VMs in the `comparison.parity.test.ts` suites.
+- **ListNode marshalling.** Linked-list problems (`reverse_linked_list`, `remove_nth_from_end`,
+  `has_cycle`) pass `head` as an array (with `pos` wiring a cycle for `has_cycle`); each runtime builds
+  a ListNode for the call and serializes a ListNode return back to an array. There are no tree problems.
+- **Persistence (`src/data/storage.ts`).** Per-(problem, language) code, solved status, revealed-hint
+  count, last language, and the Vim preference live in `localStorage`. Resilient (all access is
+  try/caught — the app works with storage disabled).
 
-1. Problem statements are documented within the implementation files in `lib/`
-2. Each problem has corresponding test files that validate the solution
-3. Tests are designed to provide feedback on algorithm correctness and performance
-4. Some Ruby tests include benchmarking using rspec-benchmark
+## Working with `shared/problems.json`
 
-## Working with Problems
+The app consumes the JSON **directly** — there is no code-generation step (the old generators were
+removed at cutover).
 
-When implementing solutions:
-- Problem descriptions are embedded as comments in the `lib/` files
-- Follow the existing function signatures and return types
-- All problems should pass their respective test suites
-- Code should be placed in the appropriate language directory's `lib/` folder
+**Adding test cases:** edit the problem's `testCases` array; verify with `npm run dev` (run a known
+solution in each language) and `npm test`.
 
-## Shared Problem Definition System
-
-The repository uses a centralized JSON system for problem definitions and test cases:
-
-- **Problem definitions**: `shared/problems.json` - Single source of truth for problem statements, test cases, and function signatures
-- **Test generation**: Language-specific generators in `shared/generators/` convert JSON to test files
-- **Automation**: `shared/generate_all_tests.sh` regenerates all test files from the shared definitions
-
-### Adding New Test Cases
-
-To add test cases for existing problems:
-1. Edit `shared/problems.json` to add new entries to the `testCases` array
-2. Run `./shared/generate_all_tests.sh` to regenerate all test files
-3. Alternatively, use language-specific commands:
-   - JavaScript: `cd JavaScript && npm run generate-tests`
-   - Ruby: `cd Ruby && rake generate_tests`
-   - Python: `cd Python && python ../shared/generators/python_test_generator.py`
-
-### Adding New Problems
-
-1. Add problem definition to `shared/problems.json` following the existing schema
-2. Run the generation script to create initial test files
-3. Create implementation files in each language's `lib/` directory
-4. **IMPORTANT: Update README.md** - Add the new problem to the main README.md table showing which languages have implementations
-5. **Test validation**: Write complete solutions to verify tests work properly, then remove the actual implementation code, leaving only the function signature and problem description comments
-   - **Python syntax requirement**: Python functions must include a `pass` statement in empty function bodies, as Python cannot have syntactically empty functions unlike JavaScript and Ruby
+**Adding a problem:**
+1. Add the entry to `shared/problems.json` with per-language `functionSignatures`/`returnType`,
+   `parameters`, and `testCases` (plus optional `hints`). Python's seeded body is `pass`; Ruby's is an
+   empty `end`; JS is an empty brace body — all produced automatically from the signature.
+2. Verify a correct solution passes in **all three** languages via `npm run dev`.
+3. Add the problem to the README's problem list.
+4. If a return is a `ListNode`, set `returnType.<lang>` to `"ListNode"` so the harness serializes it.
 
 ### Problem Description Guidelines
 
-When writing problem descriptions for `shared/problems.json`, use academic and original language to avoid copyright concerns while maintaining clarity:
+Use academic, original phrasing (avoid copying problem statements verbatim):
 
-**Academic Style Elements:**
-- Use formal vocabulary: "implement", "design", "develop", "construct", "determine"
-- Technical precision: "contiguous subsequence", "distinct shortest paths", "optimal solution"
-- Algorithm focus: "classic dynamic programming problem", "recursive algorithm", "optimization problem"
-- Performance guidance: "strive for an optimal O(n) solution using constant space"
+- Formal vocabulary: "implement", "design", "develop", "construct", "determine".
+- Technical precision: "contiguous subsequence", "distinct shortest paths", "optimal solution".
+- Algorithm/perf framing: "classic dynamic programming problem", "strive for an optimal O(n) solution
+  using constant space".
 
-**Examples of Academic Rephrasing:**
-- Instead of: "Given an array of integers and a target sum, return the indices..."
-- Use: "Implement a function that locates a pair of elements within an integer array whose sum equals a specified target value..."
+Examples of rephrasing:
+- Instead of "Given an array of integers and a target sum, return the indices…" → "Implement a function
+  that locates a pair of elements within an integer array whose sum equals a specified target value…".
+- Instead of "Find the largest contiguous subarray sum…" → "Design an algorithm to determine the
+  maximum sum achievable from any contiguous subsequence…".
 
-- Instead of: "Find the largest contiguous subarray sum..."
-- Use: "Design an algorithm to determine the maximum sum achievable from any contiguous subsequence..."
+Keep complete requirements/constraints; be clear despite the formal tone; make it distinct from common
+online statements.
 
-- Instead of: "Count paths in a grid from top-left to bottom-right..."
-- Use: "Develop a recursive algorithm to count the total number of distinct shortest paths through a rectangular grid..."
+**Constraint formatting:** use proper exponential notation — write `10^5`, not `105`. For algorithm
+problems "105" almost always means 10^5 (100,000); prefer "up to 100,000 elements" for clarity.
 
-**Key Principles:**
-- Maintain complete problem requirements and constraints
-- Use textbook-style formal language
-- Emphasize algorithmic thinking and optimization
-- Be distinctly different from common online problem statements
-- Ensure clarity despite formal tone
+### Result ordering & comparison metadata
 
-**Constraint Formatting:**
-- When copying constraints from external sources, be careful with scientific notation formatting
-- Common issue: "1 <= x <= 105" should be written as "1 <= x <= 10^5"
-- Always use proper exponential notation (10^5) rather than concatenated numbers (105) to avoid ambiguity
-- Example: "arrays with up to 100,000 elements" is clearer than "arrays with up to 105 elements"
-- **Use common sense**: Consider the context - for algorithm problems, "105" is almost certainly 10^5 (100,000) rather than the literal number 105, as most practical algorithms deal with larger datasets
-
-### Test Generator Function Naming Issues
-
-**Known Issue**: The test generators sometimes use inconsistent function naming between the JSON signatures and actual test expectations:
-
-- **JavaScript**: Generally follows camelCase from JSON (e.g., `productExceptSelf`) but test files sometimes expect different names (e.g., `mergeIntervals` vs `merge`)
-- **Ruby/Python**: Test generators often use snake_case problem key names instead of respecting the JSON function signatures
-  - Example: JSON specifies `max_profit` but tests expect `best_time_to_buy_and_sell_stock`
-  - **Workaround**: Match implementation function names to test expectations rather than JSON signatures
-
-**Best Practice**: Always check the generated test files to confirm the expected function name before implementing solutions.
-
-### Test Output Ordering Considerations
-
-**Important**: When implementing problems that return collections (arrays, lists), be aware that:
-
-- Problem statements often specify "return the answer in any order" (e.g., Group Anagrams, Three Sum)
-- Test cases should specify one consistent expected ordering rather than trying to test all valid orderings
-- When implementing algorithms, use the natural ordering your algorithm produces
-- If tests fail due to ordering differences, update the expected results in `shared/problems.json` to match the algorithm's natural output, then regenerate test files
-
-**Example**: Group Anagrams naturally groups by the order elements are first encountered, which may differ from problem examples that show arbitrary orderings.
-
-### Test Generator Comparison Logic Issues
-
-**Critical Discovery**: The test generators use overly simplistic logic to determine comparison methods:
-
-**JavaScript Generator Logic**:
-```javascript
-const isArray = returnType.includes('array');
-if (isArray) {
-  // Uses toEqual() for deep equality
-} else {
-  // Uses toBe() for reference/primitive equality
-}
-```
-
-**Problems with Current Approach**:
-1. **String-based detection**: Only checks if return type contains literal string "array"
-2. **No actual test data analysis**: Doesn't examine what the test cases actually contain
-3. **Complex data structure issues**: Problems like Reverse Linked List return `ListNode` but tests compare arrays
-4. **No ordering consideration**: All arrays use `toEqual()` which requires exact ordering
-
-**Abstraction Layer Pattern**:
-For complex data structures (linked lists, trees), implement:
-- **Core algorithm function**: Works with actual data structures (e.g., `reverseList(head)` returns `ListNode`)
-- **Test wrapper function**: Converts between arrays and data structures for testability
-- **Helper functions**: `arrayToList()`, `listToArray()`, etc.
-
-**Common Failure**: Tests fail with "received serializes to the same string" when using `toBe()` instead of `toEqual()` for array comparisons.
-
-### Proposed Test Generator Enhancements
-
-**Enhanced JSON Schema**:
-Add optional comparison metadata to test cases:
-```json
-{
-  "testCases": [
-    {
-      "input": {"nums": [1, 2, 3]},
-      "expected": [[1, 2], [2, 3]],
-      "description": "should return pairs",
-      "comparison": {
-        "mode": "unordered_array",  // Options: "exact", "unordered_array", "set_equality"
-        "type": "deep_equality"     // Options: "reference", "deep_equality", "custom"
-      }
-    }
-  ]
-}
-```
-
-**Comparison Modes**:
-1. **"exact"**: Arrays must match exactly (current `toEqual()` behavior)
-2. **"unordered_array"**: Array contents must match but order doesn't matter
-3. **"set_equality"**: Treats arrays as sets (no duplicates, no order)
-
-**Enhanced Generator Logic**:
-```javascript
-function generateComparison(testCase, problemData) {
-  const comparison = testCase.comparison || getDefaultComparison(problemData.returnType);
-
-  switch (comparison.mode) {
-    case "exact":
-      return "toEqual";
-    case "unordered_array":
-      return "toEqualUnordered";  // Custom matcher
-    case "set_equality":
-      return "toEqualAsSet";      // Custom matcher
-    default:
-      return inferComparisonFromType(testCase.expected);
-  }
-}
-```
-
-**Custom Jest Matchers** (for JavaScript):
-```javascript
-expect.extend({
-  toEqualUnordered(received, expected) {
-    if (!Array.isArray(received) || !Array.isArray(expected)) {
-      return { pass: false, message: () => "Both values must be arrays" };
-    }
-    const sortedReceived = [...received].sort();
-    const sortedExpected = [...expected].sort();
-    return {
-      pass: JSON.stringify(sortedReceived) === JSON.stringify(sortedExpected),
-      message: () => `Expected arrays to have same elements regardless of order`
-    };
-  }
-});
-```
-
-**Backward Compatibility**: Default behavior remains unchanged; enhancements are opt-in through metadata.
-
-## Enhanced Test Comparison System (IMPLEMENTED)
-
-The test generator system now supports advanced array comparison modes through optional metadata in `shared/problems.json`.
-
-### Usage
-
-Add comparison metadata to test cases in `problems.json`:
-
-```json
-{
-  "input": {"strs": ["eat", "tea", "tan"]},
-  "expected": [["eat", "tea"], ["tan"]],
-  "description": "should group anagrams correctly",
-  "comparison": {
-    "mode": "unordered_array",
-    "type": "deep_equality"
-  }
-}
-```
-
-### Available Comparison Modes
-
-1. **"exact"** (default): Arrays must match exactly (standard behavior)
-2. **"unordered_array"**: Array contents must match but order doesn't matter
-3. **"set_equality"**: Treats arrays as sets (no duplicates, no order consideration)
-
-### Language-Specific Implementation
-
-**JavaScript**:
-- Uses custom Jest matchers: `toEqualUnordered()`, `toEqualAsSet()`
-- Automatically injected into test files when needed
-- Handles nested arrays (like Group Anagrams) correctly
-
-**Python**:
-- Uses custom assertion methods: `assertEqualUnordered()`, `assertEqualAsSet()`
-- Added as class methods to test classes when needed
-- Properly sorts nested structures before comparison
-
-**Ruby**:
-- Uses custom RSpec matchers: `match_unordered()`, `match_as_set()`
-- Automatically defined in test files when needed
-- Leverages Ruby's functional programming features
-
-### Problems Using Enhanced Comparison
-
-- **Group Anagrams**: Uses `"unordered_array"` mode since result groups can be in any order
-- **Three Sum**: Uses `"unordered_array"` mode since triplet order doesn't matter
-
-### Benefits
-
-- **No more manual result adjustment**: Problems with "any order" requirements work automatically
-- **Robust comparison logic**: Handles nested arrays, different data types, and edge cases
-- **Backward compatible**: Existing tests continue working without changes
-- **Maintainable**: Centralized comparison logic in generators, not scattered across tests
-
-## Test Coverage
-
-Problems are implemented across languages with varying coverage - check the README.md table for which problems are available in each language.
+- Some problems are order-insensitive (e.g. Group Anagrams, Three Sum). Give each `testCase` one
+  consistent `expected` value and set `comparison.mode` to `unordered_array` (or `set_equality`) rather
+  than trying to enumerate orderings. `exact` is the default.
+- These modes are implemented once in `src/runner/comparison.ts` and mirrored in the Ruby/Python
+  preludes; if you change comparator behavior, add/adjust a vector in
+  `src/runner/__fixtures__/comparison-vectors.json` so the parity tests keep all three languages aligned.
