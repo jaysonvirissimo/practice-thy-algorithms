@@ -5,7 +5,7 @@
 import type { Language } from './types';
 
 const PREFIX = 'pta:';
-const LANGUAGES: readonly Language[] = ['javascript', 'ruby'];
+const LANGUAGES: readonly Language[] = ['javascript', 'ruby', 'python'];
 
 function isLanguage(value: unknown): value is Language {
   return typeof value === 'string' && (LANGUAGES as readonly string[]).includes(value);

@@ -48,6 +48,37 @@ export type RubyResponse =
   | RubyInitErrorResponse
   | RunResponse;
 
+// --- Python worker protocol ----------------------------------------------
+// Structurally identical to Ruby (persistent worker, boot-once VM); kept as
+// distinct named types so the two workers can evolve independently.
+
+export interface PythonInitRequest {
+  type: 'init';
+}
+
+export interface PythonReadyResponse {
+  type: 'ready';
+}
+
+export interface PythonInitErrorResponse {
+  type: 'init-error';
+  message: string;
+}
+
+export interface PythonRunRequest {
+  type: 'run';
+  requestId: number;
+  userCode: string;
+  spec: LangSpec;
+  testCases: RawTestCase[];
+}
+
+export type PythonRequest = PythonInitRequest | PythonRunRequest;
+export type PythonResponse =
+  | PythonReadyResponse
+  | PythonInitErrorResponse
+  | RunResponse;
+
 /** Build a result representing a load/runtime failure with no executed cases. */
 export function errorResult(runtimeError: string): TestRunResult {
   return {
