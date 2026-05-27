@@ -1,19 +1,20 @@
 import rawProblems from '@shared/problems.json';
-import type { Problem, RawProblem } from './types';
+import type { Language, LangSpec, Problem, RawProblem } from './types';
 
 /**
- * Parse a JavaScript function signature into its name and argument names.
+ * Parse a JavaScript or Ruby function signature into its name and argument names.
  *
  * The JSON `parameters[]` names are occasionally wrong (e.g. two_sum,
  * maximum_subarray), so the signature is the authoritative source. The split is
  * bracket-depth aware so default values containing commas survive intact, e.g.
- * `function coinChange(amount, coins = [1, 5, 10, 25])`.
+ * `function coinChange(amount, coins = [1, 5, 10, 25])` or
+ * `def coin_change(amount, coins = [1, 5, 10, 25])`.
  */
 export function parseSignature(signature: string): {
   functionName: string;
   argNames: string[];
 } {
-  const nameMatch = signature.match(/function\s+([A-Za-z0-9_$]+)/);
+  const nameMatch = signature.match(/(?:function|def)\s+([A-Za-z0-9_$]+)/);
   const functionName = nameMatch ? nameMatch[1] : '';
 
   const open = signature.indexOf('(');
@@ -46,22 +47,47 @@ export function parseSignature(signature: string): {
   };
 }
 
-function deriveProblem(key: string, raw: RawProblem): Problem {
-  const jsSignature = raw.functionSignatures.javascript;
-  const { functionName, argNames } = parseSignature(jsSignature);
+function deriveLangSpec(
+  signature: string,
+  paramTypes: string[],
+  isListNodeReturn: boolean,
+  language: Language,
+): LangSpec {
+  const { functionName, argNames } = parseSignature(signature);
+  // Ruby methods need an `end`; JS needs a brace body (M1 seed preserved exactly).
+  const body = language === 'ruby' ? `\n  \nend\n` : ` {\n  \n}\n`;
+  return {
+    functionName,
+    argNames,
+    paramTypes,
+    signatureTemplate: signature + body,
+    isListNodeReturn,
+  };
+}
 
+function deriveProblem(key: string, raw: RawProblem): Problem {
+  const paramTypes = raw.parameters.map((p) => p.type);
   return {
     key,
     title: raw.title,
     description: raw.description,
     complexity: raw.complexity,
-    functionName,
-    argNames,
-    paramTypes: raw.parameters.map((p) => p.type),
-    signatureTemplate: `${jsSignature} {\n  \n}\n`,
-    isListNodeReturn: raw.returnType.javascript === 'ListNode',
     testCases: raw.testCases,
     hints: raw.hints,
+    languages: {
+      javascript: deriveLangSpec(
+        raw.functionSignatures.javascript,
+        paramTypes,
+        raw.returnType.javascript === 'ListNode',
+        'javascript',
+      ),
+      ruby: deriveLangSpec(
+        raw.functionSignatures.ruby,
+        paramTypes,
+        raw.returnType.ruby === 'ListNode',
+        'ruby',
+      ),
+    },
   };
 }
 

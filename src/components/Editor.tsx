@@ -6,9 +6,13 @@ import {
 } from 'react';
 import { Compartment, EditorState, Prec } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
+import { StreamLanguage } from '@codemirror/language';
 import { basicSetup } from 'codemirror';
 import { javascript } from '@codemirror/lang-javascript';
+import { ruby } from '@codemirror/legacy-modes/mode/ruby';
 import { vim } from '@replit/codemirror-vim';
+import type { Extension } from '@codemirror/state';
+import type { Language } from '../data/types';
 
 export interface EditorHandle {
   /** Replace the entire document (used by reset-to-signature). */
@@ -21,15 +25,20 @@ interface EditorProps {
   onChange: (value: string) => void;
   onRun: () => void;
   vimEnabled: boolean;
+  language: Language;
 }
 
+const languageExtension = (language: Language): Extension =>
+  language === 'ruby' ? StreamLanguage.define(ruby) : javascript();
+
 const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
-  { initialValue, onChange, onRun, vimEnabled },
+  { initialValue, onChange, onRun, vimEnabled, language },
   ref,
 ) {
   const hostRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
   const vimCompartment = useRef(new Compartment());
+  const languageCompartment = useRef(new Compartment());
 
   // Keep callbacks fresh without recreating the editor / keymap.
   const onChangeRef = useRef(onChange);
@@ -58,7 +67,7 @@ const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
           ),
           vimCompartment.current.of(vimEnabled ? vim() : []),
           basicSetup,
-          javascript(),
+          languageCompartment.current.of(languageExtension(language)),
           EditorView.updateListener.of((u) => {
             if (u.docChanged) onChangeRef.current(u.state.doc.toString());
           }),
@@ -81,6 +90,15 @@ const Editor = forwardRef<EditorHandle, EditorProps>(function Editor(
       effects: vimCompartment.current.reconfigure(vimEnabled ? vim() : []),
     });
   }, [vimEnabled]);
+
+  // Switch syntax highlighting when the language changes.
+  useEffect(() => {
+    viewRef.current?.dispatch({
+      effects: languageCompartment.current.reconfigure(
+        languageExtension(language),
+      ),
+    });
+  }, [language]);
 
   useImperativeHandle(
     ref,

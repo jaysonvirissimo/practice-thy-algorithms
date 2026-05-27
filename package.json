@@ -14,9 +14,13 @@
   },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/language": "^6.12.3",
+    "@codemirror/legacy-modes": "^6.5.3",
     "@codemirror/state": "^6.5.2",
     "@codemirror/view": "^6.36.2",
     "@replit/codemirror-vim": "^6.3.0",
+    "@ruby/3.4-wasm-wasi": "2.9.3-2.9.4",
+    "@ruby/wasm-wasi": "2.9.3-2.9.4",
     "codemirror": "^6.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

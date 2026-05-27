@@ -1,16 +1,31 @@
-// JavaScript is the only runnable language in M1; Ruby arrives in M2.
-export default function LanguageSelector() {
+import type { Language } from '../data/types';
+
+interface LanguageSelectorProps {
+  language: Language;
+  onChange: (language: Language) => void;
+  rubyLoading?: boolean;
+}
+
+export default function LanguageSelector({
+  language,
+  onChange,
+  rubyLoading,
+}: LanguageSelectorProps) {
   return (
     <div className="lang-selector" role="group" aria-label="Language">
-      <button className="lang-option active" aria-pressed="true">
+      <button
+        className={`lang-option ${language === 'javascript' ? 'active' : ''}`}
+        aria-pressed={language === 'javascript'}
+        onClick={() => onChange('javascript')}
+      >
         JavaScript
       </button>
       <button
-        className="lang-option disabled"
-        disabled
-        title="Ruby support is coming soon"
+        className={`lang-option ${language === 'ruby' ? 'active' : ''}`}
+        aria-pressed={language === 'ruby'}
+        onClick={() => onChange('ruby')}
       >
-        Ruby (soon)
+        {rubyLoading ? 'Ruby…' : 'Ruby'}
       </button>
     </div>
   );

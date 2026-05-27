@@ -42,24 +42,30 @@ export interface RawProblem {
 // Enriched shape — derived once at load time and consumed by the app.
 // ---------------------------------------------------------------------------
 
+/** Per-language derivation used by the editor seed and the test harness. */
+export interface LangSpec {
+  /** Function/method name parsed from the language's signature (authoritative). */
+  functionName: string;
+  /** Argument names parsed from the signature, in order. */
+  argNames: string[];
+  /** Parameter types positionally aligned with argNames (for ListNode detection). */
+  paramTypes: string[];
+  /** Editor seed: the raw signature plus an empty body. */
+  signatureTemplate: string;
+  /** True when returnType[language] === "ListNode" (serialize result to array). */
+  isListNodeReturn: boolean;
+}
+
 export interface Problem {
   /** snake_case key from problems.json, e.g. "two_sum". */
   key: string;
   title: string;
   description: string;
   complexity: string;
-  /** Function name parsed from functionSignatures.javascript (authoritative). */
-  functionName: string;
-  /** Argument names parsed from the JS signature, in order. */
-  argNames: string[];
-  /** Parameter types positionally aligned with argNames (for ListNode detection). */
-  paramTypes: string[];
-  /** Editor seed: the raw JS signature plus an empty body. */
-  signatureTemplate: string;
-  /** True when returnType.javascript === "ListNode" (serialize result to array). */
-  isListNodeReturn: boolean;
   testCases: RawTestCase[];
   hints?: string[];
+  /** Derived per-language specs (javascript, ruby). */
+  languages: Record<Language, LangSpec>;
 }
 
 // ---------------------------------------------------------------------------
