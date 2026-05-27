@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import type { Problem } from '../data/types';
+import { solvedLanguages } from '../data/storage';
+
+const LANG_ABBR: Record<string, string> = { javascript: 'JS', ruby: 'Rb' };
 
 interface CatalogProps {
   problems: Problem[];
@@ -29,18 +32,38 @@ export default function Catalog({ problems, onSelect }: CatalogProps) {
         aria-label="Search problems"
       />
       <ul className="catalog-list">
-        {shown.map((p) => (
-          <li key={p.key}>
-            <button className="catalog-item" onClick={() => onSelect(p.key)}>
-              <span className="catalog-item-title">{p.title}</span>
-              <span className="catalog-item-meta">
-                <span className="complexity">{p.complexity}</span>
-                <span className="lang-badge active">JS</span>
-                <span className="lang-badge soon">Ruby soon</span>
-              </span>
-            </button>
-          </li>
-        ))}
+        {shown.map((p) => {
+          const solved = solvedLanguages(p.key);
+          return (
+            <li key={p.key}>
+              <button
+                className={`catalog-item${solved.length ? ' solved' : ''}`}
+                onClick={() => onSelect(p.key)}
+              >
+                <span className="catalog-item-title">
+                  {solved.length > 0 && (
+                    <span
+                      className="solved-seal"
+                      title={`Solved in ${solved.join(', ')}`}
+                      aria-label="Solved"
+                    >
+                      ✓
+                    </span>
+                  )}
+                  {p.title}
+                </span>
+                <span className="catalog-item-meta">
+                  <span className="complexity">{p.complexity}</span>
+                  {solved.map((lang) => (
+                    <span key={lang} className="lang-chip">
+                      {LANG_ABBR[lang] ?? lang}
+                    </span>
+                  ))}
+                </span>
+              </button>
+            </li>
+          );
+        })}
         {shown.length === 0 && (
           <li className="catalog-empty">No problems match “{filter}”.</li>
         )}

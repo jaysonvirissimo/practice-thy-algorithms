@@ -76,15 +76,28 @@ export default function ResultsPanel({ running, result }: ResultsPanelProps) {
         </div>
       ) : (
         <>
-          <p
-            className={`results-summary ${result.passed ? 'pass' : 'fail'}`}
-          >
-            {passedCount}/{total} passed
-            <span className="results-duration">
-              {' '}
-              · {result.durationMs.toFixed(1)} ms
-            </span>
-          </p>
+          {result.passed ? (
+            <div className="solved-banner" role="status">
+              <span className="solved-banner-seal" aria-hidden="true">
+                ❦
+              </span>
+              <span className="solved-banner-text">
+                Solved — {passedCount}/{total} passed
+                <span className="results-duration">
+                  {' '}
+                  · {result.durationMs.toFixed(1)} ms
+                </span>
+              </span>
+            </div>
+          ) : (
+            <p className="results-summary fail">
+              {passedCount}/{total} passed
+              <span className="results-duration">
+                {' '}
+                · {result.durationMs.toFixed(1)} ms
+              </span>
+            </p>
+          )}
           <ul className="case-list">
             {result.cases.map((c, i) => (
               <CaseRow key={i} c={c} />

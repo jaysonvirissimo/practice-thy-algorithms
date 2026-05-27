@@ -393,6 +393,159 @@
   margin: 0 0 0.2rem;
 }
 
+/* ---- Hints (marginalia) --------------------------------------------- */
+.hints {
+  margin-top: 1.25rem;
+  padding: 0.5rem 0 0.5rem 0.9rem;
+  border-top: 1px dashed var(--gold);
+  border-left: 3px solid var(--gold);
+  font-style: italic;
+}
+
+.hints-heading {
+  margin: 0.4rem 0 0.5rem;
+}
+
+.hints-list {
+  margin: 0 0 0.6rem;
+  padding-left: 1.2rem;
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+.hint-item {
+  margin-bottom: 0.4rem;
+}
+
+.hints-exhausted {
+  margin: 0;
+}
+
+/* ---- Solved seal & language chips (catalog + workspace) ------------- */
+.solved-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.catalog-item .solved-seal {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.45rem;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.solved-seal.inline {
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  font-style: normal;
+  margin-bottom: 0.5rem;
+}
+
+.catalog-item.solved {
+  border-color: var(--gold);
+}
+
+.lang-chip {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  border: 1px solid var(--gold);
+  background-color: rgba(184, 134, 11, 0.18);
+  color: var(--ink);
+}
+
+/* ---- Illuminated success banner ------------------------------------- */
+.solved-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid var(--gold);
+  border-radius: 4px;
+  background: linear-gradient(
+    180deg,
+    rgba(184, 134, 11, 0.16),
+    rgba(255, 255, 255, 0.18)
+  );
+}
+
+.solved-banner-seal {
+  font-size: 1.6rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.solved-banner-text {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: #2f6b2f;
+}
+
+/* ---- Tasteful motion (opt-in; static for reduced-motion users) ------ */
+@media (prefers-reduced-motion: no-preference) {
+  .catalog-item .solved-seal {
+    animation: seal-pop 0.32s ease-out both;
+  }
+  .solved-seal.inline {
+    animation: seal-pop 0.32s ease-out both;
+  }
+  .hint-item {
+    animation: hint-in 0.28s ease-out both;
+  }
+  .solved-banner {
+    animation: banner-glow 0.5s ease-out both;
+  }
+  .solved-banner-seal {
+    animation: seal-pop 0.45s ease-out both;
+  }
+
+  @keyframes seal-pop {
+    0% {
+      transform: scale(0.4);
+      opacity: 0;
+    }
+    70% {
+      transform: scale(1.12);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes hint-in {
+    0% {
+      transform: translateY(-0.3rem);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes banner-glow {
+    0% {
+      opacity: 0;
+      box-shadow: 0 0 0 rgba(184, 134, 11, 0);
+    }
+    60% {
+      box-shadow: 0 0 18px rgba(184, 134, 11, 0.55);
+    }
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 6px rgba(184, 134, 11, 0.25);
+    }
+  }
+}
+
 @media (max-width: 860px) {
   .workspace {
     grid-template-columns: 1fr;

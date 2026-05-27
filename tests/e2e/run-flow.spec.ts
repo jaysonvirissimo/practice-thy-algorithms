@@ -20,8 +20,7 @@ test('runs a correct JS solution to all-pass', async ({ page }) => {
   await setEditorCode(page, TWO_SUM_CORRECT);
   await page.getByTestId('run-button').click();
 
-  await expect(page.locator('.results-summary')).toHaveText(/3\/3 passed/);
-  await expect(page.locator('.results-summary.pass')).toBeVisible();
+  await expect(page.locator('.solved-banner')).toContainText('3/3 passed');
 });
 
 test('shows failing cases with expected vs actual for a wrong solution', async ({
@@ -52,5 +51,5 @@ test('runs a linked-list solution through the real worker', async ({ page }) => 
   );
   await page.getByTestId('run-button').click();
 
-  await expect(page.locator('.results-summary')).toHaveText(/3\/3 passed/);
+  await expect(page.locator('.solved-banner')).toContainText('3/3 passed');
 });

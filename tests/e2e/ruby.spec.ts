@@ -26,8 +26,7 @@ test('runs a correct Ruby solution to all-pass', async ({ page }) => {
 end`,
   );
   await page.getByTestId('run-button').click();
-  await expect(page.locator('.results-summary')).toHaveText(/3\/3 passed/);
-  await expect(page.locator('.results-summary.pass')).toBeVisible();
+  await expect(page.locator('.solved-banner')).toContainText('3/3 passed');
 });
 
 test('shows failing cases for a wrong Ruby solution', async ({ page }) => {
@@ -55,7 +54,7 @@ test('runs a Ruby ListNode solution (reverse_list)', async ({ page }) => {
 end`,
   );
   await page.getByTestId('run-button').click();
-  await expect(page.locator('.results-summary')).toHaveText(/3\/3 passed/);
+  await expect(page.locator('.solved-banner')).toContainText('3/3 passed');
 });
 
 test('runs a Ruby unordered solution (three_sum)', async ({ page }) => {
@@ -88,7 +87,7 @@ test('runs a Ruby unordered solution (three_sum)', async ({ page }) => {
 end`,
   );
   await page.getByTestId('run-button').click();
-  await expect(page.locator('.results-summary')).toHaveText(/3\/3 passed/);
+  await expect(page.locator('.solved-banner')).toContainText('3/3 passed');
 });
 
 test('captures Ruby puts output as stdout', async ({ page }) => {
@@ -105,6 +104,6 @@ test('captures Ruby puts output as stdout', async ({ page }) => {
 end`,
   );
   await page.getByTestId('run-button').click();
-  await expect(page.locator('.results-summary')).toHaveText(/3\/3 passed/);
+  await expect(page.locator('.solved-banner')).toContainText('3/3 passed');
   await expect(page.locator('.stdout')).toContainText('searching the scroll');
 });
