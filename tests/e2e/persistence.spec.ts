@@ -59,6 +59,24 @@ test('persists revealed hints across reload', async ({ page }) => {
   await expect(page.locator('.hint-item')).toHaveCount(2);
 });
 
+test('language selection is sticky across problems', async ({ page }) => {
+  await page.goto('/');
+
+  // Select Python on one problem.
+  await page.getByRole('button', { name: /Two Sum/ }).click();
+  const python = page.getByRole('button', { name: /Python/ });
+  await python.click();
+  await expect(python).toHaveAttribute('aria-pressed', 'true');
+
+  // Open a different problem → Python is already selected there.
+  await page.getByRole('button', { name: /All problems/ }).click();
+  await page.getByRole('button', { name: /Maximum Subarray/ }).click();
+  await expect(page.getByRole('button', { name: /Python/ })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+});
+
 test('persists the Vim preference across reload', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Two Sum/ }).click();

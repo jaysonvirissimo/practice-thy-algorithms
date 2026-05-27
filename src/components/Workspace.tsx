@@ -43,7 +43,7 @@ export default function Workspace({
   // Resolve the initial language once (Workspace remounts per problem.key).
   const initialLangRef = useRef<Language | null>(null);
   if (initialLangRef.current === null) {
-    initialLangRef.current = lastLanguage(problem.key) ?? 'javascript';
+    initialLangRef.current = lastLanguage() ?? 'javascript';
   }
   const initialLang = initialLangRef.current;
 
@@ -149,7 +149,7 @@ export default function Workspace({
     setCode(seed);
     editorRef.current?.reset(seed);
     setResult(null);
-    saveLastLanguage(problem.key, next);
+    saveLastLanguage(next);
     ensureRuntime(next);
   };
 
