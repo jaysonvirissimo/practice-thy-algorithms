@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
@@ -8,6 +9,13 @@ export default defineConfig({
   // https://jaysonvirissimo.github.io/practice-thy-algorithms/
   base: '/practice-thy-algorithms/',
   plugins: [react()],
+  resolve: {
+    alias: {
+      // Single source of truth lives outside src/; aliased so both the app
+      // bundle and the worker bundle can import it.
+      '@shared': fileURLToPath(new URL('./shared', import.meta.url)),
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,

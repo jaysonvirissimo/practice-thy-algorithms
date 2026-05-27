@@ -1,0 +1,19 @@
+[
+  { "mode": "exact", "a": 5, "b": 5, "equal": true },
+  { "mode": "exact", "a": 5, "b": 6, "equal": false },
+  { "mode": "exact", "a": true, "b": true, "equal": true },
+  { "mode": "exact", "a": null, "b": 0, "equal": false },
+  { "mode": "exact", "a": "abc", "b": "abc", "equal": true },
+  { "mode": "exact", "a": [0, 1], "b": [0, 1], "equal": true },
+  { "mode": "exact", "a": [0, 1], "b": [1, 0], "equal": false },
+  { "mode": "exact", "a": [[1, 6], [8, 10]], "b": [[1, 6], [8, 10]], "equal": true },
+  { "mode": "exact", "a": [], "b": [], "equal": true },
+  { "mode": "unordered_array", "a": [[-1, -1, 2], [-1, 0, 1]], "b": [[-1, 0, 1], [-1, -1, 2]], "equal": true },
+  { "mode": "unordered_array", "a": [[2, -1, -1], [1, 0, -1]], "b": [[-1, 0, 1], [-1, -1, 2]], "equal": true },
+  { "mode": "unordered_array", "a": [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]], "b": [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]], "equal": true },
+  { "mode": "unordered_array", "a": [[1, 2, 3]], "b": [[1, 2, 4]], "equal": false },
+  { "mode": "unordered_array", "a": 5, "b": 5, "equal": false },
+  { "mode": "set_equality", "a": [1, 2, 2, 3], "b": [3, 2, 1], "equal": true },
+  { "mode": "set_equality", "a": [1, 2, 3], "b": [1, 2], "equal": false },
+  { "mode": "set_equality", "a": [1, 2, 3], "b": [1, 2, 4], "equal": false }
+]

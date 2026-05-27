@@ -1,20 +1,45 @@
+import { useEffect, useRef, useState } from 'react';
+import { PROBLEMS, getProblem } from './data/problems';
+import { JsRunner } from './runner';
+import Catalog from './components/Catalog';
+import Workspace from './components/Workspace';
 import './App.css';
 
 export default function App() {
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+
+  // One runner for the app's lifetime; it spawns a fresh worker per run.
+  const runnerRef = useRef<JsRunner | null>(null);
+  if (!runnerRef.current) runnerRef.current = new JsRunner();
+  useEffect(() => {
+    const runner = runnerRef.current;
+    return () => runner?.dispose();
+  }, []);
+
+  const problem = selectedKey ? getProblem(selectedKey) : undefined;
+
   return (
-    <main className="scriptorium">
-      <article className="codex">
-        <p className="rubric">Incipit liber algorithmorum</p>
-        <h1 className="display-title">Practice Thy Algorithms</h1>
-        <p className="tagline">
-          Solve and verify algorithm problems entirely in thy browser —
-          no clone, no toolchain, no server.
-        </p>
-        <p className="colophon">
-          The codex is being illuminated. A catalog of problems, an editor, and
-          in-browser verification shall appear here soon.
-        </p>
-      </article>
-    </main>
+    <div className="app">
+      <header className="app-header">
+        <button
+          className="app-title"
+          onClick={() => setSelectedKey(null)}
+          aria-label="Back to problem index"
+        >
+          Practice Thy Algorithms
+        </button>
+      </header>
+
+      {problem ? (
+        <Workspace
+          key={problem.key}
+          problem={problem}
+          runner={runnerRef.current}
+          onBack={() => setSelectedKey(null)}
+        />
+      ) : (
+        <Catalog problems={PROBLEMS} onSelect={setSelectedKey} />
+      )}
+    </div>
   );
 }
