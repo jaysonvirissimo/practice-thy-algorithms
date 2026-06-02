@@ -1,5 +1,6 @@
 import rawProblems from '@shared/problems.json';
 import type { Language, LangSpec, Problem, RawProblem } from './types';
+import { isPredefinedType } from './predefinedTypes';
 
 /**
  * Parse a JavaScript or Ruby function signature into its name and argument names.
@@ -50,7 +51,7 @@ export function parseSignature(signature: string): {
 function deriveLangSpec(
   signature: string,
   paramTypes: string[],
-  isListNodeReturn: boolean,
+  returnType: string,
   language: Language,
 ): LangSpec {
   const { functionName, argNames } = parseSignature(signature);
@@ -62,12 +63,22 @@ function deriveLangSpec(
       : language === 'python'
         ? `:\n    pass\n`
         : ` {\n  \n}\n`;
+  // Catalog types referenced by the signature (params ∪ return), in order,
+  // deduped — drives the read-only "Predefined" box; empty for primitive-only
+  // problems.
+  const predefinedTypes: string[] = [];
+  for (const t of [...paramTypes, returnType]) {
+    if (isPredefinedType(t) && !predefinedTypes.includes(t)) {
+      predefinedTypes.push(t);
+    }
+  }
   return {
     functionName,
     argNames,
     paramTypes,
     signatureTemplate: signature + body,
-    isListNodeReturn,
+    isListNodeReturn: returnType === 'ListNode',
+    predefinedTypes,
   };
 }
 
@@ -84,19 +95,19 @@ function deriveProblem(key: string, raw: RawProblem): Problem {
       javascript: deriveLangSpec(
         raw.functionSignatures.javascript,
         paramTypes,
-        raw.returnType.javascript === 'ListNode',
+        raw.returnType.javascript,
         'javascript',
       ),
       ruby: deriveLangSpec(
         raw.functionSignatures.ruby,
         paramTypes,
-        raw.returnType.ruby === 'ListNode',
+        raw.returnType.ruby,
         'ruby',
       ),
       python: deriveLangSpec(
         raw.functionSignatures.python,
         paramTypes,
-        raw.returnType.python === 'ListNode',
+        raw.returnType.python,
         'python',
       ),
     },

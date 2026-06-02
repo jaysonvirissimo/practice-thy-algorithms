@@ -19,6 +19,7 @@ import ProblemStatement from './ProblemStatement';
 import Hints from './Hints';
 import LanguageSelector from './LanguageSelector';
 import Editor, { type EditorHandle } from './Editor';
+import PredefinedTypes from './PredefinedTypes';
 import ResultsPanel from './ResultsPanel';
 
 const SAVE_DEBOUNCE_MS = 400;
@@ -226,6 +227,8 @@ export default function Workspace({
             {runtimeError[language]}
           </p>
         )}
+
+        <PredefinedTypes problem={problem} language={language} />
 
         <Editor
           ref={editorRef}

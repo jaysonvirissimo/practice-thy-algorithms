@@ -428,6 +428,30 @@
   margin: 0;
 }
 
+/* ---- Predefined types (editor contract) ----------------------------- */
+.predefined {
+  margin: 0.75rem 0 1rem;
+  padding: 0.5rem 0 0.5rem 0.9rem;
+  border-top: 1px dashed var(--gold);
+  border-left: 3px solid var(--gold);
+}
+
+.predefined-heading {
+  margin: 0.4rem 0 0.5rem;
+}
+
+.predefined-block {
+  margin: 0 0 0.6rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
 /* ---- Solved seal & language chips (catalog + workspace) ------------- */
 .solved-seal {
   display: inline-flex;

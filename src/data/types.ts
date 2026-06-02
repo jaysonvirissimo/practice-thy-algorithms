@@ -54,6 +54,8 @@ export interface LangSpec {
   signatureTemplate: string;
   /** True when returnType[language] === "ListNode" (serialize result to array). */
   isListNodeReturn: boolean;
+  /** Catalog type names referenced by params or return, order-preserving + deduped. */
+  predefinedTypes: string[];
 }
 
 export interface Problem {
