@@ -1,0 +1,23 @@
+{
+  // Test files (Vitest unit/component + Ruby/Python parity) live alongside the
+  // source but are excluded from tsconfig.app.json's production build. They need
+  // Node types — the parity tests import `node:*` builtins and use `Buffer` — so
+  // they get their own project. `tsc -b` still type-checks them via the reference
+  // in tsconfig.json, while app code keeps a browser-only type surface.
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    // Replaces the parent `types` array (arrays are not merged): adds `node`
+    // (node: builtins + Buffer) and `vite/client` (the `*?raw` module declarations
+    // the parity tests use for ./prelude.py?raw / ./prelude.rb?raw).
+    "types": ["vitest/globals", "@testing-library/jest-dom", "node", "vite/client"]
+  },
+  // Override the parent's exclude so the test files are not excluded here.
+  "exclude": [],
+  "include": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    // Ambient declarations the tests depend on transitively.
+    "src/vite-env.d.ts",
+    "src/data/shared-json.d.ts"
+  ]
+}
