@@ -34,10 +34,10 @@
     "@types/node": "^20.17.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@vitejs/plugin-react": "^6.0.3",
     "jsdom": "^25.0.1",
     "typescript": "^5.7.2",
-    "vite": "^6.3.2",
+    "vite": "^8.1.0",
     "vite-plugin-static-copy": "^4.1.0",
     "vitest": "^4.1.0"
   }
