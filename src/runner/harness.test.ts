@@ -79,6 +79,28 @@ const SOLUTIONS: Record<string, string> = {
     }
     return false;
   }`,
+  course_schedule: `function canFinish(numCourses, prerequisites){
+    const adj = Array.from({ length: numCourses }, () => []);
+    const indegree = new Array(numCourses).fill(0);
+    for (const [a, b] of prerequisites) { adj[b].push(a); indegree[a]++; }
+    const queue = [];
+    for (let i = 0; i < numCourses; i++) if (indegree[i] === 0) queue.push(i);
+    let finished = 0;
+    while (queue.length) {
+      const course = queue.shift();
+      finished++;
+      for (const next of adj[course]) if (--indegree[next] === 0) queue.push(next);
+    }
+    return finished === numCourses;
+  }`,
+  top_k_frequent_elements: `function topKFrequent(nums, k){
+    const counts = new Map();
+    for (const n of nums) counts.set(n, (counts.get(n) || 0) + 1);
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, k)
+      .map(([value]) => value);
+  }`,
   number_of_islands: `function numIslands(grid){
     if (!grid || !grid.length) return 0;
     const R = grid.length, C = grid[0].length;

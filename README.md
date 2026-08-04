@@ -19,7 +19,7 @@ The Ruby and Python runtimes are downloaded lazily the first time you select tha
 
 ## Features
 
-- Browsable catalog of 22 problems with academic-style statements.
+- Browsable catalog of 24 problems with academic-style statements.
 - CodeMirror 6 editor seeded with the correct function signature; optional **Vim** keybindings
   and a **reset-to-signature** action.
 - In-runtime test harness: per-case pass/fail, expected-vs-actual diffs, runtime errors, captured
@@ -54,14 +54,15 @@ npm run test:e2e           # Playwright end-to-end (runs the real WASM runtimes)
 
 ## Problem set
 
-All 22 problems run in **all three languages** in-browser:
+All 24 problems run in **all three languages** in-browser:
 
 Two Sum · Unique Paths · Coin Change · Contains Duplicate · Best Time to Buy and Sell Stock ·
 Valid Parentheses · Maximum Subarray · Product of Array Except Self · Three Sum · Merge Intervals ·
 Group Anagrams · Reverse Linked List · Detect Cycle in Linked List · Container With Most Water ·
 Find Minimum in Rotated Sorted Array · Longest Repeating Character Replacement ·
 Longest Substring Without Repeating Characters · Number of Islands · Remove Nth Node From End of List ·
-Palindromic Substrings · Pacific Atlantic Water Flow · Minimum Window Substring
+Palindromic Substrings · Pacific Atlantic Water Flow · Minimum Window Substring · Course Schedule ·
+Top K Frequent Elements
 
 ## Editing or adding problems
 
