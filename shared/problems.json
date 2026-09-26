@@ -1482,5 +1482,79 @@
       "Maintain a bounded min-heap of size k keyed by count (or select the k largest counts from the frequency table) rather than fully sorting all distinct values.",
       "A linear-time alternative buckets distinct values by their exact count — counts range from 1 to n — then walks the buckets from highest count downward, collecting values until k are gathered."
     ]
+  },
+  "tiered_allocation": {
+    "title": "Tiered Allocation",
+    "description": "Implement a function that distributes a non-negative integer quantity across an ordered sequence of tiers, each with a non-negative integer capacity. Tiers are satisfied strictly in the order given: a tier receives as much of the remaining quantity as its capacity permits, and no later tier receives anything until every earlier tier is full or the quantity is exhausted. Return an array holding the amount allocated to each tier, in order, followed by one final element giving any quantity left over once all tiers are full — so the result contains one more element than there are tiers, and its elements sum to the original quantity. The tier list may be empty and may contain up to 10^5 tiers.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "amount",
+        "type": "integer",
+        "description": "Non-negative quantity to distribute"
+      },
+      {
+        "name": "capacities",
+        "type": "array<integer>",
+        "description": "Ordered tier capacities, each non-negative"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<integer>",
+      "ruby": "array<integer>",
+      "python": "list<integer>"
+    },
+    "functionSignatures": {
+      "javascript": "function tieredAllocation(amount, capacities)",
+      "ruby": "def tiered_allocation(amount, capacities)",
+      "python": "def tiered_allocation(amount, capacities)"
+    },
+    "testCases": [
+      {
+        "input": { "amount": 150, "capacities": [100, 20] },
+        "expected": [100, 20, 30],
+        "description": "should carry the overflow beyond all tiers into the final element"
+      },
+      {
+        "input": { "amount": 50, "capacities": [100, 20] },
+        "expected": [50, 0, 0],
+        "description": "should exhaust the amount within the first tier"
+      },
+      {
+        "input": { "amount": 110, "capacities": [100, 20] },
+        "expected": [100, 10, 0],
+        "description": "should partially fill the second tier"
+      },
+      {
+        "input": { "amount": 120, "capacities": [100, 20] },
+        "expected": [100, 20, 0],
+        "description": "should leave no remainder when the amount exactly fills every tier"
+      },
+      {
+        "input": { "amount": 0, "capacities": [100, 20] },
+        "expected": [0, 0, 0],
+        "description": "should allocate nothing when the amount is zero"
+      },
+      {
+        "input": { "amount": 300, "capacities": [100, 20, 50] },
+        "expected": [100, 20, 50, 130],
+        "description": "should fill three tiers and return the overflow"
+      },
+      {
+        "input": { "amount": 75, "capacities": [] },
+        "expected": [75],
+        "description": "should return the entire amount as overflow when there are no tiers"
+      },
+      {
+        "input": { "amount": 40, "capacities": [0, 30, 0, 20] },
+        "expected": [0, 30, 0, 10, 0],
+        "description": "should pass over zero-capacity tiers"
+      }
+    ],
+    "hints": [
+      "Think about what quantity is still available to hand out as you move from one tier to the next.",
+      "A single ordered pass suffices: maintain a running remainder, give each tier the smaller of its capacity and what remains, and subtract that grant before advancing.",
+      "After the loop, append the leftover remainder as the final element; as a sanity check, the result should always sum back to the original amount."
+    ]
   }
 }

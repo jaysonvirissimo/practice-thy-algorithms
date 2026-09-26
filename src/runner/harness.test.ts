@@ -101,6 +101,17 @@ const SOLUTIONS: Record<string, string> = {
       .slice(0, k)
       .map(([value]) => value);
   }`,
+  tiered_allocation: `function tieredAllocation(amount, capacities){
+    let remaining = amount;
+    const result = [];
+    for (const capacity of capacities) {
+      const grant = Math.min(capacity, remaining);
+      result.push(grant);
+      remaining -= grant;
+    }
+    result.push(remaining);
+    return result;
+  }`,
   number_of_islands: `function numIslands(grid){
     if (!grid || !grid.length) return 0;
     const R = grid.length, C = grid[0].length;
