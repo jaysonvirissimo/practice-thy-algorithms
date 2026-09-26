@@ -51,3 +51,14 @@ describe('Ruby comparators match comparison-vectors.json (cross-language parity)
     });
   }
 });
+
+describe('Ruby result normalization', () => {
+  it('stringifies symbol hash keys so they match JSON-parsed expectations', () => {
+    const ok = vm
+      .eval(
+        "__ptap_normalize({ tiers: [1], split: [2] }) == { 'tiers' => [1], 'split' => [2] }",
+      )
+      .toString();
+    expect(ok).toBe('true');
+  });
+});

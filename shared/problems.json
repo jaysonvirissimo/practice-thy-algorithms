@@ -1556,5 +1556,104 @@
       "A single ordered pass suffices: maintain a running remainder, give each tier the smaller of its capacity and what remains, and subtract that grant before advancing.",
       "After the loop, append the leftover remainder as the final element; as a sanity check, the result should always sum back to the original amount."
     ]
+  },
+  "tiered_allocation_with_split": {
+    "title": "Tiered Allocation With Split",
+    "description": "Implement a function that distributes a non-negative monetary amount, expressed in integer cents, in two stages. First, satisfy an ordered sequence of fixed-capacity tiers strictly in the order given: each tier receives as much of the remaining amount as its capacity permits, and no later tier receives anything until every earlier tier is full or the amount is exhausted. Second, divide whatever remains (the residual) among an ordered list of recipients in proportion to their weights, expressed in basis points (10,000 basis points = 100%). Each recipient first receives the floor of its exact proportional share, residual × weight ÷ 10,000; any units left undistributed by this flooring are then assigned one at a time, from left to right, to recipients with positive weight until the entire residual is allocated. A recipient with zero weight always receives nothing. Return an object (a hash in Ruby, a dict in Python) with two keys: `tiers`, the amount allocated to each fixed tier in order, and `split`, the amount allocated to each recipient in order. Every returned value must be a non-negative integer, and together they must sum exactly to the original amount. Ruby solutions may use symbol or string keys. Constraints: all capacities are non-negative integers; every weight is an integer from 0 through 10,000, the weights sum to exactly 10,000, and at least one is positive; the amount and every returned value are safe integers, but intermediate products may exceed the safe-integer range and the result must nonetheless be exact; the tier list may be empty, and each list may contain up to 10^5 elements.",
+    "complexity": "O(n + m)",
+    "parameters": [
+      {
+        "name": "amountCents",
+        "type": "integer",
+        "description": "Non-negative amount to distribute, in integer cents"
+      },
+      {
+        "name": "capacitiesCents",
+        "type": "array<integer>",
+        "description": "Ordered fixed-tier capacities in cents, each non-negative"
+      },
+      {
+        "name": "splitBasisPoints",
+        "type": "array<integer>",
+        "description": "Ordered recipient weights in basis points, summing to 10,000"
+      }
+    ],
+    "returnType": {
+      "javascript": "object",
+      "ruby": "hash",
+      "python": "dict"
+    },
+    "functionSignatures": {
+      "javascript": "function tieredAllocationWithSplit(amountCents, capacitiesCents, splitBasisPoints)",
+      "ruby": "def tiered_allocation_with_split(amount_cents, capacities_cents, split_basis_points)",
+      "python": "def tiered_allocation_with_split(amount_cents, capacities_cents, split_basis_points)"
+    },
+    "testCases": [
+      {
+        "input": { "amountCents": 15000, "capacitiesCents": [10000, 2000], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [10000, 2000], "split": [2400, 600] },
+        "description": "should fill both tiers and split the residual 80/20"
+      },
+      {
+        "input": { "amountCents": 5000, "capacitiesCents": [10000, 2000], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [5000, 0], "split": [0, 0] },
+        "description": "should exhaust the amount within the first tier"
+      },
+      {
+        "input": { "amountCents": 10000, "capacitiesCents": [10000, 2000], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [10000, 0], "split": [0, 0] },
+        "description": "should exactly fill the first tier"
+      },
+      {
+        "input": { "amountCents": 10001, "capacitiesCents": [10000, 2000], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [10000, 1], "split": [0, 0] },
+        "description": "should spill one cent into the second tier"
+      },
+      {
+        "input": { "amountCents": 12000, "capacitiesCents": [10000, 2000], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [10000, 2000], "split": [0, 0] },
+        "description": "should exactly fill every tier with nothing left to split"
+      },
+      {
+        "input": { "amountCents": 12001, "capacitiesCents": [10000, 2000], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [10000, 2000], "split": [1, 0] },
+        "description": "should give a single leftover cent to the first recipient"
+      },
+      {
+        "input": { "amountCents": 15000, "capacitiesCents": [10000, 2000], "splitBasisPoints": [5000, 5000] },
+        "expected": { "tiers": [10000, 2000], "split": [1500, 1500] },
+        "description": "should split the residual evenly"
+      },
+      {
+        "input": { "amountCents": 101, "capacitiesCents": [], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [], "split": [81, 20] },
+        "description": "should assign the rounding remainder left to right"
+      },
+      {
+        "input": { "amountCents": 100, "capacitiesCents": [], "splitBasisPoints": [3333, 3333, 3334] },
+        "expected": { "tiers": [], "split": [34, 33, 33] },
+        "description": "should reconcile a three-way split"
+      },
+      {
+        "input": { "amountCents": 101, "capacitiesCents": [], "splitBasisPoints": [7500, 0, 2500] },
+        "expected": { "tiers": [], "split": [76, 0, 25] },
+        "description": "should never allocate to a zero-weight recipient"
+      },
+      {
+        "input": { "amountCents": 0, "capacitiesCents": [10000, 2000], "splitBasisPoints": [8000, 2000] },
+        "expected": { "tiers": [0, 0], "split": [0, 0] },
+        "description": "should allocate nothing when the amount is zero"
+      },
+      {
+        "input": { "amountCents": 9000000000002, "capacitiesCents": [], "splitBasisPoints": [5001, 4999] },
+        "expected": { "tiers": [], "split": [4500900000002, 4499100000000] },
+        "description": "should remain exact when intermediate products exceed the safe-integer range"
+      }
+    ],
+    "hints": [
+      "Split the work into two phases: settle the fixed tiers first (as in Tiered Allocation), then treat what remains as a pool to divide proportionally. Keep everything in whole units — never convert to fractional dollars or percentages.",
+      "Give every recipient the floor of residual × basisPoints ÷ 10,000, then hand the few units lost to flooring back out one at a time, left to right, skipping zero-weight recipients. Beware: in JavaScript that product can exceed Number.MAX_SAFE_INTEGER even when both factors are safe.",
+      "In JavaScript, perform the multiply-and-divide with BigInt (BigInt(residual) * BigInt(bp) / 10000n truncates, which is the floor for non-negative values) and convert each share back with Number(). The undistributed remainder is always smaller than the number of positive-weight recipients, so a single left-to-right pass suffices; finally, confirm everything sums to amountCents."
+    ]
   }
 }

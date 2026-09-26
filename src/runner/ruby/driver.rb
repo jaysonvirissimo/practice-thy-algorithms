@@ -56,7 +56,7 @@ def __ptap_run(meta_json)
         end
 
         raw_out = send(fn_name.to_sym, *args)
-        actual = is_list ? __ptap_list_to_array(raw_out) : raw_out
+        actual = is_list ? __ptap_list_to_array(raw_out) : __ptap_normalize(raw_out)
         case_result['actual'] = actual
         case_result['passed'] = __ptap_compare(mode, actual, tc['expected'])
       rescue StandardError => e

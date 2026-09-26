@@ -112,6 +112,25 @@ const SOLUTIONS: Record<string, string> = {
     result.push(remaining);
     return result;
   }`,
+  tiered_allocation_with_split: `function tieredAllocationWithSplit(amountCents, capacitiesCents, splitBasisPoints){
+    let remaining = amountCents;
+    const tiers = capacitiesCents.map((capacity) => {
+      const grant = Math.min(capacity, remaining);
+      remaining -= grant;
+      return grant;
+    });
+    const residual = BigInt(remaining);
+    let undistributed = remaining;
+    const split = splitBasisPoints.map((bp) => {
+      const share = Number(residual * BigInt(bp) / 10000n);
+      undistributed -= share;
+      return share;
+    });
+    for (let i = 0; undistributed > 0 && i < split.length; i++) {
+      if (splitBasisPoints[i] > 0) { split[i] += 1; undistributed -= 1; }
+    }
+    return { tiers, split };
+  }`,
   number_of_islands: `function numIslands(grid){
     if (!grid || !grid.length) return 0;
     const R = grid.length, C = grid[0].length;

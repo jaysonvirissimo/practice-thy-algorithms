@@ -40,6 +40,16 @@ def __ptap_list_to_array(head)
   out
 end
 
+# Deep-convert Symbol hash keys to Strings so an idiomatic `{ tiers: [...] }`
+# return compares equal to the JSON-parsed (string-keyed) expectation.
+def __ptap_normalize(value)
+  case value
+  when Hash  then value.to_h { |k, v| [k.is_a?(Symbol) ? k.to_s : k, __ptap_normalize(v)] }
+  when Array then value.map { |v| __ptap_normalize(v) }
+  else            value
+  end
+end
+
 # Comparators ported to match src/runner/comparison.ts so JS and Ruby agree
 # (verified against comparison-vectors.json).
 def __ptap_unordered(a, b)
