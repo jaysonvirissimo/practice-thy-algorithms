@@ -11,9 +11,40 @@ import {
   saveVimPref,
   lastLanguage,
   saveLastLanguage,
+  loadAnswers,
+  saveAnswers,
+  isAnalysisSolved,
+  markAnalysisSolved,
 } from './storage';
 
 beforeEach(() => localStorage.clear());
+
+describe('analysis persistence', () => {
+  it('round-trips draft answers', () => {
+    expect(loadAnswers('masons_guild_roll')).toEqual([]);
+    saveAnswers('masons_guild_roll', ['1', '', '121']);
+    expect(loadAnswers('masons_guild_roll')).toEqual(['1', '', '121']);
+    expect(localStorage.getItem('pta:answers:masons_guild_roll')).toBe(
+      '["1","","121"]',
+    );
+  });
+
+  it('tolerates malformed stored answers', () => {
+    localStorage.setItem('pta:answers:x', '{not json');
+    expect(loadAnswers('x')).toEqual([]);
+    localStorage.setItem('pta:answers:x', '{"a":1}');
+    expect(loadAnswers('x')).toEqual([]);
+    localStorage.setItem('pta:answers:x', '["1",2,null]');
+    expect(loadAnswers('x')).toEqual(['1', '', '']);
+  });
+
+  it('tracks the solved flag apart from coding solved status', () => {
+    expect(isAnalysisSolved('masons_guild_roll')).toBe(false);
+    markAnalysisSolved('masons_guild_roll');
+    expect(isAnalysisSolved('masons_guild_roll')).toBe(true);
+    expect(solvedLanguages('masons_guild_roll')).toEqual([]);
+  });
+});
 
 describe('code persistence', () => {
   it('round-trips code per (problem, language)', () => {

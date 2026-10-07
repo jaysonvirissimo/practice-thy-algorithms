@@ -493,6 +493,74 @@
   color: var(--ink);
 }
 
+/* ---- Analysis (no-code) problems ------------------------------------ */
+.catalog-section {
+  margin-bottom: 1.75rem;
+}
+
+.analysis-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.analysis-parts {
+  gap: 0.6rem;
+}
+
+.analysis-part {
+  border-color: rgba(184, 134, 11, 0.35);
+}
+
+.analysis-prompt {
+  line-height: 1.5;
+}
+
+.analysis-input {
+  display: block;
+  width: 8rem;
+  max-width: 100%;
+  margin: 0.45rem 0 0 1.4rem;
+  padding: 0.35rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--ink);
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+}
+
+.analysis-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  margin: 0.45rem 0 0 1.4rem;
+}
+
+.analysis-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+.analysis-explanation {
+  margin: 0.4rem 0 0 1.4rem;
+  font-style: italic;
+  color: #4a3d2a;
+}
+
+.analysis-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.analysis-actions .results-summary {
+  margin: 0;
+}
+
 /* ---- Illuminated success banner ------------------------------------- */
 .solved-banner {
   display: flex;

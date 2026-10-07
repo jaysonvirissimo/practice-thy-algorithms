@@ -64,6 +64,35 @@ export function markSolved(problemKey: string, lang: Language): void {
   safeSet(solvedKey(problemKey), JSON.stringify([...current, lang]));
 }
 
+// --- Analysis problems (draft answers + solved flag) ---------------------
+// Kept apart from `solved:` because that key holds a list of Languages.
+const answersKey = (problemKey: string) => `${PREFIX}answers:${problemKey}`;
+const answeredKey = (problemKey: string) => `${PREFIX}answered:${problemKey}`;
+
+export function loadAnswers(problemKey: string): string[] {
+  const raw = safeGet(answersKey(problemKey));
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map((a) => (typeof a === 'string' ? a : ''));
+  } catch {
+    return [];
+  }
+}
+
+export function saveAnswers(problemKey: string, answers: string[]): void {
+  safeSet(answersKey(problemKey), JSON.stringify(answers));
+}
+
+export function isAnalysisSolved(problemKey: string): boolean {
+  return safeGet(answeredKey(problemKey)) === '1';
+}
+
+export function markAnalysisSolved(problemKey: string): void {
+  safeSet(answeredKey(problemKey), '1');
+}
+
 // --- Hint reveal count ---------------------------------------------------
 const hintsKey = (problemKey: string) => `${PREFIX}hints:${problemKey}`;
 

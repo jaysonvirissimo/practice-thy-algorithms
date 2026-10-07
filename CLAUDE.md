@@ -125,6 +125,21 @@ online statements.
 **Constraint formatting:** use proper exponential notation — write `10^5`, not `105`. For algorithm
 problems "105" almost always means 10^5 (100,000); prefer "up to 100,000 elements" for clarity.
 
+### Analysis ("Foundations") problems
+
+Entries with `"kind": "analysis"` are no-code exercises (step counting) graded in the UI by
+`src/data/analysis.ts`. They never reach a runner. `src/data/problems.ts` loads them into
+`ANALYSIS_PROBLEMS` (`getAnalysisProblem`), apart from the coding `PROBLEMS`. The catalog lists them
+under **Foundations**, and `AnalysisWorkspace` renders them. Shape: `title`, `description`, `hints`,
+`parts: [{ prompt, answer, explanation? }]`, where `answer` is `{ type: "integer", value }` (exact whole
+number) or `{ type: "choice", choices, value }`. Omit `complexity`, because it would give answers away.
+- State the cost model in the description (what counts as one step: direct read, inspection against a
+  sought value, one-position shift, write/removal). Step counts are ambiguous without it.
+- `explanation` shows only once a part is answered correctly; hints follow the usual 3-step progression.
+- When adding step-count problems, extend the cost-model guard in `src/data/analysis.test.ts`, which
+  recomputes the expected counts from N.
+- Persistence: draft answers live in `pta:answers:<key>` and the solved flag in `pta:answered:<key>`.
+
 ### Result ordering & comparison metadata
 
 - Some problems are order-insensitive (e.g. Group Anagrams, Three Sum). Give each `testCase` one

@@ -28,6 +28,8 @@ export interface RawTestCase {
 }
 
 export interface RawProblem {
+  /** Coding problems omit `kind`; analysis problems set it to "analysis". */
+  kind?: 'coding';
   title: string;
   description: string;
   complexity: string;
@@ -37,6 +39,30 @@ export interface RawProblem {
   testCases: RawTestCase[];
   hints?: string[];
 }
+
+/** How an analysis part is answered and graded. */
+export type AnswerSpec =
+  | { type: 'integer'; value: number }
+  | { type: 'choice'; choices: string[]; value: string };
+
+export interface RawAnalysisPart {
+  prompt: string;
+  answer: AnswerSpec;
+  /** Shown once the part is answered correctly. */
+  explanation?: string;
+}
+
+/** A conceptual (no-code) problem: graded in the UI, never sent to a runner. */
+export interface RawAnalysisProblem {
+  kind: 'analysis';
+  title: string;
+  description: string;
+  parts: RawAnalysisPart[];
+  hints?: string[];
+}
+
+/** Any entry in shared/problems.json. */
+export type RawEntry = RawProblem | RawAnalysisProblem;
 
 // ---------------------------------------------------------------------------
 // Enriched shape — derived once at load time and consumed by the app.
@@ -68,6 +94,15 @@ export interface Problem {
   hints?: string[];
   /** Derived per-language specs (javascript, ruby). */
   languages: Record<Language, LangSpec>;
+}
+
+export interface AnalysisProblem {
+  /** snake_case key from problems.json, e.g. "florentine_deposit_ledger". */
+  key: string;
+  title: string;
+  description: string;
+  parts: RawAnalysisPart[];
+  hints?: string[];
 }
 
 // ---------------------------------------------------------------------------

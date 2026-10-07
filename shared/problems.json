@@ -1655,5 +1655,152 @@
       "Give every recipient the floor of residual × basisPoints ÷ 10,000, then hand the few units lost to flooring back out one at a time, left to right, skipping zero-weight recipients. Beware: in JavaScript that product can exceed Number.MAX_SAFE_INTEGER even when both factors are safe.",
       "In JavaScript, perform the multiply-and-divide with BigInt (BigInt(residual) * BigInt(bp) / 10000n truncates, which is the floor for non-negative values) and convert each share back with Number(). The undistributed remainder is always smaller than the number of positive-weight recipients, so a single left-to-right pass suffices; finally, confirm everything sums to amountCents."
     ]
+  },
+  "florentine_deposit_ledger": {
+    "kind": "analysis",
+    "title": "Florentine Deposit Ledger",
+    "description": "A Florentine banking house records its deposits in a bound ledger with ample blank folios. Each folio holds at most one entry, 80 entries currently occupy folios 1 through 80 with no gaps, and any folio can be opened directly by its number. Determine the number of steps each of the following operations requires. Count one step for each direct read of a folio, each inspection of an entry against a sought value, each shift of an entry by one folio, and each write or removal of an entry. The ledger must remain contiguous from the first folio after every operation.",
+    "parts": [
+      {
+        "prompt": "Read the entry recorded on a given folio.",
+        "answer": {
+          "type": "integer",
+          "value": 1
+        },
+        "explanation": "Any folio can be opened directly by its number, so a single read suffices."
+      },
+      {
+        "prompt": "Search for a depositor who has no entry in the ledger.",
+        "answer": {
+          "type": "integer",
+          "value": 80
+        },
+        "explanation": "Absence can only be concluded after every one of the 80 entries has been inspected."
+      },
+      {
+        "prompt": "Record a new deposit on the first folio, keeping every existing entry.",
+        "answer": {
+          "type": "integer",
+          "value": 81
+        },
+        "explanation": "All 80 entries shift forward one folio to vacate the first, followed by one write: 80 + 1."
+      },
+      {
+        "prompt": "Record a new deposit on the folio after the last entry.",
+        "answer": {
+          "type": "integer",
+          "value": 1
+        },
+        "explanation": "That folio is already empty and nothing else moves, so one write suffices."
+      },
+      {
+        "prompt": "Strike the entry on the first folio, leaving no gap.",
+        "answer": {
+          "type": "integer",
+          "value": 80
+        },
+        "explanation": "One removal, then each of the remaining 79 entries shifts back one folio: 1 + 79."
+      },
+      {
+        "prompt": "Strike the entry on the last folio.",
+        "answer": {
+          "type": "integer",
+          "value": 1
+        },
+        "explanation": "Removing the final entry leaves no gap to close."
+      }
+    ],
+    "hints": [
+      "Ask what must happen to the other entries for the ledger to stay contiguous after each change.",
+      "Changes at the end of the ledger disturb nothing else; changes at the front force every later entry to shift by one folio.",
+      "Count shifts and the single write or removal separately, then add them: inserting at the front costs N shifts plus one write, while deleting from the front costs one removal plus N − 1 shifts."
+    ]
+  },
+  "masons_guild_roll": {
+    "kind": "analysis",
+    "title": "Masons' Guild Roll",
+    "description": "A guild of master masons keeps its roll in numbered places, with room to spare; 60 names currently fill places 1 through 60 with no gaps, and any place is accessible directly by its number. The guild charter forbids listing a mason twice, so the roll behaves as a set: before a name is admitted, the clerk must establish that it is not already present. Assume every newly admitted mason is not yet on the roll. Determine the number of steps each of the following operations requires. Count one step for each direct read of a place, each inspection of a name against a sought value, each shift of a name by one place, and each write or removal of a name. The roll must remain contiguous from the first place after every operation.",
+    "parts": [
+      {
+        "prompt": "Read the name in a given place.",
+        "answer": {
+          "type": "integer",
+          "value": 1
+        },
+        "explanation": "The charter constrains only admissions; reading remains a single direct access."
+      },
+      {
+        "prompt": "Search for a mason who is not on the roll.",
+        "answer": {
+          "type": "integer",
+          "value": 60
+        },
+        "explanation": "All 60 names must be inspected before absence can be concluded."
+      },
+      {
+        "prompt": "Admit a new master at the head of the roll.",
+        "answer": {
+          "type": "integer",
+          "value": 121
+        },
+        "explanation": "60 inspections to rule out a duplicate, 60 shifts to vacate the first place, and 1 write: 60 + 60 + 1."
+      },
+      {
+        "prompt": "Admit a new master at the foot of the roll.",
+        "answer": {
+          "type": "integer",
+          "value": 61
+        },
+        "explanation": "60 inspections for the duplicate check, then 1 write into the empty place: 60 + 1."
+      },
+      {
+        "prompt": "Strike the name in the first place, leaving no gap.",
+        "answer": {
+          "type": "integer",
+          "value": 60
+        },
+        "explanation": "Removal needs no duplicate check: 1 removal plus 59 shifts."
+      },
+      {
+        "prompt": "Strike the name in the last place.",
+        "answer": {
+          "type": "integer",
+          "value": 1
+        },
+        "explanation": "One removal, with nothing left to shift."
+      }
+    ],
+    "hints": [
+      "Compare each operation with the same operation on a roll that permits duplicates. Which ones gain extra work?",
+      "Only admissions change: each must first inspect the whole roll for the name, and since the newcomer is absent that takes N inspections.",
+      "Add the full inspection to the ordinary insertion cost: admitting at the head becomes N + (N + 1), and admitting at the foot becomes N + 1. Reads, searches, and removals cost the same as for an unrestricted list."
+    ]
+  },
+  "reeves_tithe_count": {
+    "kind": "analysis",
+    "title": "The Reeve's Tithe Count",
+    "description": "A manorial reeve keeps the tithe roll as a contiguous list of N entries in no particular order, each recording the crop of one sheaf delivered to the tithe barn: wheat, rye, oats, barley, and so forth. The steward requires not merely whether any barley was delivered, but exactly how many barley sheaves appear on the roll. Count one step for each inspection of an entry against the sought crop. Determine the number of steps that producing the count requires, expressed in terms of N.",
+    "parts": [
+      {
+        "prompt": "How many steps does producing the barley count require?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "1",
+            "log N",
+            "N/2",
+            "N",
+            "N²"
+          ],
+          "value": "N"
+        },
+        "explanation": "Unlike a search for the first match, the count cannot stop early: every one of the N entries must be inspected, whether or not it is barley."
+      }
+    ],
+    "hints": [
+      "Consider when a search for the first barley sheaf may stop, and whether the count may stop at the same moment.",
+      "Any later entry might still be barley, so no entry can be skipped: the count requires a full pass over the roll.",
+      "Each entry is inspected exactly once while a running tally is kept (the tally itself is not counted under this cost model); how many sheaves turn out to be barley does not change the number of inspections."
+    ]
   }
 }

@@ -1,8 +1,14 @@
 import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react';
 import type { Language, LanguageRunner } from './data/types';
-import { PROBLEMS, getProblem } from './data/problems';
+import {
+  ANALYSIS_PROBLEMS,
+  PROBLEMS,
+  getAnalysisProblem,
+  getProblem,
+} from './data/problems';
 import { getRunner as createRunner } from './runner';
 import Catalog from './components/Catalog';
+import AnalysisWorkspace from './components/AnalysisWorkspace';
 import './App.css';
 
 // The editor workspace pulls in CodeMirror; defer it so the catalog landing is
@@ -32,6 +38,8 @@ export default function App() {
   }, []);
 
   const problem = selectedKey ? getProblem(selectedKey) : undefined;
+  const analysis =
+    selectedKey && !problem ? getAnalysisProblem(selectedKey) : undefined;
 
   return (
     <div className="app">
@@ -56,8 +64,18 @@ export default function App() {
             onBack={() => setSelectedKey(null)}
           />
         </Suspense>
+      ) : analysis ? (
+        <AnalysisWorkspace
+          key={analysis.key}
+          problem={analysis}
+          onBack={() => setSelectedKey(null)}
+        />
       ) : (
-        <Catalog problems={PROBLEMS} onSelect={setSelectedKey} />
+        <Catalog
+          problems={PROBLEMS}
+          analysis={ANALYSIS_PROBLEMS}
+          onSelect={setSelectedKey}
+        />
       )}
     </div>
   );

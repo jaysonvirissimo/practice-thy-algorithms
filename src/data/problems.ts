@@ -1,5 +1,13 @@
 import rawProblems from '@shared/problems.json';
-import type { Language, LangSpec, Problem, RawProblem } from './types';
+import type {
+  AnalysisProblem,
+  Language,
+  LangSpec,
+  Problem,
+  RawAnalysisProblem,
+  RawEntry,
+  RawProblem,
+} from './types';
 import { isPredefinedType } from './predefinedTypes';
 
 /**
@@ -114,13 +122,40 @@ function deriveProblem(key: string, raw: RawProblem): Problem {
   };
 }
 
-/** All problems, in the order they appear in problems.json. */
-export const PROBLEMS: Problem[] = Object.entries(
-  rawProblems as Record<string, RawProblem>,
-).map(([key, raw]) => deriveProblem(key, raw));
+function isAnalysis(raw: RawEntry): raw is RawAnalysisProblem {
+  return raw.kind === 'analysis';
+}
+
+const ENTRIES = Object.entries(rawProblems as Record<string, RawEntry>);
+
+/** All coding problems, in the order they appear in problems.json. */
+export const PROBLEMS: Problem[] = ENTRIES.flatMap(([key, raw]) =>
+  isAnalysis(raw) ? [] : [deriveProblem(key, raw)],
+);
+
+/** All analysis (no-code) problems, in the order they appear in problems.json. */
+export const ANALYSIS_PROBLEMS: AnalysisProblem[] = ENTRIES.flatMap(
+  ([key, raw]) =>
+    isAnalysis(raw)
+      ? [
+          {
+            key,
+            title: raw.title,
+            description: raw.description,
+            parts: raw.parts,
+            hints: raw.hints,
+          },
+        ]
+      : [],
+);
 
 const BY_KEY = new Map(PROBLEMS.map((p) => [p.key, p]));
+const ANALYSIS_BY_KEY = new Map(ANALYSIS_PROBLEMS.map((p) => [p.key, p]));
 
 export function getProblem(key: string): Problem | undefined {
   return BY_KEY.get(key);
+}
+
+export function getAnalysisProblem(key: string): AnalysisProblem | undefined {
+  return ANALYSIS_BY_KEY.get(key);
 }

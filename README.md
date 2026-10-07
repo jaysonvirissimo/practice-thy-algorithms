@@ -65,6 +65,11 @@ Palindromic Substrings · Pacific Atlantic Water Flow · Minimum Window Substrin
 Top K Frequent Elements · Tiered Allocation ·
 Tiered Allocation With Split
 
+**Foundations** — short no-code exercises in counting the steps that basic operations take, answered
+in the browser and graded per part:
+
+Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count
+
 ## Editing or adding problems
 
 `shared/problems.json` is the **single source of truth** — the app consumes it directly at
@@ -75,6 +80,11 @@ build time (no code generation step). Each problem entry has:
 - `testCases` (each `{ input, expected, description }`, with an optional
   `comparison.mode` of `exact` | `unordered_array` | `set_equality`);
 - an optional top-level `hints` array (language-agnostic).
+
+Foundations entries instead set `"kind": "analysis"` and carry `title`, `description`, `hints`, and
+a `parts` array of `{ prompt, answer, explanation? }`. Each `answer` is either
+`{ "type": "integer", "value": 81 }` or `{ "type": "choice", "choices": [...], "value": "N" }`.
+They have no `complexity`, signatures, or test cases, and they never reach a runner.
 
 Edit the JSON, then verify with `npm run dev` in each language and `npm test`. If you add a problem,
 also add it to the problem list above.
