@@ -1802,5 +1802,41 @@
       "Any later entry might still be barley, so no entry can be skipped: the count requires a full pass over the roll.",
       "Each entry is inspected exactly once while a running tally is kept (the tally itself is not counted under this cost model); how many sheaves turn out to be barley does not change the number of inspections."
     ]
+  },
+  "venetian_account_register": {
+    "kind": "analysis",
+    "title": "The Venetian Account Register",
+    "description": "A banco on the Rialto keeps the numbers of its accounts in a register sorted in ascending order: [104, 117, 123, 138, 152, 166, 171, 189, 195]. A clerk must locate account 152. Count one step for each inspection of an entry against the sought account number. Two procedures are to be compared. Scanning (linear search) inspects entries in order from the first, stopping at a match. Halving (binary search) inspects the middle entry of the range still under consideration, stopping at a match and otherwise discarding the half of the range that cannot hold the sought number before repeating; each inspection, together with its less-than, equal, or greater-than verdict, is a single step.",
+    "parts": [
+      {
+        "prompt": "Scanning from the first entry, how many steps locate account 152?",
+        "answer": {
+          "type": "integer",
+          "value": 5
+        },
+        "explanation": "Accounts 104, 117, 123, and 138 are inspected and passed over; 152 matches on the fifth inspection."
+      },
+      {
+        "prompt": "By halving, how many steps locate account 152?",
+        "answer": {
+          "type": "integer",
+          "value": 1
+        },
+        "explanation": "The register holds 9 entries, so the middle is the fifth entry, which is 152 itself: it matches on the very first inspection."
+      },
+      {
+        "prompt": "The great register of the Rialto grows to 500,000 accounts, still kept in ascending order. By halving, what is the greatest number of steps a search could require?",
+        "answer": {
+          "type": "integer",
+          "value": 19
+        },
+        "explanation": "Every inspection that misses at least halves the range still under consideration. Since 2^18 = 262,144 ≤ 500,000 < 524,288 = 2^19, the range can be halved 18 times before a single entry remains, and that last entry takes one more inspection: 18 + 1 = 19."
+      }
+    ],
+    "hints": [
+      "Scanning makes no use of the ascending order; halving relies on it to rule out many entries with each inspection.",
+      "For scanning, the step count is simply the position of the sought account. For halving, ask how many times the range can be cut in half before only one entry remains.",
+      "Halving an odd-length range inspects its exact middle first, so a sought value sitting there costs a single step. On n entries the worst case is ⌊log₂ n⌋ + 1 inspections: find the consecutive powers of 2 that bracket 500,000."
+    ]
   }
 }

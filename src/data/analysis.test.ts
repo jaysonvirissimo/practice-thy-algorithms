@@ -35,6 +35,7 @@ describe('analysis problem content', () => {
       'florentine_deposit_ledger',
       'masons_guild_roll',
       'reeves_tithe_count',
+      'venetian_account_register',
     ]);
     const codingKeys = new Set(PROBLEMS.map((p) => p.key));
     for (const p of ANALYSIS_PROBLEMS) expect(codingKeys.has(p.key)).toBe(false);
@@ -83,6 +84,30 @@ describe('analysis problem content', () => {
       n + 1,
       n,
       1,
+    ]);
+  });
+
+  it('search answers match the cost model (register and target from the text)', () => {
+    const p = getAnalysisProblem('venetian_account_register')!;
+    const register: number[] = JSON.parse(p.description.match(/\[[\d, ]+\]/)![0]);
+    const target = Number(p.description.match(/locate account (\d+)/)![1]);
+    expect([...register].sort((a, b) => a - b)).toEqual(register);
+
+    let probes = 0;
+    for (let lo = 0, hi = register.length - 1; lo <= hi; ) {
+      const mid = Math.floor((lo + hi) / 2);
+      probes++;
+      if (register[mid] === target) break;
+      if (register[mid] < target) lo = mid + 1;
+      else hi = mid - 1;
+    }
+
+    const n = 500_000;
+    expect(p.parts[2].prompt).toMatch(/\b500,000 accounts\b/);
+    expect(integerAnswers('venetian_account_register')).toEqual([
+      register.indexOf(target) + 1,
+      probes,
+      Math.floor(Math.log2(n)) + 1,
     ]);
   });
 

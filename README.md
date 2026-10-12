@@ -68,7 +68,7 @@ Tiered Allocation With Split
 **Foundations** — short no-code exercises in counting the steps that basic operations take, answered
 in the browser and graded per part:
 
-Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count
+Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count · The Venetian Account Register
 
 ## Editing or adding problems
 
