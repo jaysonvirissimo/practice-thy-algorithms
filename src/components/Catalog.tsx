@@ -1,6 +1,10 @@
 import { useState, type ReactNode } from 'react';
 import type { AnalysisProblem, Problem } from '../data/types';
-import { isAnalysisSolved, solvedLanguages } from '../data/storage';
+import {
+  clearProgress,
+  isAnalysisSolved,
+  solvedLanguages,
+} from '../data/storage';
 
 const LANG_ABBR: Record<string, string> = {
   javascript: 'JS',
@@ -55,7 +59,15 @@ export default function Catalog({
   onSelect,
 }: CatalogProps) {
   const [filter, setFilter] = useState('');
+  const [confirmingReset, setConfirmingReset] = useState(false);
   const q = filter.trim().toLowerCase();
+
+  // Catalog reads solved status straight from storage on every render, so the
+  // state change below is enough to drop the seals once progress is cleared.
+  const resetProgress = () => {
+    clearProgress();
+    setConfirmingReset(false);
+  };
   const shown = q
     ? problems.filter(
         (p) =>
@@ -124,6 +136,40 @@ export default function Catalog({
           <li className="catalog-empty">No problems match “{filter}”.</li>
         )}
       </ul>
+
+      <footer className="catalog-footer">
+        {confirmingReset ? (
+          <>
+            <p className="catalog-footer-note">
+              Erase saved code, solved marks, revealed hints and answers for
+              every problem on this device? Vim and language preferences are
+              kept.
+            </p>
+            <div className="catalog-footer-actions">
+              <button
+                className="ghost-button danger"
+                onClick={resetProgress}
+                data-testid="reset-progress-confirm"
+              >
+                Erase progress
+              </button>
+              <button
+                className="link-button"
+                onClick={() => setConfirmingReset(false)}
+              >
+                Keep
+              </button>
+            </div>
+          </>
+        ) : (
+          <button
+            className="link-button"
+            onClick={() => setConfirmingReset(true)}
+          >
+            Reset progress…
+          </button>
+        )}
+      </footer>
     </section>
   );
 }

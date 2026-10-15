@@ -27,6 +27,14 @@ function safeSet(key: string, value: string): void {
   }
 }
 
+function safeRemove(key: string): void {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    /* unavailable — silently skip */
+  }
+}
+
 // --- Code per (problem, language) ----------------------------------------
 const codeKey = (problemKey: string, lang: Language) =>
   `${PREFIX}code:${problemKey}:${lang}`;
@@ -127,4 +135,28 @@ export function lastLanguage(): Language | null {
 
 export function saveLastLanguage(lang: Language): void {
   safeSet(LANG_KEY, lang);
+}
+
+// --- Reset ---------------------------------------------------------------
+// Preferences rather than progress; they survive a reset.
+const PREFERENCE_KEYS: ReadonlySet<string> = new Set([VIM_KEY, LANG_KEY]);
+
+/**
+ * Erase every problem's saved code, solved status, revealed-hint count and
+ * analysis answers. The Vim and last-language preferences are kept.
+ */
+export function clearProgress(): void {
+  // Collect first: removing while iterating shifts localStorage.key(i).
+  const doomed: string[] = [];
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(PREFIX) && !PREFERENCE_KEYS.has(key)) {
+        doomed.push(key);
+      }
+    }
+  } catch {
+    return;
+  }
+  for (const key of doomed) safeRemove(key);
 }

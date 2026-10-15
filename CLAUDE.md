@@ -71,7 +71,8 @@ Node 20 only (see `.tool-versions`); Ruby/Python execute in-browser, not locally
   a ListNode for the call and serializes a ListNode return back to an array. There are no tree problems.
 - **Persistence (`src/data/storage.ts`).** Per-(problem, language) code, solved status, revealed-hint
   count, last language, and the Vim preference live in `localStorage`. Resilient (all access is
-  try/caught — the app works with storage disabled).
+  try/caught — the app works with storage disabled). `clearProgress()` (the catalog's "Reset
+  progress" control) removes every `pta:` key except the `pta:vim` / `pta:lang` preferences.
 
 ## Working with `shared/problems.json`
 

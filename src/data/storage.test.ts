@@ -15,6 +15,7 @@ import {
   saveAnswers,
   isAnalysisSolved,
   markAnalysisSolved,
+  clearProgress,
 } from './storage';
 
 beforeEach(() => localStorage.clear());
@@ -116,8 +117,54 @@ describe('last language', () => {
   });
 });
 
+describe('clearProgress', () => {
+  it('erases progress for every problem but keeps preferences and foreign keys', () => {
+    saveCode('two_sum', 'javascript', 'x');
+    saveCode('coin_change', 'ruby', 'y');
+    markSolved('two_sum', 'javascript');
+    saveHintCount('two_sum', 2);
+    saveAnswers('masons_guild_roll', ['1']);
+    markAnalysisSolved('masons_guild_roll');
+    saveVimPref(true);
+    saveLastLanguage('ruby');
+    localStorage.setItem('other:key', 'untouched');
+
+    clearProgress();
+
+    expect(loadCode('two_sum', 'javascript')).toBeNull();
+    expect(loadCode('coin_change', 'ruby')).toBeNull();
+    expect(solvedLanguages('two_sum')).toEqual([]);
+    expect(loadHintCount('two_sum')).toBe(0);
+    expect(loadAnswers('masons_guild_roll')).toEqual([]);
+    expect(isAnalysisSolved('masons_guild_roll')).toBe(false);
+    expect(loadVimPref()).toBe(true);
+    expect(lastLanguage()).toBe('ruby');
+    expect(localStorage.getItem('other:key')).toBe('untouched');
+    expect(
+      Object.keys(localStorage).filter((k) => k.startsWith('pta:')).sort(),
+    ).toEqual(['pta:lang', 'pta:vim']);
+  });
+
+  it('is a no-op on empty storage', () => {
+    expect(() => clearProgress()).not.toThrow();
+    expect(localStorage.length).toBe(0);
+  });
+});
+
 describe('resilience when localStorage throws', () => {
   afterEach(() => vi.restoreAllMocks());
+
+  it('clearProgress does not throw when enumeration or removal is blocked', () => {
+    saveCode('two_sum', 'javascript', 'x');
+    vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+      throw new Error('blocked');
+    });
+    expect(() => clearProgress()).not.toThrow();
+    vi.spyOn(Storage.prototype, 'key').mockImplementation(() => {
+      throw new Error('blocked');
+    });
+    expect(() => clearProgress()).not.toThrow();
+  });
 
   it('reads return defaults and writes do not throw', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {

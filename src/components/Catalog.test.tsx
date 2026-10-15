@@ -40,6 +40,38 @@ describe('Catalog', () => {
     expect(within(ledger).queryByLabelText('Solved')).not.toBeInTheDocument();
   });
 
+  it('erases progress only after the inline confirmation', () => {
+    markSolved('two_sum', 'javascript');
+    markAnalysisSolved('masons_guild_roll');
+    render(
+      <Catalog
+        problems={PROBLEMS}
+        analysis={ANALYSIS_PROBLEMS}
+        onSelect={vi.fn()}
+      />,
+    );
+    const solvedSeals = () => screen.queryAllByLabelText('Solved');
+    expect(solvedSeals()).toHaveLength(2);
+
+    // The confirm step is hidden until the control is clicked.
+    expect(screen.queryByTestId('reset-progress-confirm')).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /reset progress/i }));
+    expect(screen.getByText(/erase saved code/i)).toBeInTheDocument();
+
+    // "Keep" cancels without touching storage.
+    fireEvent.click(screen.getByRole('button', { name: /^keep$/i }));
+    expect(screen.queryByTestId('reset-progress-confirm')).not.toBeInTheDocument();
+    expect(solvedSeals()).toHaveLength(2);
+
+    // Confirming erases progress and the seals disappear without a remount.
+    fireEvent.click(screen.getByRole('button', { name: /reset progress/i }));
+    fireEvent.click(screen.getByTestId('reset-progress-confirm'));
+    expect(solvedSeals()).toHaveLength(0);
+    expect(localStorage.getItem('pta:solved:two_sum')).toBeNull();
+    expect(localStorage.getItem('pta:answered:masons_guild_roll')).toBeNull();
+    expect(screen.getByRole('button', { name: /reset progress/i })).toBeInTheDocument();
+  });
+
   it('filters analysis problems by title and hides an empty section', () => {
     render(
       <Catalog

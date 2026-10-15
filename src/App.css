@@ -650,3 +650,31 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Catalog footer: the "Reset progress" control with its inline confirmation. */
+.catalog-footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gold);
+}
+
+.catalog-footer .link-button {
+  margin-bottom: 0;
+}
+
+.catalog-footer-note {
+  margin: 0 0 0.75rem;
+  color: #8a7a55;
+  font-style: italic;
+}
+
+.catalog-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ghost-button.danger {
+  border-color: var(--rubric);
+  color: var(--rubric);
+}

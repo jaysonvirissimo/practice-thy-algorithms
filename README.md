@@ -25,8 +25,10 @@ The Ruby and Python runtimes are downloaded lazily the first time you select tha
 - In-runtime test harness: per-case pass/fail, expected-vs-actual diffs, runtime errors, captured
   `console.log`/`puts`/`print` output, and an infinite-loop timeout.
 - Progressive **hints** for select problems.
-- Local **persistence** (your code per problem+language, solved status, revealed hints, and the
-  Vim preference) via `localStorage` — everything stays on your machine.
+- Local **persistence** (your code per problem+language, solved status, revealed hints, Foundations
+  answers, last language, and the Vim preference) via `localStorage` — everything stays on your
+  machine. A **Reset progress** control at the foot of the catalog erases all of it except the
+  language and Vim preferences.
 - A medieval illuminated-manuscript ("Scriptorium") theme.
 
 ## Usage
