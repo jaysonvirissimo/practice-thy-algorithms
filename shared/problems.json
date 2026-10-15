@@ -1656,6 +1656,90 @@
       "In JavaScript, perform the multiply-and-divide with BigInt (BigInt(residual) * BigInt(bp) / 10000n truncates, which is the floor for non-negative values) and convert each share back with Number(). The undistributed remainder is always smaller than the number of positive-weight recipients, so a single left-to-right pass suffices; finally, confirm everything sums to amountCents."
     ]
   },
+  "augsburg_bill_index": {
+    "title": "The Augsburg Bill Index",
+    "description": "The counting-house of a great Augsburg merchant bank files its bills of exchange by number and keeps those numbers in a single index, arranged in strictly ascending order. A factor arriving from Antwerp presents a bill and asks at which position in the index its number is filed. Implement a function that, given the index as an array of distinct integers sorted in ascending order and a sought bill number, returns the zero-based position of that number within the index, or -1 if no bill with that number is filed. The index may be empty and may hold up to 10^5 numbers; every bill number, including the sought one, is a positive integer no greater than 10^9.",
+    "complexity": "O(log n)",
+    "parameters": [
+      {
+        "name": "billNumbers",
+        "type": "array<integer>",
+        "description": "Distinct bill numbers in strictly ascending order"
+      },
+      {
+        "name": "sought",
+        "type": "integer",
+        "description": "Bill number to locate"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function findBill(billNumbers, sought)",
+      "ruby": "def find_bill(bill_numbers, sought)",
+      "python": "def find_bill(bill_numbers, sought)"
+    },
+    "testCases": [
+      {
+        "input": { "billNumbers": [1042, 1137, 1201, 1288, 1316, 1425, 1499, 1570], "sought": 1288 },
+        "expected": 3,
+        "description": "should return 3 when the sought bill is filed in the interior of the index"
+      },
+      {
+        "input": { "billNumbers": [1042, 1137, 1201, 1288, 1316, 1425, 1499, 1570], "sought": 1042 },
+        "expected": 0,
+        "description": "should return 0 when the sought bill is the first entry"
+      },
+      {
+        "input": { "billNumbers": [1042, 1137, 1201, 1288, 1316, 1425, 1499, 1570], "sought": 1570 },
+        "expected": 7,
+        "description": "should return 7 when the sought bill is the last entry"
+      },
+      {
+        "input": { "billNumbers": [1042, 1137, 1201, 1288, 1316, 1425, 1499, 1570], "sought": 1300 },
+        "expected": -1,
+        "description": "should return -1 when the sought number falls between two filed bills"
+      },
+      {
+        "input": { "billNumbers": [1042, 1137, 1201, 1288, 1316, 1425, 1499, 1570], "sought": 900 },
+        "expected": -1,
+        "description": "should return -1 when the sought number is below every entry"
+      },
+      {
+        "input": { "billNumbers": [1042, 1137, 1201, 1288, 1316, 1425, 1499, 1570], "sought": 2000 },
+        "expected": -1,
+        "description": "should return -1 when the sought number is above every entry"
+      },
+      {
+        "input": { "billNumbers": [104, 117, 123, 138, 152, 166, 171, 189, 195], "sought": 152 },
+        "expected": 4,
+        "description": "should return 4 when the sought bill sits at the exact middle of an odd-length index"
+      },
+      {
+        "input": { "billNumbers": [1316], "sought": 1316 },
+        "expected": 0,
+        "description": "should return 0 when a single-entry index holds the sought bill"
+      },
+      {
+        "input": { "billNumbers": [1316], "sought": 1317 },
+        "expected": -1,
+        "description": "should return -1 when a single-entry index does not hold the sought bill"
+      },
+      {
+        "input": { "billNumbers": [], "sought": 1042 },
+        "expected": -1,
+        "description": "should return -1 when the index is empty"
+      }
+    ],
+    "hints": [
+      "The index is in ascending order, so one inspection tells you more than whether the entry matches: it tells you on which side of that entry the sought number must lie, if it is filed at all.",
+      "Apply binary search: keep a low and a high bound on the range still under consideration, inspect the middle entry, and discard the half that cannot hold the sought number, so the range halves with every inspection.",
+      "Use inclusive bounds (low = 0, high = length - 1) and loop while low <= high; take mid = low + floor((high - low) / 2), then move low to mid + 1 or high to mid - 1 depending on the comparison, and return -1 once the bounds cross. An empty index falls straight through to -1."
+    ]
+  },
   "florentine_deposit_ledger": {
     "kind": "analysis",
     "title": "Florentine Deposit Ledger",

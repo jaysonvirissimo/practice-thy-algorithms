@@ -131,6 +131,15 @@ const SOLUTIONS: Record<string, string> = {
     }
     return { tiers, split };
   }`,
+  augsburg_bill_index: `function findBill(billNumbers, sought){
+    let lo = 0, hi = billNumbers.length - 1;
+    while (lo <= hi) {
+      const mid = lo + ((hi - lo) >> 1);
+      if (billNumbers[mid] === sought) return mid;
+      if (billNumbers[mid] < sought) lo = mid + 1; else hi = mid - 1;
+    }
+    return -1;
+  }`,
   number_of_islands: `function numIslands(grid){
     if (!grid || !grid.length) return 0;
     const R = grid.length, C = grid[0].length;
