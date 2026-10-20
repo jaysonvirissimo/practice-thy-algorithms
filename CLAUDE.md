@@ -132,6 +132,7 @@ Entries with `"kind": "analysis"` are no-code exercises (step counting) graded i
 `src/data/analysis.ts`. They never reach a runner. `src/data/problems.ts` loads them into
 `ANALYSIS_PROBLEMS` (`getAnalysisProblem`), apart from the coding `PROBLEMS`. The catalog lists them
 under **Foundations**, and `AnalysisWorkspace` renders them. Shape: `title`, `description`, `hints`,
+optional `code` (a JavaScript procedure to analyze, rendered as a code block under the description),
 `parts: [{ prompt, answer, explanation? }]`, where `answer` is `{ type: "integer", value }` (exact whole
 number) or `{ type: "choice", choices, value }`. Omit `complexity`, because it would give answers away.
 - State the cost model in the description (what counts as one step: direct read, inspection against a
@@ -139,6 +140,8 @@ number) or `{ type: "choice", choices, value }`. Omit `complexity`, because it w
 - `explanation` shows only once a part is answered correctly; hints follow the usual 3-step progression.
 - When adding step-count problems, extend the cost-model guard in `src/data/analysis.test.ts`, which
   recomputes the expected counts from N.
+- When adding a problem with `code`, add its description's worked examples to the procedure test in
+  `src/data/analysis.test.ts`, which runs each snippet.
 - Persistence: draft answers live in `pta:answers:<key>` and the solved flag in `pta:answered:<key>`.
 
 ### Result ordering & comparison metadata

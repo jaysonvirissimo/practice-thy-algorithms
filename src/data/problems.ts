@@ -142,6 +142,7 @@ export const ANALYSIS_PROBLEMS: AnalysisProblem[] = ENTRIES.flatMap(
             key,
             title: raw.title,
             description: raw.description,
+            code: raw.code,
             parts: raw.parts,
             hints: raw.hints,
           },

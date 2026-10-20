@@ -65,4 +65,18 @@ describe('AnalysisWorkspace', () => {
     expect(screen.getByLabelText('Correct')).toBeInTheDocument();
     expect(isAnalysisSolved(tithe.key)).toBe(true);
   });
+
+  it('shows the procedure to analyze only when the problem has one', () => {
+    const tithe = getAnalysisProblem('reeves_tithe_count')!;
+    const { container, unmount } = render(
+      <AnalysisWorkspace problem={tithe} onBack={vi.fn()} />,
+    );
+    expect(container.querySelector('pre.statement-code')).toHaveTextContent(
+      'function countBarley(roll)',
+    );
+    unmount();
+
+    render(<AnalysisWorkspace problem={ledger} onBack={vi.fn()} />);
+    expect(document.querySelector('pre.statement-code')).toBeNull();
+  });
 });

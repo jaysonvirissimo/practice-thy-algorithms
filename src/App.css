@@ -177,6 +177,17 @@
   line-height: 1.6;
 }
 
+.statement-code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.9rem;
+  overflow-x: auto;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(184, 134, 11, 0.5);
+}
+
 .statement-complexity code {
   font-family: var(--font-mono);
 }

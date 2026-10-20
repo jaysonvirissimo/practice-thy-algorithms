@@ -57,6 +57,8 @@ export interface RawAnalysisProblem {
   kind: 'analysis';
   title: string;
   description: string;
+  /** A JavaScript procedure to analyze, shown beneath the description. */
+  code?: string;
   parts: RawAnalysisPart[];
   hints?: string[];
 }
@@ -101,6 +103,7 @@ export interface AnalysisProblem {
   key: string;
   title: string;
   description: string;
+  code?: string;
   parts: RawAnalysisPart[];
   hints?: string[];
 }

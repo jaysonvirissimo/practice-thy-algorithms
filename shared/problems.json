@@ -1863,7 +1863,8 @@
   "reeves_tithe_count": {
     "kind": "analysis",
     "title": "The Reeve's Tithe Count",
-    "description": "A manorial reeve keeps the tithe roll as a contiguous list of N entries in no particular order, each recording the crop of one sheaf delivered to the tithe barn: wheat, rye, oats, barley, and so forth. The steward requires not merely whether any barley was delivered, but exactly how many barley sheaves appear on the roll. Count one step for each inspection of an entry against the sought crop. Determine the number of steps that producing the count requires, expressed in terms of N.",
+    "description": "A manorial reeve keeps the tithe roll as a contiguous list of N entries in no particular order, each recording the crop of one sheaf delivered to the tithe barn: wheat, rye, oats, barley, and so forth. The steward requires not merely whether any barley was delivered, but exactly how many barley sheaves appear on the roll, and the reeve tallies them by the procedure below. Count one step for each inspection of an entry against the sought crop. Determine the number of steps that producing the count requires, expressed in terms of N.",
+    "code": "function countBarley(roll) {\n  let tally = 0;\n  for (const sheaf of roll) {\n    if (sheaf === \"barley\") {\n      tally += 1;\n    }\n  }\n  return tally;\n}",
     "parts": [
       {
         "prompt": "How many steps does producing the barley count require?",
@@ -1921,6 +1922,118 @@
       "Scanning makes no use of the ascending order; halving relies on it to rule out many entries with each inspection.",
       "For scanning, the step count is simply the position of the sought account. For halving, ask how many times the range can be cut in half before only one entry remains.",
       "Halving an odd-length range inspects its exact middle first, so a sought value sitting there costs a single step. On n entries the worst case is ⌊log₂ n⌋ + 1 inspections: find the consecutive powers of 2 that bracket 500,000."
+    ]
+  },
+  "jubilee_audit_year": {
+    "kind": "analysis",
+    "title": "The Jubilee Audit",
+    "description": "The auditors of a Roman banking house examine its books on a fixed calendar. An audit falls in every year divisible by 3, except that Holy Years (those divisible by 25) bring such crowds of pilgrims that the audit proceeds only when the Holy Year is also a half-century jubilee, divisible by 50. Thus 1350 and 1377 are audit years, while 1375 and 1378 are not. The clerk decides by the procedure below. Let N be the value of the year supplied, and count one step for each arithmetic operation or comparison on a single number. Express the time complexity of the procedure in Big O notation.",
+    "code": "function isAuditYear(year) {\n  return (year % 25 === 0) ? (year % 50 === 0) : (year % 3 === 0);\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of isAuditYear, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(1)"
+        },
+        "explanation": "Whatever the year, the procedure performs at most two remainders and two comparisons. N is a value, not a quantity of data: a larger year never adds work, so the cost is O(1)."
+      }
+    ],
+    "hints": [
+      "Ask whether deciding the year 9,000 would take the clerk any longer than deciding the year 1350.",
+      "The procedure contains no loop and no recursion: it evaluates a fixed handful of remainders and comparisons, then returns.",
+      "Count the worst case exactly: one remainder and comparison to test for a Holy Year, then one more of each. That bound does not depend on N, and any fixed bound is O(1)."
+    ]
+  },
+  "moneychangers_purse": {
+    "kind": "analysis",
+    "title": "The Moneychanger's Purse",
+    "description": "A moneychanger at the Champagne fairs weighs each coin in a merchant's purse and records the weights, in grains, in an array. To value the purse, the moneychanger totals those weights by the procedure below. Let N be the number of coins in the purse, and count one step for each addition, each comparison, and each visit to a coin. Express the time complexity of the procedure in Big O notation.",
+    "code": "function purseWeight(coins) {\n  let total = 0;\n  for (const coin of coins) {\n    total += coin;\n  }\n  return total;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of purseWeight, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N)"
+        },
+        "explanation": "The loop visits every coin exactly once and performs one addition per visit, so the work grows in direct proportion to the number of coins: O(N)."
+      }
+    ],
+    "hints": [
+      "Imagine the purse grows tenfold. What happens to the moneychanger's labour?",
+      "Find the part of the procedure that repeats, and ask how many times it repeats for a purse of N coins.",
+      "The loop body runs once per coin and does a fixed amount of work each time; the setup before it and the return after it happen once. N repetitions of fixed work plus a fixed overhead is O(N)."
+    ]
+  },
+  "usurers_reckoning": {
+    "kind": "analysis",
+    "title": "The Usurer's Reckoning",
+    "description": "A Lombard usurer lends a single florin on ruinous terms: at the close of every season, the sum owed triples. The procedure below determines how many seasons must pass before the debt first reaches at least a given number of florins. A target of 27 florins, for example, is reached after 3 seasons, and a target of 30 florins after 4. Let N be the target number of florins, and count one step for each multiplication, addition, and comparison. Express the time complexity of the procedure in Big O notation.",
+    "code": "function seasonsUntilDue(targetFlorins) {\n  let seasons = 0;\n  let owed = 1;\n  while (owed < targetFlorins) {\n    owed *= 3;\n    seasons += 1;\n  }\n  return seasons;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of seasonsUntilDue, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(log N)"
+        },
+        "explanation": "Each pass through the loop triples the sum owed, so after k passes it equals 3^k. The loop stops once 3^k ≥ N, after ⌈log₃ N⌉ passes. Logarithms in different bases differ only by a constant factor, so the cost is O(log N)."
+      }
+    ],
+    "hints": [
+      "Compare how many more passes the loop makes for a target of 30,000 florins than for a target of 30.",
+      "The loop does not advance by a fixed amount: the quantity it tests is multiplied on every pass. Ask how many triplings it takes to reach N.",
+      "After k passes the debt is 3^k, so the loop runs for the least k with 3^k ≥ N, namely ⌈log₃ N⌉. Since log₃ N = log N / log 3, the base contributes only a constant factor."
+    ]
+  },
+  "assayers_fair_weight": {
+    "kind": "analysis",
+    "title": "The Assayer's Fair Weight",
+    "description": "The assayer of a mint weighs a sample of newly struck coins and lists their weights, in grains, from lightest to heaviest. By the mint's ordinance, the fair weight of the sample is read at a mark one-third of the way up the list: it is the single coin at the mark or, when the number of coins is a multiple of 3, the mean of the three coins around it. The weights [68, 70, 71, 72, 75] thus give a fair weight of 70, as do [66, 69, 70, 71, 72, 74]. The assayer's procedure is given below. Let N be the number of coins in the sample, and count one step for each arithmetic operation, each comparison, and each read of a weight. Express the time complexity of the procedure in Big O notation.",
+    "code": "function fairWeight(weights) {\n  const mark = Math.floor(weights.length / 3);\n  if (weights.length % 3 === 0) {\n    return (weights[mark - 1] + weights[mark] + weights[mark + 1]) / 3;\n  }\n  return weights[mark];\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of fairWeight, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(1)"
+        },
+        "explanation": "The procedure computes one position and reads at most three weights, each directly by its index. A sample of 6 coins and a sample of 6,000 cost the same handful of steps: O(1). Ordering the list would cost more, but it arrives already ordered."
+      }
+    ],
+    "hints": [
+      "Consider what the ordering of the list spares the assayer: must every coin be examined?",
+      "Each weight is read directly from a computed position, and nothing in the procedure repeats.",
+      "The worst case is the multiple-of-3 branch: one division, one remainder and comparison, three reads, two additions, and a final division. That count is fixed regardless of N, so the procedure is O(1)."
     ]
   }
 }

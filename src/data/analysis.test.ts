@@ -36,6 +36,10 @@ describe('analysis problem content', () => {
       'masons_guild_roll',
       'reeves_tithe_count',
       'venetian_account_register',
+      'jubilee_audit_year',
+      'moneychangers_purse',
+      'usurers_reckoning',
+      'assayers_fair_weight',
     ]);
     const codingKeys = new Set(PROBLEMS.map((p) => p.key));
     for (const p of ANALYSIS_PROBLEMS) expect(codingKeys.has(p.key)).toBe(false);
@@ -109,6 +113,31 @@ describe('analysis problem content', () => {
       probes,
       Math.floor(Math.log2(n)) + 1,
     ]);
+  });
+
+  // Run each procedure so the code, and the worked examples its description
+  // cites, cannot drift apart.
+  const procedure = (key: string) => {
+    const { code } = getAnalysisProblem(key)!;
+    const name = code!.match(/^function (\w+)/)![1];
+    return new Function(`${code}\nreturn ${name};`)() as (arg: unknown) => unknown;
+  };
+
+  it('procedures agree with the worked examples in their descriptions', () => {
+    const isAuditYear = procedure('jubilee_audit_year');
+    expect([1350, 1377, 1375, 1378].map(isAuditYear)).toEqual([true, true, false, false]);
+
+    expect(procedure('moneychangers_purse')([71, 69, 72])).toBe(212);
+
+    const seasonsUntilDue = procedure('usurers_reckoning');
+    expect(seasonsUntilDue(27)).toBe(3);
+    expect(seasonsUntilDue(30)).toBe(4);
+
+    const fairWeight = procedure('assayers_fair_weight');
+    expect(fairWeight([68, 70, 71, 72, 75])).toBe(70);
+    expect(fairWeight([66, 69, 70, 71, 72, 74])).toBe(70);
+
+    expect(procedure('reeves_tithe_count')(['wheat', 'barley', 'rye', 'barley'])).toBe(2);
   });
 
   it('the N stated in each description matches the cost-model N', () => {

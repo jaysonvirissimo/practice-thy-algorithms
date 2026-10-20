@@ -3,6 +3,8 @@ interface StatementProblem {
   description: string;
   /** Omitted for analysis problems, where it could give away an answer. */
   complexity?: string;
+  /** A procedure to analyze (analysis problems only). */
+  code?: string;
 }
 
 export default function ProblemStatement({
@@ -19,6 +21,11 @@ export default function ProblemStatement({
         </p>
       )}
       <p className="statement-description">{problem.description}</p>
+      {problem.code && (
+        <pre className="statement-code">
+          <code>{problem.code}</code>
+        </pre>
+      )}
     </article>
   );
 }

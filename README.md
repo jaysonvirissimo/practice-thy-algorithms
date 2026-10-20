@@ -68,10 +68,12 @@ Top K Frequent Elements · Tiered Allocation ·
 Tiered Allocation With Split ·
 The Augsburg Bill Index
 
-**Foundations** — short no-code exercises in counting the steps that basic operations take, answered
-in the browser and graded per part:
+**Foundations** — short no-code exercises in counting the steps that basic operations take and
+stating the Big O of short procedures, answered in the browser and graded per part:
 
-Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count · The Venetian Account Register
+Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count · The Venetian Account
+Register · The Jubilee Audit · The Moneychanger's Purse · The Usurer's Reckoning · The Assayer's Fair
+Weight
 
 ## Editing or adding problems
 
@@ -84,8 +86,9 @@ build time (no code generation step). Each problem entry has:
   `comparison.mode` of `exact` | `unordered_array` | `set_equality`);
 - an optional top-level `hints` array (language-agnostic).
 
-Foundations entries instead set `"kind": "analysis"` and carry `title`, `description`, `hints`, and
-a `parts` array of `{ prompt, answer, explanation? }`. Each `answer` is either
+Foundations entries instead set `"kind": "analysis"` and carry `title`, `description`, `hints`, an
+optional `code` string (a JavaScript procedure shown under the description), and a `parts` array
+of `{ prompt, answer, explanation? }`. Each `answer` is either
 `{ "type": "integer", "value": 81 }` or `{ "type": "choice", "choices": [...], "value": "N" }`.
 They have no `complexity`, signatures, or test cases, and they never reach a runner.
 
