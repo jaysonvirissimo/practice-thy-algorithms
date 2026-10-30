@@ -1740,6 +1740,75 @@
       "Use inclusive bounds (low = 0, high = length - 1) and loop while low <= high; take mid = low + floor((high - low) / 2), then move low to mid + 1 or high to mid - 1 depending on the comparison, and return -1 once the bounds cross. An empty index falls straight through to -1."
     ]
   },
+  "greatest_balance": {
+    "title": "The Greatest Balance on the Books",
+    "description": "A Lucchese banking house keeps a book of balances, one per client, each an integer number of florins: a positive balance is credit the house holds for the client, and a negative one is a debt the client owes the house. When the partners ask which client stands highest, the house's elderly clerk holds each balance up against every other balance in turn and declares the one that no other exceeds, a labour that grows unbearable as the book thickens. Implement a function that, given the balances as an array of integers, returns the greatest balance recorded. The book holds at least one and at most 10^5 balances, each between -10^9 and 10^9, and the greatest balance may appear more than once.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "balances",
+        "type": "array<integer>",
+        "description": "Client balances in florins; a negative value is a debt owed to the house"
+      }
+    ],
+    "returnType": {
+      "javascript": "integer",
+      "ruby": "integer",
+      "python": "integer"
+    },
+    "functionSignatures": {
+      "javascript": "function greatestBalance(balances)",
+      "ruby": "def greatest_balance(balances)",
+      "python": "def greatest_balance(balances)"
+    },
+    "testCases": [
+      {
+        "input": { "balances": [340, 1250, 875, 60] },
+        "expected": 1250,
+        "description": "should return 1250 when the greatest balance lies in the interior of the book"
+      },
+      {
+        "input": { "balances": [2200, 410, 975, 1530] },
+        "expected": 2200,
+        "description": "should return 2200 when the greatest balance is the first entry"
+      },
+      {
+        "input": { "balances": [15, 720, 380, 1960] },
+        "expected": 1960,
+        "description": "should return 1960 when the greatest balance is the last entry"
+      },
+      {
+        "input": { "balances": [417] },
+        "expected": 417,
+        "description": "should return 417 when the book holds a single balance"
+      },
+      {
+        "input": { "balances": [-120, -45, -900, -310] },
+        "expected": -45,
+        "description": "should return -45 when every client owes the house, the greatest being the smallest debt"
+      },
+      {
+        "input": { "balances": [0, -3, -7] },
+        "expected": 0,
+        "description": "should return 0 when a settled account outranks the debtors"
+      },
+      {
+        "input": { "balances": [800, 1375, 1375, 200] },
+        "expected": 1375,
+        "description": "should return 1375 when the greatest balance appears more than once"
+      },
+      {
+        "input": { "balances": [-1000000000, 999999999, 1000000000, -999999999, 0] },
+        "expected": 1000000000,
+        "description": "should return 1000000000 when balances reach the limits of the book"
+      }
+    ],
+    "hints": [
+      "Ask whether, once a balance has been read and found smaller than some other balance, there is any reason to read it again.",
+      "A single pass over the book suffices: carry the greatest balance seen so far, and let each new balance either replace it or be passed over.",
+      "Seed the running greatest with the first balance rather than with zero, since every balance may be a debt; then make one comparison per remaining entry, replacing the running value whenever an entry exceeds it. That is N − 1 comparisons in all."
+    ]
+  },
   "florentine_deposit_ledger": {
     "kind": "analysis",
     "title": "Florentine Deposit Ledger",
@@ -2034,6 +2103,106 @@
       "Consider what the ordering of the list spares the assayer: must every coin be examined?",
       "Each weight is read directly from a computed position, and nothing in the procedure repeats.",
       "The worst case is the multiple-of-3 branch: one division, one remainder and comparison, three reads, two additions, and a final division. That count is fixed regardless of N, so the procedure is O(1)."
+    ]
+  },
+  "three_clerks_of_lubeck": {
+    "kind": "analysis",
+    "title": "The Three Clerks of Lübeck",
+    "description": "The counting-house of a Lübeck firm of the Hanse sets three clerks to reconcile a bundle of N bills, and each clerk swears by a different method. The scanning clerk's method takes N steps, the halving clerk's takes log N steps, and the cross-checking clerk's takes N² steps. Here log N means the base-2 logarithm, the number of times N can be halved before it reaches 1, and the bundles are always a power of two in size, so every count is a whole number. For a bundle of 64 bills the scanning clerk needs 64 steps. Determine the number of steps each remaining cell of the table requires: the halving and cross-checking clerks on a bundle of 64 bills, and all three clerks on a bundle of 1,024 bills.",
+    "parts": [
+      {
+        "prompt": "The halving clerk, on a bundle of 64 bills.",
+        "answer": {
+          "type": "integer",
+          "value": 6
+        },
+        "explanation": "64 halves to 32, 16, 8, 4, 2, 1: six halvings, so log₂ 64 = 6."
+      },
+      {
+        "prompt": "The cross-checking clerk, on a bundle of 64 bills.",
+        "answer": {
+          "type": "integer",
+          "value": 4096
+        },
+        "explanation": "Every bill against every bill: 64 × 64 = 4,096."
+      },
+      {
+        "prompt": "The scanning clerk, on a bundle of 1,024 bills.",
+        "answer": {
+          "type": "integer",
+          "value": 1024
+        },
+        "explanation": "The scanning clerk's labour grows in step with the bundle: 1,024 bills, 1,024 steps."
+      },
+      {
+        "prompt": "The halving clerk, on a bundle of 1,024 bills.",
+        "answer": {
+          "type": "integer",
+          "value": 10
+        },
+        "explanation": "1,024 = 2^10, so ten halvings bring it to 1. Sixteen times the bills cost the halving clerk only four more steps."
+      },
+      {
+        "prompt": "The cross-checking clerk, on a bundle of 1,024 bills.",
+        "answer": {
+          "type": "integer",
+          "value": 1048576
+        },
+        "explanation": "1,024 × 1,024 = 1,048,576. Sixteen times the bills cost the cross-checking clerk 256 times the steps."
+      }
+    ],
+    "hints": [
+      "Each clerk's column grows at its own pace as the bundle grows: one in step with N, one far more slowly, one far faster.",
+      "For the halving clerk, ask how many times the bundle can be cut in half before a single bill remains. For the cross-checking clerk, every bill is checked against every bill, so multiply N by itself.",
+      "64 = 2^6 and 1,024 = 2^10, so the halving column reads 6 and 10. The scanning column simply repeats N, and the cross-checking column is N × N: 4,096 and 1,048,576."
+    ]
+  },
+  "bruges_cross_reckoning": {
+    "kind": "analysis",
+    "title": "The Bruges Cross-Reckoning",
+    "description": "At the Bruges bourse a clerk reconciles the accounts of the house's correspondents by cross-reckoning: every account is checked against every account, itself included, so that a book of N accounts costs exactly N² steps, one for each check. The clerk, who tallies every check on a slate, reports that reconciling this morning's book required 1,369 steps. Determine how many accounts the book holds.",
+    "parts": [
+      {
+        "prompt": "How many accounts does the book hold?",
+        "answer": {
+          "type": "integer",
+          "value": 37
+        },
+        "explanation": "N² = 1,369 and 37 × 37 = 1,369, so the book holds 37 accounts. 36² = 1,296 falls short and 38² = 1,444 overshoots."
+      }
+    ],
+    "hints": [
+      "The cost model gives the steps from the accounts; turn it around and ask what the steps reveal about the accounts.",
+      "Since the steps number N², the number of accounts is the whole number whose square is 1,369: the square root.",
+      "Bracket it with squares you know: 30² = 900 and 40² = 1,600, then 36² = 1,296 and 38² = 1,444, leaving 37² = 1,369."
+    ]
+  },
+  "venturers_double_voyage": {
+    "kind": "analysis",
+    "title": "The Venturer's Double Voyage",
+    "description": "A Genoese merchant will stake a sum on two voyages in succession, choosing from a list of ventures on offer. Each venture multiplies whatever is staked in it by a listed whole-number factor, so the yield of carrying a stake through two distinct ventures is the product of their factors. Offered the factors [3, 2, 5, 4], the merchant's best pairing yields 20. The merchant's agent finds the best pairing by the procedure below. Let N be the number of ventures on offer, and count one step for each multiplication, each comparison, and each read of a factor. Express the time complexity of the procedure in Big O notation.",
+    "code": "function bestDoubleVoyage(factors) {\n  let best = factors[0] * factors[1];\n  for (let i = 0; i < factors.length; i++) {\n    for (let j = 0; j < factors.length; j++) {\n      if (i !== j && factors[i] * factors[j] > best) {\n        best = factors[i] * factors[j];\n      }\n    }\n  }\n  return best;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of bestDoubleVoyage, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N²)"
+        },
+        "explanation": "The outer loop runs N times, and on each of those the inner loop runs N times, so the body executes N × N times. Each execution is a fixed handful of reads, a multiplication, and a comparison: O(N²). The i !== j guard skips only N of the N² pairs and changes nothing."
+      }
+    ],
+    "hints": [
+      "Imagine the list of ventures doubling in length. Does the agent's labour double, or does it grow worse than that?",
+      "There is a loop inside a loop, and each runs over all N ventures: count how many times the innermost body executes.",
+      "N × N executions of a body that does a fixed amount of work is N² steps up to a constant factor, so O(N²). The i !== j check skips only N of the N² pairs and cannot change the order."
     ]
   }
 }

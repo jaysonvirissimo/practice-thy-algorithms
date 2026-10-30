@@ -140,6 +140,11 @@ const SOLUTIONS: Record<string, string> = {
     }
     return -1;
   }`,
+  greatest_balance: `function greatestBalance(balances){
+    let best = balances[0];
+    for (let i = 1; i < balances.length; i++) if (balances[i] > best) best = balances[i];
+    return best;
+  }`,
   number_of_islands: `function numIslands(grid){
     if (!grid || !grid.length) return 0;
     const R = grid.length, C = grid[0].length;

@@ -40,6 +40,9 @@ describe('analysis problem content', () => {
       'moneychangers_purse',
       'usurers_reckoning',
       'assayers_fair_weight',
+      'three_clerks_of_lubeck',
+      'bruges_cross_reckoning',
+      'venturers_double_voyage',
     ]);
     const codingKeys = new Set(PROBLEMS.map((p) => p.key));
     for (const p of ANALYSIS_PROBLEMS) expect(codingKeys.has(p.key)).toBe(false);
@@ -115,6 +118,27 @@ describe('analysis problem content', () => {
     ]);
   });
 
+  it("clerks' table answers match the cost model (N = 64 and N = 1,024)", () => {
+    const [n1, n2] = [64, 1024];
+    // The description gives the scanning clerk's 64 directly; the parts cover
+    // the remaining five cells of the table.
+    expect(integerAnswers('three_clerks_of_lubeck')).toEqual([
+      Math.log2(n1),
+      n1 * n1,
+      n2,
+      Math.log2(n2),
+      n2 * n2,
+    ]);
+  });
+
+  it('cross-reckoning answer is the square root of the tally in the text', () => {
+    const p = getAnalysisProblem('bruges_cross_reckoning')!;
+    const steps = Number(p.description.match(/required ([\d,]+) steps/)![1].replace(/,/g, ''));
+    const accounts = Math.sqrt(steps);
+    expect(Number.isInteger(accounts)).toBe(true);
+    expect(integerAnswers('bruges_cross_reckoning')).toEqual([accounts]);
+  });
+
   // Run each procedure so the code, and the worked examples its description
   // cites, cannot drift apart.
   const procedure = (key: string) => {
@@ -138,6 +162,10 @@ describe('analysis problem content', () => {
     expect(fairWeight([66, 69, 70, 71, 72, 74])).toBe(70);
 
     expect(procedure('reeves_tithe_count')(['wheat', 'barley', 'rye', 'barley'])).toBe(2);
+
+    const bestDoubleVoyage = procedure('venturers_double_voyage');
+    expect(bestDoubleVoyage([3, 2, 5, 4])).toBe(20);
+    expect(bestDoubleVoyage([7, 1, 6])).toBe(42);
   });
 
   it('the N stated in each description matches the cost-model N', () => {
@@ -147,5 +175,8 @@ describe('analysis problem content', () => {
     expect(getAnalysisProblem('masons_guild_roll')!.description).toMatch(
       /\b60 names\b/,
     );
+    const clerks = getAnalysisProblem('three_clerks_of_lubeck')!.description;
+    expect(clerks).toMatch(/\b64 bills\b/);
+    expect(clerks).toMatch(/\b1,024 bills\b/);
   });
 });
