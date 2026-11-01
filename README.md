@@ -73,7 +73,8 @@ stating the Big O of short procedures, answered in the browser and graded per pa
 
 Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count · The Venetian Account
 Register · The Jubilee Audit · The Moneychanger's Purse · The Usurer's Reckoning · The Assayer's Fair
-Weight · The Three Clerks of Lübeck · The Bruges Cross-Reckoning · The Venturer's Double Voyage
+Weight · The Three Clerks of Lübeck · The Bruges Cross-Reckoning · The Venturer's Double Voyage ·
+The Notary's Two Estimates · The Exchequer's Doubled Levy · The Broker's Alternate Tally
 
 ## Editing or adding problems
 

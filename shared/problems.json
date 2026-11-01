@@ -2204,5 +2204,103 @@
       "There is a loop inside a loop, and each runs over all N ventures: count how many times the innermost body executes.",
       "N × N executions of a body that does a fixed amount of work is N² steps up to a constant factor, so O(N²). The i !== j check skips only N of the N² pairs and cannot change the order."
     ]
+  },
+  "notarys_two_estimates": {
+    "kind": "analysis",
+    "title": "The Notary's Two Estimates",
+    "description": "A Sienese notary must have a partnership contract of N clauses engrossed on parchment and invites quotes from two scriveners, each stated in pen strokes. The first scrivener quotes 4N + 16 strokes: four for each clause, plus sixteen for the preamble and the seal. The second quotes 2N² strokes, because every clause must be cross-referenced against every clause, and in both the Latin and the vernacular copies. Express the time complexity of each scrivener's labour in Big O notation.",
+    "parts": [
+      {
+        "prompt": "The first scrivener's quote of 4N + 16 strokes.",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N)"
+        },
+        "explanation": "As N grows, the sixteen strokes for the preamble and seal become a vanishing share of the work, and the factor of 4 only rescales it. 4N + 16 grows in direct proportion to N: O(N)."
+      },
+      {
+        "prompt": "The second scrivener's quote of 2N² strokes.",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N²)"
+        },
+        "explanation": "The factor of 2 doubles the labour at every size but does not change how it grows: double the clauses and the strokes quadruple. 2N² is O(N²)."
+      }
+    ],
+    "hints": [
+      "Imagine a contract of a million clauses. Which parts of each quote still matter, and which have become trifles?",
+      "Big O describes how the cost grows as N grows. Terms that do not grow with N, and fixed multipliers in front of a term, do not change that growth.",
+      "Discard the constant 16 and the coefficient 4 from 4N + 16, leaving N: O(N). Discard the coefficient 2 from 2N², leaving N²: O(N²)."
+    ]
+  },
+  "exchequers_doubled_levy": {
+    "kind": "analysis",
+    "title": "The Exchequer's Doubled Levy",
+    "description": "In time of war, the exchequer of a Hanseatic port doubles every customs duty on its roll and then totals the doubled roll to learn what the levy will raise. Duties of [3, 5, 2] marks, for example, double to [6, 10, 4] and raise 20 marks. The exchequer's procedure is given below. Let N be the number of duties on the roll, and count one step for each multiplication, each addition, each entry appended to a list, and each visit to a duty. Express the time complexity of the procedure in Big O notation.",
+    "code": "function doubledLevy(duties) {\n  const doubled = [];\n  for (const duty of duties) {\n    doubled.push(duty * 2);\n  }\n  let total = 0;\n  for (const duty of doubled) {\n    total += duty;\n  }\n  return total;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of doubledLevy, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N)"
+        },
+        "explanation": "The first loop visits each of the N duties once, doubling and appending it. The second loop then visits each of the N doubled duties once, adding it to the total. The loops run one after the other, not one inside the other, so the work is about 2N steps, and the constant 2 drops out: O(N)."
+      }
+    ],
+    "hints": [
+      "There are two loops. Before counting, check whether one runs inside the other or whether they run one after the other.",
+      "Count each loop separately: how many times does each one repeat for a roll of N duties? Then combine the two counts.",
+      "Two loops in sequence cost N + N = 2N repetitions of fixed work, plus a fixed setup. Constant factors do not affect Big O, so 2N is O(N), the same order as a single pass."
+    ]
+  },
+  "brokers_alternate_tally": {
+    "kind": "analysis",
+    "title": "The Broker's Alternate Tally",
+    "description": "A bill broker on the Rialto keeps a column of bill values, in ducats. To prepare offsetting quotes, the broker takes every other bill in the column, beginning with the first, and records that bill's value added to the value of each bill in the column, its own included. A column of [1, 2, 3] thus yields the sums [2, 3, 4, 4, 5, 6]: the first bill paired with all three, then the third bill paired with all three. The broker's procedure is given below. Let N be the number of bills in the column, and count one step for each comparison, each arithmetic operation, each read of a bill, and each sum recorded. Express the time complexity of the procedure in Big O notation.",
+    "code": "function alternateTally(bills) {\n  const sums = [];\n  for (let i = 0; i < bills.length; i++) {\n    if (i % 2 === 0) {\n      for (const other of bills) {\n        sums.push(bills[i] + other);\n      }\n    }\n  }\n  return sums;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of alternateTally, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N²)"
+        },
+        "explanation": "The outer loop visits all N positions, but only about N/2 of them, the even ones, run the inner loop. Each inner loop visits all N bills, so the sums number about N/2 × N = N²/2. The factor of ½ is a constant and drops out, so the cost is O(N²). The N/2 odd positions each cost only a remainder and a comparison, which adds a mere O(N)."
+      }
+    ],
+    "hints": [
+      "The broker skips half the bills in the outer pass. Ask whether skipping half also halves the order of growth, or only the amount of work.",
+      "Count how many outer positions run the inner loop, and how much work each inner loop does. Multiply the two counts.",
+      "About N/2 positions each run an inner loop of N steps, giving about N²/2 steps in all. A constant factor of ½ does not change the order, so the procedure is O(N²), the same as pairing every bill with every bill."
+    ]
   }
 }

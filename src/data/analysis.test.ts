@@ -43,6 +43,9 @@ describe('analysis problem content', () => {
       'three_clerks_of_lubeck',
       'bruges_cross_reckoning',
       'venturers_double_voyage',
+      'notarys_two_estimates',
+      'exchequers_doubled_levy',
+      'brokers_alternate_tally',
     ]);
     const codingKeys = new Set(PROBLEMS.map((p) => p.key));
     for (const p of ANALYSIS_PROBLEMS) expect(codingKeys.has(p.key)).toBe(false);
@@ -166,6 +169,9 @@ describe('analysis problem content', () => {
     const bestDoubleVoyage = procedure('venturers_double_voyage');
     expect(bestDoubleVoyage([3, 2, 5, 4])).toBe(20);
     expect(bestDoubleVoyage([7, 1, 6])).toBe(42);
+
+    expect(procedure('exchequers_doubled_levy')([3, 5, 2])).toBe(20);
+    expect(procedure('brokers_alternate_tally')([1, 2, 3])).toEqual([2, 3, 4, 4, 5, 6]);
   });
 
   it('the N stated in each description matches the cost-model N', () => {
