@@ -1809,6 +1809,75 @@
       "Seed the running greatest with the first balance rather than with zero, since every balance may be a debt; then make one comparison per remaining entry, replacing the running value whenever an entry exceeds it. That is N − 1 comparisons in all."
     ]
   },
+  "swift_seizure": {
+    "title": "The Customs Clerk's Swift Seizure",
+    "description": "In the customs house of Genoa, officers letter every bale named on a ship's manifest, and a capital X marks a bale seized as contraband; a ship carrying even one such bale is detained. The harbour clerk decides by reading the manifest from the first bale to the last and noting any X, but keeps reading to the final bale even when the very first bears the mark, so every manifest costs as many inspections as it has bales, whatever it holds. Implement a function that, given the manifest as a string with one letter per bale, determines whether any bale bears a capital X, returning true if so and false otherwise. The manifest holds between 0 and 100,000 letters, each an uppercase or lowercase letter from A to Z; a lowercase x is an ordinary inspection mark and does not signify a seizure.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "manifest",
+        "type": "string",
+        "description": "One letter per bale; a capital X marks a seized bale"
+      }
+    ],
+    "returnType": {
+      "javascript": "boolean",
+      "ruby": "boolean",
+      "python": "boolean"
+    },
+    "functionSignatures": {
+      "javascript": "function hasSeizure(manifest)",
+      "ruby": "def has_seizure(manifest)",
+      "python": "def has_seizure(manifest)"
+    },
+    "testCases": [
+      {
+        "input": { "manifest": "XWOOLSPICE" },
+        "expected": true,
+        "description": "should return true when the first bale is seized"
+      },
+      {
+        "input": { "manifest": "SILKXALUM" },
+        "expected": true,
+        "description": "should return true when a seized bale lies in the interior of the manifest"
+      },
+      {
+        "input": { "manifest": "PEPPERWINEX" },
+        "expected": true,
+        "description": "should return true when only the last bale is seized"
+      },
+      {
+        "input": { "manifest": "WOOLSILKSALT" },
+        "expected": false,
+        "description": "should return false when no bale is seized"
+      },
+      {
+        "input": { "manifest": "xAxBx" },
+        "expected": false,
+        "description": "should return false when the manifest bears only lowercase inspection marks"
+      },
+      {
+        "input": { "manifest": "" },
+        "expected": false,
+        "description": "should return false for an empty manifest"
+      },
+      {
+        "input": { "manifest": "X" },
+        "expected": true,
+        "description": "should return true for a single seized bale"
+      },
+      {
+        "input": { "manifest": "AXBXXC" },
+        "expected": true,
+        "description": "should return true when several bales are seized"
+      }
+    ],
+    "hints": [
+      "Ask what the clerk learns about the ship once a single X has been seen, and whether any later bale could change that verdict.",
+      "The verdict is settled the moment the first X appears, so the scan can stop there instead of running to the final bale.",
+      "Inspect the letters in order and return true as soon as one is a capital X; return false only after the whole manifest has been read. A seizure at the head of the manifest now costs one inspection, O(1), while a clean manifest still costs N, so the worst case remains O(N)."
+    ]
+  },
   "florentine_deposit_ledger": {
     "kind": "analysis",
     "title": "Florentine Deposit Ledger",
@@ -2301,6 +2370,143 @@
       "The broker skips half the bills in the outer pass. Ask whether skipping half also halves the order of growth, or only the amount of work.",
       "Count how many outer positions run the inner loop, and how much work each inner loop does. Multiply the two counts.",
       "About N/2 positions each run an inner loop of N steps, giving about N²/2 steps in all. A constant factor of ½ does not change the order, so the procedure is O(N²), the same as pairing every bill with every bill."
+    ]
+  },
+  "antwerp_two_tenders": {
+    "kind": "analysis",
+    "title": "The Two Tenders of Antwerp",
+    "description": "The governors of the Antwerp bourse invite tenders to audit a register of N accounts, each tender stated in steps of labour. The first auditor tenders 3N² + 2N + 1 steps: three for every pairing of one account with another, two more for each account on its own, and one to seal the finished report. The second auditor tenders N + log N steps: one for each account, plus log N steps to find the opening folio by halving the register. Express the time complexity of each auditor's labour in Big O notation.",
+    "parts": [
+      {
+        "prompt": "The first auditor's tender of 3N² + 2N + 1 steps.",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N²)"
+        },
+        "explanation": "The N² term outgrows the others: for a register of 1,000 accounts, 3N² is 3,000,000 steps while 2N + 1 adds only 2,001, less than a tenth of a percent. Keep only the fastest-growing term, drop its coefficient of 3, and the tender is O(N²)."
+      },
+      {
+        "prompt": "The second auditor's tender of N + log N steps.",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N)"
+        },
+        "explanation": "log N grows far more slowly than N: for 1,000 accounts it adds about 10 steps to the 1,000 spent reading them. The N term dominates, so the tender is O(N). The steps are added, not multiplied, so O(N log N) would overstate it."
+      }
+    ],
+    "hints": [
+      "Imagine a register of a million accounts. In each tender, which term accounts for nearly all of the labour?",
+      "Big O keeps only the term that grows fastest as N grows. Lower-order terms, like constants, become trifles beside it and are dropped.",
+      "From 3N² + 2N + 1, drop the lower-order terms 2N and 1 and the coefficient 3, leaving N²: O(N²). From N + log N, drop log N, which grows more slowly than N: O(N)."
+    ]
+  },
+  "rhine_toll_exact_change": {
+    "kind": "analysis",
+    "title": "The Rhine Toll-Keeper's Exact Change",
+    "description": "The toll at a castle on the Rhine is exactly 10 pfennigs, and the toll-keeper gives no change, so a traveller may pass only by handing over two distinct coins from the purse whose values sum to exactly 10. A purse of [3, 8, 7, 1] can pay, with the coins of 3 and 7, but a purse of [5, 2, 6] cannot, since its single coin of 5 cannot be offered twice. The traveller decides by the procedure below. Let N be the number of coins in the purse, and count one step for each pairing (i, j) the inner loop considers, including the pairings it rejects because i equals j. Consider a purse of 50 coins, then the procedure's growth in general.",
+    "code": "function canPayToll(coins) {\n  for (let i = 0; i < coins.length; i++) {\n    for (let j = 0; j < coins.length; j++) {\n      if (i !== j && coins[i] + coins[j] === 10) {\n        return true;\n      }\n    }\n  }\n  return false;\n}",
+    "parts": [
+      {
+        "prompt": "In the best case, how many steps does canPayToll take on a purse of 50 coins?",
+        "answer": {
+          "type": "integer",
+          "value": 2
+        },
+        "explanation": "The luckiest purse has its first two coins summing to 10. The pairing (0, 0) is considered and rejected because i equals j, then (0, 1) matches and the procedure returns at once: 2 steps, however large the purse."
+      },
+      {
+        "prompt": "In the worst case, how many steps does canPayToll take on a purse of 50 coins?",
+        "answer": {
+          "type": "integer",
+          "value": 2500
+        },
+        "explanation": "The unluckiest purse holds no pair summing to 10, so the procedure never returns early: it considers every one of the 50 × 50 = 2,500 pairings before returning false."
+      },
+      {
+        "prompt": "In the average case, what is the time complexity of canPayToll, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N²)"
+        },
+        "explanation": "When the paying pair sits at a typical place in the purse, the procedure works through roughly half the rows of pairings before finding it, about N²/2 steps. The factor of ½ is a constant and drops out, so the average case is still O(N²)."
+      },
+      {
+        "prompt": "In the worst case, what is the time complexity of canPayToll, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N²)"
+        },
+        "explanation": "With no paying pair, both loops run to completion: N outer passes of N inner pairings each, N² steps in all, so O(N²)."
+      }
+    ],
+    "hints": [
+      "The procedure returns the moment it finds a paying pair. Where in the purse would that pair have to sit for the traveller to be luckiest, and what purse would be unluckiest?",
+      "Because of the early return, the cost depends on the arrangement of the coins, not only their number. Count the pairings considered in each scenario, remembering that the rejected i = j pairings count too.",
+      "Best case: the first two coins pay, after the pairings (0, 0) and (0, 1). Worst case: no pair pays, and all N × N pairings are considered. A typical purse stops about halfway through, near N²/2 pairings, which is still O(N²)."
+    ]
+  },
+  "genoese_contraband_mark": {
+    "kind": "analysis",
+    "title": "The Genoese Contraband Mark",
+    "description": "In the customs house of Genoa, officers letter every bale named on a ship's manifest, and a capital X marks a bale seized as contraband. The harbour clerk decides whether a ship must be detained by the procedure below, so that the manifest \"ABXC\" detains its ship while \"ABxC\", bearing only a lowercase inspection mark, does not. Let N be the number of bales on the manifest, and count one step for each inspection of a letter.",
+    "code": "function hasSeizure(manifest) {\n  let seized = false;\n  for (let i = 0; i < manifest.length; i++) {\n    if (manifest[i] === \"X\") {\n      seized = true;\n    }\n  }\n  return seized;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of hasSeizure, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N)"
+        },
+        "explanation": "The loop inspects every letter of the manifest exactly once, whatever it finds, so the work grows in direct proportion to the number of bales: O(N)."
+      },
+      {
+        "prompt": "How many steps does hasSeizure take on a manifest of 200 bales whose first bale is marked X?",
+        "answer": {
+          "type": "integer",
+          "value": 200
+        },
+        "explanation": "The verdict is known after the first inspection, but the procedure only sets a flag and keeps reading, so it inspects all 200 letters. Its best case is no better than its worst; The Customs Clerk's Swift Seizure asks you to repair that."
+      }
+    ],
+    "hints": [
+      "Once the clerk has seen one X, can any later bale change the verdict?",
+      "Look for a way out of the loop. Setting the flag does not end the scan, so nothing stops it before the final bale.",
+      "Every one of the N letters is inspected on every manifest, whether the first bale is marked, the last, or none: best, average, and worst cases all cost N steps, which is O(N)."
     ]
   }
 }

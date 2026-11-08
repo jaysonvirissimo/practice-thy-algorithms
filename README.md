@@ -19,7 +19,7 @@ The Ruby and Python runtimes are downloaded lazily the first time you select tha
 
 ## Features
 
-- Browsable catalog of 28 problems with academic-style statements.
+- Browsable catalog of 29 problems with academic-style statements.
 - CodeMirror 6 editor seeded with the correct function signature; optional **Vim** keybindings
   and a **reset-to-signature** action.
 - In-runtime test harness: per-case pass/fail, expected-vs-actual diffs, runtime errors, captured
@@ -56,7 +56,7 @@ npm run test:e2e           # Playwright end-to-end (runs the real WASM runtimes)
 
 ## Problem set
 
-All 28 problems run in **all three languages** in-browser:
+All 29 problems run in **all three languages** in-browser:
 
 Two Sum · Unique Paths · Coin Change · Contains Duplicate · Best Time to Buy and Sell Stock ·
 Valid Parentheses · Maximum Subarray · Product of Array Except Self · Three Sum · Merge Intervals ·
@@ -66,7 +66,7 @@ Longest Substring Without Repeating Characters · Number of Islands · Remove Nt
 Palindromic Substrings · Pacific Atlantic Water Flow · Minimum Window Substring · Course Schedule ·
 Top K Frequent Elements · Tiered Allocation ·
 Tiered Allocation With Split ·
-The Augsburg Bill Index · The Greatest Balance on the Books
+The Augsburg Bill Index · The Greatest Balance on the Books · The Customs Clerk's Swift Seizure
 
 **Foundations** — short no-code exercises in counting the steps that basic operations take and
 stating the Big O of short procedures, answered in the browser and graded per part:
@@ -74,7 +74,8 @@ stating the Big O of short procedures, answered in the browser and graded per pa
 Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count · The Venetian Account
 Register · The Jubilee Audit · The Moneychanger's Purse · The Usurer's Reckoning · The Assayer's Fair
 Weight · The Three Clerks of Lübeck · The Bruges Cross-Reckoning · The Venturer's Double Voyage ·
-The Notary's Two Estimates · The Exchequer's Doubled Levy · The Broker's Alternate Tally
+The Notary's Two Estimates · The Exchequer's Doubled Levy · The Broker's Alternate Tally ·
+The Two Tenders of Antwerp · The Rhine Toll-Keeper's Exact Change · The Genoese Contraband Mark
 
 ## Editing or adding problems
 

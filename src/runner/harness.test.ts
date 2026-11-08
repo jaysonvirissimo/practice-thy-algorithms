@@ -145,6 +145,10 @@ const SOLUTIONS: Record<string, string> = {
     for (let i = 1; i < balances.length; i++) if (balances[i] > best) best = balances[i];
     return best;
   }`,
+  swift_seizure: `function hasSeizure(manifest){
+    for (const letter of manifest) if (letter === 'X') return true;
+    return false;
+  }`,
   number_of_islands: `function numIslands(grid){
     if (!grid || !grid.length) return 0;
     const R = grid.length, C = grid[0].length;

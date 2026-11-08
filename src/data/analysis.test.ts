@@ -46,6 +46,9 @@ describe('analysis problem content', () => {
       'notarys_two_estimates',
       'exchequers_doubled_levy',
       'brokers_alternate_tally',
+      'antwerp_two_tenders',
+      'rhine_toll_exact_change',
+      'genoese_contraband_mark',
     ]);
     const codingKeys = new Set(PROBLEMS.map((p) => p.key));
     for (const p of ANALYSIS_PROBLEMS) expect(codingKeys.has(p.key)).toBe(false);
@@ -142,6 +145,19 @@ describe('analysis problem content', () => {
     expect(integerAnswers('bruges_cross_reckoning')).toEqual([accounts]);
   });
 
+  it('toll answers match the cost model (N = 50)', () => {
+    const n = 50;
+    expect(getAnalysisProblem('rhine_toll_exact_change')!.description).toMatch(/\b50 coins\b/);
+    // Best case: (0, 0) rejected, then (0, 1) pays. Worst case: no pair pays.
+    expect(integerAnswers('rhine_toll_exact_change').slice(0, 2)).toEqual([2, n * n]);
+  });
+
+  it('contraband answer matches the cost model (N = 200)', () => {
+    const part = getAnalysisProblem('genoese_contraband_mark')!.parts[1];
+    expect(part.prompt).toMatch(/\b200 bales\b/);
+    expect(part.answer).toEqual({ type: 'integer', value: 200 });
+  });
+
   // Run each procedure so the code, and the worked examples its description
   // cites, cannot drift apart.
   const procedure = (key: string) => {
@@ -172,6 +188,14 @@ describe('analysis problem content', () => {
 
     expect(procedure('exchequers_doubled_levy')([3, 5, 2])).toBe(20);
     expect(procedure('brokers_alternate_tally')([1, 2, 3])).toEqual([2, 3, 4, 4, 5, 6]);
+
+    const canPayToll = procedure('rhine_toll_exact_change');
+    expect(canPayToll([3, 8, 7, 1])).toBe(true);
+    expect(canPayToll([5, 2, 6])).toBe(false);
+
+    const hasSeizure = procedure('genoese_contraband_mark');
+    expect(hasSeizure('ABXC')).toBe(true);
+    expect(hasSeizure('ABxC')).toBe(false);
   });
 
   it('the N stated in each description matches the cost-model N', () => {
