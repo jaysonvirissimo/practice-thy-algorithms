@@ -217,14 +217,14 @@
     ]
   },
   "contains_duplicate": {
-    "title": "Contains Duplicate",
-    "description": "Analyze an integer array to determine whether any value appears more than once. Return true if at least one duplicate exists, false if all elements are distinct. Design an efficient solution that can handle arrays with up to 100,000 elements containing values in the range of negative one billion to positive one billion.",
+    "title": "The Notary's Twice-Paid Invoice",
+    "description": "A Florentine notary swears that every invoice in his payment register was settled only once, though his new velvet hat has aroused the auditors' suspicions. Implement a function that, given the register as an array of integer invoice numbers, returns true if any number appears more than once and false otherwise. The register [104, 117, 123, 104] returns true because invoice 104 is listed twice. The register may be empty and may contain up to 100,000 entries; invoice numbers range from -10^9 through 10^9, with negative numbers denoting credit notes and zero denoting the notary's own expenses.",
     "complexity": "O(n)",
     "parameters": [
       {
         "name": "nums",
         "type": "array<integer>",
-        "description": "Array of integers to check for duplicates"
+        "description": "Invoice numbers in the notary's payment register"
       }
     ],
     "returnType": {
@@ -243,27 +243,236 @@
           "nums": [1, 2, 3, 1]
         },
         "expected": true,
-        "description": "should return true when element 1 appears at indices 0 and 3"
+        "description": "should expose invoice 1 paid on both the first and fourth entries"
       },
       {
         "input": {
           "nums": [1, 2, 3, 4]
         },
         "expected": false,
-        "description": "should return false when all elements are distinct"
+        "description": "should clear the notary when every invoice is listed once"
       },
       {
         "input": {
           "nums": [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
         },
         "expected": true,
-        "description": "should return true when multiple elements have duplicates"
+        "description": "should flag a register with several repeatedly paid invoices"
+      },
+      {
+        "input": { "nums": [] },
+        "expected": false,
+        "description": "should clear an empty payment register"
+      },
+      {
+        "input": { "nums": [0] },
+        "expected": false,
+        "description": "should allow one claim for the notary's own expenses"
+      },
+      {
+        "input": { "nums": [-1000000000, 0, 1000000000, -1000000000] },
+        "expected": true,
+        "description": "should detect a twice-paid credit note among boundary invoice numbers"
       }
     ],
     "hints": [
-      "The core operation is deciding whether a value has appeared before; which structure answers membership queries efficiently?",
-      "A hash set tests membership in constant time: insert each element and report a duplicate the instant an insertion would collide with an existing member.",
-      "This yields an O(n) time solution at the cost of O(n) auxiliary space; a sort-first approach trades space for O(n log n) time."
+      "As the auditor reads each invoice, what record would reveal whether it has already been paid?",
+      "A hash set can record the invoice numbers already encountered and answer membership queries in expected constant time.",
+      "Read the register once. Return true when a number is already in the set; otherwise insert it. Return false after the final entry. This takes expected O(n) time and O(n) auxiliary space."
+    ]
+  },
+  "array_intersection": {
+    "title": "The Rialto's Double-Booked Debtors",
+    "description": "Two banks on the Rialto compare their debtor rolls before extending fresh credit, lest the same merchant pledge one imaginary cargo of pepper to both. Implement a function that accepts two arrays of integer account numbers and returns every distinct account number appearing in both rolls. List the result in the order those numbers first appear in the first roll, with each number included only once. For example, [104, 117, 123, 138, 152] and [99, 117, 138, 166] yield [117, 138]. Either roll may be empty or contain repeated numbers, and each may hold up to 100,000 entries. Account numbers are positive integers no greater than 10^9. Do not use a built-in intersection operation.",
+    "complexity": "O(n + m)",
+    "parameters": [
+      {
+        "name": "firstRoll",
+        "type": "array<integer>",
+        "description": "Account numbers on the first bank's debtor roll"
+      },
+      {
+        "name": "secondRoll",
+        "type": "array<integer>",
+        "description": "Account numbers on the second bank's debtor roll"
+      }
+    ],
+    "returnType": {
+      "javascript": "array<integer>",
+      "ruby": "array<integer>",
+      "python": "list<integer>"
+    },
+    "functionSignatures": {
+      "javascript": "function intersectAccounts(firstRoll, secondRoll)",
+      "ruby": "def intersect_accounts(firstRoll, secondRoll)",
+      "python": "def intersect_accounts(firstRoll, secondRoll)"
+    },
+    "testCases": [
+      {
+        "input": { "firstRoll": [104, 117, 123, 138, 152], "secondRoll": [99, 117, 138, 166] },
+        "expected": [117, 138],
+        "description": "should identify the two merchants indebted to both banks"
+      },
+      {
+        "input": { "firstRoll": [138, 104, 117], "secondRoll": [117, 138, 104] },
+        "expected": [138, 104, 117],
+        "description": "should follow the first bank's roll rather than numerical or second-roll order"
+      },
+      {
+        "input": { "firstRoll": [138, 104, 138, 117, 104], "secondRoll": [104, 104, 138, 138] },
+        "expected": [138, 104],
+        "description": "should list each shared debtor once despite repeated entries on both rolls"
+      },
+      {
+        "input": { "firstRoll": [104, 117], "secondRoll": [123, 138] },
+        "expected": [],
+        "description": "should return an empty reconciliation when the banks share no debtors"
+      },
+      {
+        "input": { "firstRoll": [], "secondRoll": [104] },
+        "expected": [],
+        "description": "should handle an empty first debtor roll"
+      },
+      {
+        "input": { "firstRoll": [104], "secondRoll": [] },
+        "expected": [],
+        "description": "should handle an empty second debtor roll"
+      },
+      {
+        "input": { "firstRoll": [], "secondRoll": [] },
+        "expected": [],
+        "description": "should reconcile two banks with no debtors"
+      },
+      {
+        "input": { "firstRoll": [1000000000, 1, 1000000000], "secondRoll": [1, 1000000000] },
+        "expected": [1000000000, 1],
+        "description": "should preserve first-roll order for the smallest and largest account numbers"
+      }
+    ],
+    "hints": [
+      "How could the clerk check whether an account is on the second roll without rereading that roll for every entry on the first?",
+      "Build a hash set of the second roll's account numbers, then scan the first roll in its original order.",
+      "When a first-roll number is in the set, append it and remove it from the set so later copies cannot be emitted. For roll lengths n and m, this takes expected O(n + m) time and O(m) auxiliary space, excluding the result."
+    ]
+  },
+  "missing_alphabet_letter": {
+    "title": "The Mint's Missing Seal",
+    "description": "A mint licenses 26 assayers, each with a distinct lowercase seal from a through z. During an inspection, the royal comptroller discovers that one seal never appears in the day's record; its keeper blames a goose for eating the stamp. Implement a function that accepts the record as a string and returns the missing lowercase letter. Exactly 25 distinct lowercase English letters appear, each possibly many times. Spaces and ASCII punctuation are permitted and do not count as seals; no uppercase letters or digits appear. For example, \"the quick brown box jumps over a lazy dog\" is missing \"f\". The record contains between 25 and 100,000 characters.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "marks",
+        "type": "string",
+        "description": "Inspection record containing every lowercase assayer's seal except one"
+      }
+    ],
+    "returnType": { "javascript": "string", "ruby": "string", "python": "string" },
+    "functionSignatures": {
+      "javascript": "function missingSeal(marks)",
+      "ruby": "def missing_seal(marks)",
+      "python": "def missing_seal(marks)"
+    },
+    "testCases": [
+      {
+        "input": { "marks": "the quick brown box jumps over a lazy dog" },
+        "expected": "f",
+        "description": "should identify seal f missing from the comptroller's example"
+      },
+      {
+        "input": { "marks": "bcdefghijklmnopqrstuvwxyz" },
+        "expected": "a",
+        "description": "should find the missing first seal of the alphabet"
+      },
+      {
+        "input": { "marks": "abcdefghijklmnopqrstuvwxy" },
+        "expected": "z",
+        "description": "should find the missing last seal of the alphabet"
+      },
+      {
+        "input": { "marks": "zyxwvutsrqpo, mlkjihgfedcba!" },
+        "expected": "n",
+        "description": "should ignore spaces and punctuation in a reverse-ordered seal record"
+      },
+      {
+        "input": { "marks": "aaaa bbbb cdefghijklmnoprstuvwxyz; zzzz!" },
+        "expected": "q",
+        "description": "should find an absent seal despite repeated impressions of other seals"
+      }
+    ],
+    "hints": [
+      "The comptroller needs to know which seals have appeared, not how often each assayer used a stamp.",
+      "Record the lowercase letters in a hash set while reading the inspection record, ignoring other characters.",
+      "After recording the seals, check a through z and return the letter absent from the set. The record costs O(n) time to read; the 26 checks and at most 26 stored seals add constant work and space."
+    ]
+  },
+  "first_unique_character": {
+    "title": "The Bourse's Lone Underwriter",
+    "description": "At the Antwerp bourse, merchants stamp a shipping bond once for each share they underwrite. The bond's clerk must name the earliest merchant who pledged exactly one share, for that merchant alone is excused from the treasurer's interminable second briefing. Implement a function that accepts the stamps as a string of lowercase English letters and returns the first character, in the string's original order, that occurs exactly once in the entire string. Return an empty string if no such character exists. For example, \"minimum\" returns \"n\": both n and u appear once, but n comes first. The string may be empty and may contain up to 100,000 characters; each letter identifies one merchant.",
+    "complexity": "O(n)",
+    "parameters": [
+      {
+        "name": "marks",
+        "type": "string",
+        "description": "Merchant stamps in their original order on the shipping bond"
+      }
+    ],
+    "returnType": { "javascript": "string", "ruby": "string", "python": "string" },
+    "functionSignatures": {
+      "javascript": "function firstLoneUnderwriter(marks)",
+      "ruby": "def first_lone_underwriter(marks)",
+      "python": "def first_lone_underwriter(marks)"
+    },
+    "testCases": [
+      {
+        "input": { "marks": "minimum" },
+        "expected": "n",
+        "description": "should excuse merchant n before the later lone merchant u"
+      },
+      {
+        "input": { "marks": "zabacb" },
+        "expected": "z",
+        "description": "should use stamp order rather than alphabetic order to select a lone merchant"
+      },
+      {
+        "input": { "marks": "aabbc" },
+        "expected": "c",
+        "description": "should find a lone merchant at the end of the bond"
+      },
+      {
+        "input": { "marks": "abac" },
+        "expected": "b",
+        "description": "should disqualify an opening merchant whose second stamp appears later"
+      },
+      {
+        "input": { "marks": "aabbcc" },
+        "expected": "",
+        "description": "should excuse nobody when every merchant pledged twice"
+      },
+      {
+        "input": { "marks": "aaaa" },
+        "expected": "",
+        "description": "should reject a merchant who pledged more than two shares"
+      },
+      {
+        "input": { "marks": "" },
+        "expected": "",
+        "description": "should handle a bond with no underwriters"
+      },
+      {
+        "input": { "marks": "q" },
+        "expected": "q",
+        "description": "should excuse the only merchant on a single-stamp bond"
+      },
+      {
+        "input": { "marks": "ducat" },
+        "expected": "d",
+        "description": "should choose the first stamp when every merchant pledged once"
+      }
+    ],
+    "hints": [
+      "A merchant's first stamp does not yet prove that the merchant pledged only once. What must the clerk learn from the rest of the bond?",
+      "Use a hash map to count every merchant's stamps, then read the string again in its original order.",
+      "On the second pass, return the first character whose total count is one; return an empty string if none qualifies. Two passes take O(n) time, and the 26 possible marks require constant auxiliary space."
     ]
   },
   "best_time_to_buy_and_sell_stock": {
