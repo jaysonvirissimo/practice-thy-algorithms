@@ -49,6 +49,11 @@ describe('analysis problem content', () => {
       'antwerp_two_tenders',
       'rhine_toll_exact_change',
       'genoese_contraband_mark',
+      'sienese_balanced_row',
+      'two_guilds_merged_roll',
+      'harbour_proscribed_mark',
+      'venturers_triple_voyage',
+      'chancery_lottery_of_petitions',
     ]);
     const codingKeys = new Set(PROBLEMS.map((p) => p.key));
     for (const p of ANALYSIS_PROBLEMS) expect(codingKeys.has(p.key)).toBe(false);
@@ -163,7 +168,7 @@ describe('analysis problem content', () => {
   const procedure = (key: string) => {
     const { code } = getAnalysisProblem(key)!;
     const name = code!.match(/^function (\w+)/)![1];
-    return new Function(`${code}\nreturn ${name};`)() as (arg: unknown) => unknown;
+    return new Function(`${code}\nreturn ${name};`)() as (...args: unknown[]) => unknown;
   };
 
   it('procedures agree with the worked examples in their descriptions', () => {
@@ -196,6 +201,24 @@ describe('analysis problem content', () => {
     const hasSeizure = procedure('genoese_contraband_mark');
     expect(hasSeizure('ABXC')).toBe(true);
     expect(hasSeizure('ABxC')).toBe(false);
+
+    const isBalancedRow = procedure('sienese_balanced_row');
+    expect(isBalancedRow([30, 60, 40, 70])).toBe(true);
+    expect(isBalancedRow([30, 60, 50, 70])).toBe(false);
+
+    expect(procedure('two_guilds_merged_roll')([2, 5, 9], [3, 5, 12, 14])).toEqual([
+      2, 3, 5, 5, 9, 12, 14,
+    ]);
+
+    const bearsMark = procedure('harbour_proscribed_mark');
+    expect(bearsMark('ABCDEFGHI', 'DEF')).toBe(true);
+    expect(bearsMark('ABCDEFGHI', 'DD')).toBe(false);
+
+    const bestTripleVoyage = procedure('venturers_triple_voyage');
+    expect(bestTripleVoyage([3, 2, 5, 4])).toBe(60);
+    expect(bestTripleVoyage([7, 1, 6, 2])).toBe(84);
+
+    expect(procedure('chancery_lottery_of_petitions')([1, 2, 3, 4, 5, 6, 7, 8])).toBe(6);
   });
 
   it('the N stated in each description matches the cost-model N', () => {

@@ -75,7 +75,9 @@ Florentine Deposit Ledger · Masons' Guild Roll · The Reeve's Tithe Count · Th
 Register · The Jubilee Audit · The Moneychanger's Purse · The Usurer's Reckoning · The Assayer's Fair
 Weight · The Three Clerks of Lübeck · The Bruges Cross-Reckoning · The Venturer's Double Voyage ·
 The Notary's Two Estimates · The Exchequer's Doubled Levy · The Broker's Alternate Tally ·
-The Two Tenders of Antwerp · The Rhine Toll-Keeper's Exact Change · The Genoese Contraband Mark
+The Two Tenders of Antwerp · The Rhine Toll-Keeper's Exact Change · The Genoese Contraband Mark ·
+The Sienese Balanced Row · The Merged Roll of Two Guilds · The Proscribed Mark · The Venturer's
+Triple Voyage · The Chancery's Lottery of Petitions
 
 ## Editing or adding problems
 

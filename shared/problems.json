@@ -2508,5 +2508,145 @@
       "Look for a way out of the loop. Setting the flag does not end the scan, so nothing stops it before the final bale.",
       "Every one of the N letters is inspected on every manifest, whether the first bale is marked, the last, or none: best, average, and worst cases all cost N steps, which is O(N)."
     ]
+  },
+  "sienese_balanced_row": {
+    "kind": "analysis",
+    "title": "The Sienese Balanced Row",
+    "description": "A Sienese counting-house lays its coin stacks in a row of even length before the evening audit, and the house rule calls the row balanced when the first and last stacks together hold exactly 100 denari, the second and second-to-last likewise, and so on inward to the middle. The row [30, 60, 40, 70] is balanced, for example, while [30, 60, 50, 70] is not. The auditor tests a row by the procedure below. Let N be the number of stacks in the row, and count one step for each read of a stack, each addition, and each comparison. Express the time complexity of the procedure in Big O notation.",
+    "code": "function isBalancedRow(stacks) {\n  let left = 0;\n  let right = stacks.length - 1;\n  while (left < stacks.length / 2) {\n    if (stacks[left] + stacks[right] !== 100) {\n      return false;\n    }\n    left += 1;\n    right -= 1;\n  }\n  return true;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of isBalancedRow, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(N)"
+        },
+        "explanation": "In the worst case the row is balanced and no pair ends the audit early, so the loop runs once for each of the N/2 pairs, doing a fixed handful of reads, one addition, and a comparison each time. That is a constant multiple of N/2 steps, and the constant ½ drops out: O(N)."
+      }
+    ],
+    "hints": [
+      "Imagine the row doubling in length. How does the number of pairs the auditor must weigh change?",
+      "The two markers walk toward each other and stop at the middle: count how many times the loop repeats for a row of N stacks, assuming no pair fails.",
+      "The loop repeats N/2 times with fixed work on each repetition. Constant factors do not affect Big O, so N/2 is O(N), the same order as a single full pass."
+    ]
+  },
+  "two_guilds_merged_roll": {
+    "kind": "analysis",
+    "title": "The Merged Roll of Two Guilds",
+    "description": "When the drapers' and the mercers' guilds of Ghent unite, each brings its roll of dues, already written in ascending order, and the common clerk must produce a single roll in ascending order holding every entry from both. Rolls of [2, 5, 9] and [3, 5, 12, 14] groats, for example, combine into [2, 3, 5, 5, 9, 12, 14]. The clerk works by the procedure below. Let N be the number of entries on the first roll and M the number on the second, and count one step for each comparison and each entry copied onto the new roll. Express the time complexity of the procedure in Big O notation.",
+    "code": "function mergeRolls(first, second) {\n  const merged = [];\n  let i = 0;\n  let j = 0;\n  while (i < first.length || j < second.length) {\n    if (i >= first.length) {\n      merged.push(second[j]);\n      j += 1;\n    } else if (j >= second.length) {\n      merged.push(first[i]);\n      i += 1;\n    } else if (first[i] < second[j]) {\n      merged.push(first[i]);\n      i += 1;\n    } else {\n      merged.push(second[j]);\n      j += 1;\n    }\n  }\n  return merged;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of mergeRolls, in terms of N and M?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(N)",
+            "O(N + M)",
+            "O(N × M)",
+            "O(N²)"
+          ],
+          "value": "O(N + M)"
+        },
+        "explanation": "Every repetition of the loop copies exactly one entry onto the new roll and advances one of the two markers, and no marker ever moves back. The loop therefore repeats once per entry, N + M times in all, with a fixed handful of comparisons each time: O(N + M). The rolls are separate inputs of unrelated lengths, so neither letter can stand in for the other."
+      }
+    ],
+    "hints": [
+      "The two rolls need not be the same length. Ask how the labour changes when only one of them grows.",
+      "There is a single loop. On each repetition, how many entries reach the new roll, and can either marker ever step backward?",
+      "One entry is copied per repetition and there are N + M entries to copy, so the loop repeats N + M times with fixed work each time: O(N + M). Nothing is multiplied, because no entry is ever revisited."
+    ]
+  },
+  "harbour_proscribed_mark": {
+    "kind": "analysis",
+    "title": "The Proscribed Mark",
+    "description": "The Hanseatic diet has proscribed a certain merchant house, and no ship may leave Lübeck harbour whose manifest bears that house's mark: a run of letters appearing, unbroken and in order, somewhere within the manifest's own line of letters. The mark \"DEF\" is borne by the manifest \"ABCDEFGHI\", for example, while the mark \"DD\" is not. The harbour clerk searches by the procedure below. Let N be the number of letters in the manifest and M the number of letters in the mark, and count one step for each comparison of one letter against another. Express the worst-case time complexity of the procedure in Big O notation.",
+    "code": "function bearsMark(manifest, mark) {\n  for (let start = 0; start < manifest.length; start++) {\n    let matched = 0;\n    while (matched < mark.length && manifest[start + matched] === mark[matched]) {\n      matched += 1;\n    }\n    if (matched === mark.length) {\n      return true;\n    }\n  }\n  return false;\n}",
+    "parts": [
+      {
+        "prompt": "What is the worst-case time complexity of bearsMark, in terms of N and M?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(N)",
+            "O(N + M)",
+            "O(N × M)",
+            "O(N²)"
+          ],
+          "value": "O(N × M)"
+        },
+        "explanation": "The outer loop tries each of the N starting positions in the manifest, and from each one the inner loop may compare up to M letters before it finds a mismatch. A manifest such as \"AAAAAAAA\" searched for the mark \"AAAB\" forces nearly the whole mark to be compared at nearly every position, so the worst case is about N × M comparisons: O(N × M)."
+      }
+    ],
+    "hints": [
+      "Picture a manifest that keeps almost matching the mark, failing only at the mark's final letter. How much labour is wasted at each place the clerk begins?",
+      "There is a loop inside a loop, but the two run over different things: the outer over positions in the manifest, the inner over letters of the mark.",
+      "N starting positions, each costing up to M comparisons in the worst case, is N × M steps: O(N × M). Because the manifest and the mark are separate inputs, this is not written O(N²)."
+    ]
+  },
+  "venturers_triple_voyage": {
+    "kind": "analysis",
+    "title": "The Venturer's Triple Voyage",
+    "description": "Emboldened by an earlier success, a Genoese merchant now means to carry one stake through three voyages in succession, choosing three distinct ventures from the list on offer. Each venture multiplies whatever is staked in it by a listed whole-number factor, so the yield of a trio is the product of its three factors. Offered the factors [3, 2, 5, 4], the best trio yields 60. The merchant's agent finds the best trio by the procedure below. Let N be the number of ventures on offer, and count one step for each multiplication, each comparison, and each read of a factor. Express the time complexity of the procedure in Big O notation.",
+    "code": "function bestTripleVoyage(factors) {\n  let best = factors[0] * factors[1] * factors[2];\n  for (let i = 0; i < factors.length; i++) {\n    for (let j = i + 1; j < factors.length; j++) {\n      for (let k = j + 1; k < factors.length; k++) {\n        if (factors[i] * factors[j] * factors[k] > best) {\n          best = factors[i] * factors[j] * factors[k];\n        }\n      }\n    }\n  }\n  return best;\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of bestTripleVoyage, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N²)",
+            "O(N³)"
+          ],
+          "value": "O(N³)"
+        },
+        "explanation": "Three loops are nested, each running over the ventures. Because j starts after i and k after j, each trio is examined once and not in all six of its orderings, so the innermost body runs about N³/6 times. The constant 1/6 drops out, as constants always do: O(N³)."
+      }
+    ],
+    "hints": [
+      "Compare this with choosing only two ventures. What does adding a third choice do to the number of combinations the agent must try?",
+      "Count the depth of the nesting, and note that each inner loop starts just past the marker of the loop enclosing it. Does that later start change the order of growth, or only a constant factor?",
+      "The number of distinct trios among N ventures is N × (N − 1) × (N − 2) / 6, which is N³/6 less some smaller terms. Dropping the constant and the smaller terms leaves O(N³)."
+    ]
+  },
+  "chancery_lottery_of_petitions": {
+    "kind": "analysis",
+    "title": "The Chancery's Lottery of Petitions",
+    "description": "A capricious Duke of Urbino will grant a single banking charter this year, and his chancery chooses among the petitions without reading one of them. The clerk lifts off the top half of the pile and burns it, then lifts off the bottom half of what remains and burns that, and continues by turns until a single fortunate petition is left. Of eight petitions numbered 1 to 8 from the top of the pile, petition 6 survives. The procedure is given below. Let N be the number of petitions in the pile, and count one step for each halving of the pile, since the clerk removes a half in a single motion however thick it is. Express the time complexity of the procedure in Big O notation.",
+    "code": "function pickPetition(petitions) {\n  let discard = \"top\";\n  while (petitions.length > 1) {\n    const half = Math.floor(petitions.length / 2);\n    if (discard === \"top\") {\n      petitions = petitions.slice(half);\n      discard = \"bottom\";\n    } else {\n      petitions = petitions.slice(0, half);\n      discard = \"top\";\n    }\n  }\n  return petitions[0];\n}",
+    "parts": [
+      {
+        "prompt": "What is the time complexity of pickPetition, in terms of N?",
+        "answer": {
+          "type": "choice",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)",
+            "O(N²)"
+          ],
+          "value": "O(log N)"
+        },
+        "explanation": "Each halving leaves about half of the pile, so the number of halvings needed to bring N petitions down to one is the number of times N can be halved: about log₂ N. Eight petitions take 3 halvings and sixteen take only 4. Whether the top or the bottom half is burned changes which petition wins, not how many halvings there are: O(log N)."
+      }
+    ],
+    "hints": [
+      "Imagine the pile doubling in height. How many more times must the clerk lift off a half?",
+      "Ignore which half is burned and watch only the size of the pile: 8, then 4, then 2, then 1. What governs how long that sequence is?",
+      "Doubling N adds a single halving, which is the mark of logarithmic growth: about log₂ N steps, so O(log N). The alternation between top and bottom has no effect on the count."
+    ]
   }
 }
